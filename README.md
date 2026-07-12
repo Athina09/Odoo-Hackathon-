@@ -1,0 +1,237 @@
+# EcoSphere — ESG Management Platform
+
+**Odoo Hackathon submission** · Environmental, Social & Governance performance in one executive dashboard.
+
+Environmental, Social and Governance (ESG) has become a critical aspect of modern businesses. Organizations are expected to monitor carbon emissions, promote employee well-being, and maintain governance compliance. While many ERP systems collect operational data, ESG reporting is often manual, disconnected, and difficult to monitor in real time.
+
+**EcoSphere** integrates ESG directly into day-to-day ERP operations by measuring sustainability metrics, encouraging employee participation, and providing meaningful reports for management.
+
+---
+
+## Challenge statement
+
+Build an ESG Management Platform that enables organizations to **measure**, **manage**, and **improve** their Environmental, Social and Governance performance. The platform should integrate operational data, employee participation, and compliance activities into a unified dashboard while encouraging sustainability through gamification.
+
+### Core modules
+
+| Pillar | Scope |
+|--------|--------|
+| **Environmental** | Carbon accounting, emission factors, sustainability goals, carbon reports |
+| **Social** | CSR activities, employee participation, diversity metrics, engagement |
+| **Governance** | Policies, audits, compliance tracking, governance reports |
+| **Gamification** | Challenges, badges, XP, rewards, leaderboards |
+
+**Design mockup:** [Excalidraw wireframe](https://link.excalidraw.com/l/65VNwvy7c4X/2m6lz9Ln4)
+
+---
+
+## What this repo demonstrates
+
+The **Executive Command Center** (`/ecosphere`) is a working frontend prototype aligned with the hackathon brief:
+
+- **KPI row** — overall ESG score, carbon footprint, AI confidence, compliance issues, CSR participation, active challenges
+- **Tamil Nadu ESG heatmap** — facility-level environmental exposure across TN districts (Chennai, Coimbatore, Madurai, Salem, and more)
+- **AI live feed** — environment, social, governance, and carbon insights
+- **Department performance table** — E, S, G scores, risk, and status per department
+- **Charts** — carbon trend, CSR participation, governance compliance, top emitters, ESG health breakdown
+- **Navigation shell** — Environment · Social · Governance · Challenges · Reports · Audits · Settings (sidebar IA from spec)
+
+Demo data lives in `src/data/ecosphere.ts`. The heatmap reuses Tamil Nadu district coordinates for geographic consistency.
+
+---
+
+## Business workflow
+
+```
+Master Configuration
+│
+▼
+Departments · Categories · Emission Factors · Products
+Goals · Policies · Challenges
+│
+▼
+Daily Business Operations
+(Purchase • Manufacturing • Expenses • Fleet)
+│
+▼
+Carbon Transactions
+│
+▼
+Employee Participation (CSR) · Challenge Participation
+Policy Acknowledgements · Audits
+│
+▼
+Environmental Score    Social Score    Governance Score
+│
+▼
+Department Total Score
+│
+▼
+Overall ESG Score
+(weighted: Environmental 40% / Social 30% / Governance 30%, configurable)
+│
+▼
+Organization Dashboard & Reports
+```
+
+---
+
+## Suggested data model
+
+### Master data
+
+| Model | Purpose | Key fields |
+|-------|---------|------------|
+| **Department** | Org hierarchy and ESG ownership | Name, Code, Head, Parent Department, Employee Count, Status |
+| **Category** | Shared values for Social & Gamification | Name, Type (CSR Activity / Challenge), Status |
+| **Emission Factor** | Carbon values for calculations | Factor metadata per activity type |
+| **Product ESG Profile** | ESG data linked to products | Product-linked environmental attributes |
+| **Environmental Goal** | Sustainability targets | Goal name, target, deadline, status |
+| **ESG Policy** | Governance policies | Title, version, effective date, status |
+| **Badge** | Employee achievements | Name, Description, Unlock Rule, Icon |
+| **Reward** | Redeemable incentives | Name, Description, Points Required, Stock, Status |
+
+### Transactional data
+
+| Model | Purpose | Key fields |
+|-------|---------|------------|
+| **Carbon Transaction** | Emissions from ERP operations | Source, amount, emission factor, calculated tCO₂ |
+| **CSR Activity** | Social initiatives | Title, category, date, organizer, status |
+| **Employee Participation** | CSR involvement | Employee, Activity, Proof, Approval Status, Points, Completion Date |
+| **Challenge** | Sustainability challenges | Title, Category, XP, Difficulty, Evidence Required, Deadline, Status |
+| **Challenge Participation** | Progress in challenges | Challenge, Employee, Progress, Proof, Approval, XP Awarded |
+| **Policy Acknowledgement** | Policy acceptance | Employee, Policy, acknowledged at |
+| **Audit** | Governance audits | Scope, date, findings, status |
+| **Compliance Issue** | Violations | Audit, Severity, Description, Owner, Due Date, Status |
+| **Department Score** | Aggregated ESG per dept | Environmental, Social, Governance, Total Score |
+
+### Challenge lifecycle
+
+`Draft` → `Active` → `Under Review` → `Completed` (or `Archived` at any point)
+
+---
+
+## Expected features (full platform)
+
+### Environmental
+- Configure emission factors
+- Calculate carbon emissions
+- Department carbon tracking
+- Sustainability goals
+- Environmental dashboard
+
+### Social
+- CSR activities
+- Employee participation
+- Diversity metrics
+- Training completion
+
+### Governance
+- ESG policies
+- Policy acknowledgements
+- Audits
+- Compliance issues
+
+### Gamification
+- Challenges (full lifecycle)
+- XP and badges (auto-awarded when unlock rules are met)
+- Rewards (redeemable with points/XP, stock-aware)
+- Leaderboards
+
+### Settings & administration
+- Departments and category management
+- ESG configuration
+- Notification settings
+
+### Reports
+- Environmental, Social, Governance, and ESG Summary reports
+- Custom report builder (filters + export PDF / Excel / CSV)
+- Filters: department, date range, module, employee, challenge, ESG category
+
+---
+
+## Core business rules (in scope)
+
+| Rule | Description |
+|------|-------------|
+| **Reward redemption** | Employees redeem Points/XP for catalog rewards; stock and balance are updated |
+| **Notifications** | In-app/email for compliance issues, CSR/challenge approvals, policy reminders, badge unlocks |
+| **Auto emission calculation** | When enabled, carbon transactions derive from Purchase/Manufacturing/Expense/Fleet via emission factors |
+| **Evidence requirement** | When enabled, CSR participation cannot be approved without proof |
+| **Badge auto-award** | When enabled, badges assign automatically when unlock rules are satisfied |
+| **Compliance ownership** | Every issue has Owner + Due Date; overdue open issues are flagged and notified |
+
+### Bonus ideas (optional)
+- Department ESG rankings
+- Smart dashboard visualizations
+- Mobile-responsive interface
+
+---
+
+## Tech stack
+
+| Layer | Stack |
+|-------|--------|
+| UI | React 19, TypeScript, TanStack Router, Tailwind CSS, Framer Motion |
+| Charts | Recharts |
+| Map | Leaflet + OpenStreetMap (Tamil Nadu facility heatmap) |
+| Components | Radix UI / shadcn-style primitives |
+
+---
+
+## Quick start
+
+### Prerequisites
+- Node.js 18+
+- npm
+
+### Install & run
+
+```bash
+npm install
+npm run dev
+```
+
+Open **http://localhost:8080/ecosphere** for the Executive Command Center.
+
+### Build for production
+
+```bash
+npm run build
+npm run preview
+```
+
+---
+
+## Project structure
+
+```
+src/
+├── routes/ecosphere.tsx          # Executive Command Center page
+├── components/ecosphere/
+│   ├── EcoShell.tsx              # Layout (sidebar + header)
+│   ├── EcoKpiRow.tsx             # Top KPI cards
+│   ├── EsgHeatmap.tsx            # Tamil Nadu ESG heatmap
+│   ├── AiLiveFeed.tsx            # AI insights stream
+│   ├── DepartmentTable.tsx       # Department ESG scores
+│   └── EcoChartsGrid.tsx         # Trends & health charts
+└── data/ecosphere.ts             # Demo KPIs, facilities, departments, feed
+```
+
+---
+
+## Roadmap (ERP integration)
+
+This submission focuses on the **unified executive dashboard** and data model alignment. A full Odoo integration would:
+
+1. Sync master data (departments, emission factors, policies, badges, rewards)
+2. Ingest transactional ERP events (purchases, manufacturing, fleet) into carbon transactions
+3. Drive gamification (challenges, XP, leaderboards) from real employee actions
+4. Generate module reports and custom exports from live data
+5. Enforce business rules via Odoo settings (auto-carbon, evidence, notifications)
+
+---
+
+## License
+
+Submitted for the **Odoo Hackathon** — [Athina09/Odoo-Hackathon-](https://github.com/Athina09/Odoo-Hackathon-).
