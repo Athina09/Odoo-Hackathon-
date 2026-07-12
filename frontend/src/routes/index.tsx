@@ -5,11 +5,13 @@ import { AiLiveFeed } from "@/components/ecosphere/AiLiveFeed";
 import { DepartmentTable } from "@/components/ecosphere/DepartmentTable";
 import { EcoChartsGrid, EsgHealthCard } from "@/components/ecosphere/EcoChartsGrid";
 import { EcoPage } from "@/components/ecosphere/EcoPage";
-import { requireSession } from "@/lib/ecosphere-route-guards";
+import { useEcoAuth } from "@/context/EcoAuthContext";
+import { getDashboardTitle } from "@/lib/ecosphere-role-access";
+import { requireRouteAccess } from "@/lib/ecosphere-route-guards";
 
 export const Route = createFileRoute("/")({
   beforeLoad: () => {
-    const session = requireSession("/");
+    const session = requireRouteAccess("/");
     if (session.role === "DEPARTMENT_MANAGER") {
       throw redirect({ to: "/department" });
     }
@@ -26,10 +28,24 @@ export const Route = createFileRoute("/")({
 function HomePage() {
   return (
     <EcoPage>
-      <div className="space-y-5 p-5">
+      <HomePageContent />
+    </EcoPage>
+  );
+}
+
+function HomePageContent() {
+  const { user } = useEcoAuth();
+  const title = user ? getDashboardTitle(user.role) : "ESG Command Dashboard";
+  const subtitle =
+    user?.role === "ESG_MANAGER"
+      ? "Org-wide ESG monitoring · approve CSR & challenges in Approval Hub"
+      : "KPIs → Map → Live feed → Department performance";
+
+  return (
+    <div className="space-y-4 p-6">
         <div>
-          <h1 className="text-2xl font-bold tracking-wide text-foreground">ESG Command Dashboard</h1>
-          <p className="text-sm text-muted-foreground">KPIs → Map → Live feed → Department performance</p>
+          <p className="text-[13px] text-[var(--eco-text-secondary)]">{subtitle}</p>
+          <h1 className="mt-1 text-2xl font-bold text-[var(--eco-text-primary)]">{title}</h1>
         </div>
 
         <EcoKpiRow />
@@ -50,6 +66,5 @@ function HomePage() {
           <EsgHealthCard />
         </div>
       </div>
-    </EcoPage>
   );
 }

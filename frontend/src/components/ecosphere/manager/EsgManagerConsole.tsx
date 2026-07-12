@@ -14,6 +14,7 @@ import { AiLiveFeed } from "@/components/ecosphere/AiLiveFeed";
 import { EcoChartsGrid } from "@/components/ecosphere/EcoChartsGrid";
 import { EnvironmentCaseTable } from "@/components/ecosphere/EnvironmentCaseTable";
 import { FileDown, Plus, CheckCircle2, AlertTriangle } from "lucide-react";
+import { ApprovalQueuePanel } from "@/components/ecosphere/ApprovalQueuePanel";
 
 export function EsgManagerConsole() {
   const { config } = useEcoAuth();
@@ -56,7 +57,8 @@ export function EsgManagerConsole() {
 
         <TabsContent value="csr" className="mt-0">
           <Section title="CSR activities" description="Manage and approve employee participation in CSR programs.">
-            <div className="space-y-2">
+            <ApprovalQueuePanel />
+            <div className="mt-4 space-y-2">
               {csrActivities.map((a, i) => (
                 <div
                   key={i}
@@ -80,7 +82,8 @@ export function EsgManagerConsole() {
 
         <TabsContent value="challenges" className="mt-0">
           <Section title="Sustainability challenges" description="Create challenges and approve employee sign-ups.">
-            <div className="space-y-2">
+            <ApprovalQueuePanel />
+            <div className="mt-4 space-y-2">
               {sustainabilityChallenges.map((c, i) => (
                 <div
                   key={i}

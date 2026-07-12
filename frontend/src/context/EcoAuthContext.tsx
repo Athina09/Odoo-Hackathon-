@@ -29,6 +29,7 @@ interface EcoAuthContextValue {
   isSuperAdmin: boolean;
   isEsgManager: boolean;
   isDepartmentManager: boolean;
+  isEmployee: boolean;
   config: EcoAdminConfig;
   login: (email: string, password: string, role: PortalRole) => EcoSessionUser | null;
   logout: () => void;
@@ -100,6 +101,7 @@ export function EcoAuthProvider({ children }: { children: ReactNode }) {
       isSuperAdmin: user?.role === "SUPER_ADMIN",
       isEsgManager: user?.role === "ESG_MANAGER",
       isDepartmentManager: user?.role === "DEPARTMENT_MANAGER",
+      isEmployee: user?.role === "EMPLOYEE",
       config,
       login,
       logout,

@@ -1,5 +1,6 @@
 import { EcoShell } from "./EcoShell";
 import { EcoAuthProvider } from "@/context/EcoAuthContext";
+import { Toaster } from "@/components/ui/sonner";
 
 export function EcoPage({
   children,
@@ -15,6 +16,7 @@ export function EcoPage({
       ) : (
         <EcoShell>{children}</EcoShell>
       )}
+      <Toaster position="bottom-right" richColors />
     </EcoAuthProvider>
   );
 }

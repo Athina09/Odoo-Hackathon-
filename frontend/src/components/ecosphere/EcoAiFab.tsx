@@ -18,7 +18,7 @@ export function EcoAiFab() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setOpen(true)}
-        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full border border-primary/30 bg-white px-4 py-3 text-base font-semibold text-primary shadow-md"
+        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full bg-[var(--eco-accent-blue)] px-4 py-3 text-sm font-semibold text-white shadow-md shadow-blue-500/20"
       >
         <Bot className="h-5 w-5" />
         EcoSphere AI

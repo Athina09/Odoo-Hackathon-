@@ -1,6 +1,6 @@
 import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { Crown, Leaf, LogIn, Shield, Users } from "lucide-react";
+import { Crown, Leaf, LogIn, Shield, Users, Smartphone } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { EcoPage } from "@/components/ecosphere/EcoPage";
@@ -53,6 +53,12 @@ const ROLE_OPTIONS: {
     label: "Department Manager",
     description: "Department dashboard, emissions, and team participation",
     icon: Users,
+  },
+  {
+    role: "EMPLOYEE",
+    label: "Employee",
+    description: "Mobile app — XP, challenges, CSR volunteering, rewards",
+    icon: Smartphone,
   },
 ];
 
@@ -121,7 +127,11 @@ function LoginForm() {
             <Leaf className="h-6 w-6 text-primary" />
           </div>
           <h1 className="text-2xl font-semibold text-foreground">Sign in to EcoSphere</h1>
-          <p className="mt-1 text-sm text-muted-foreground">Select your role, then choose your account</p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {selectedRole === "EMPLOYEE"
+              ? "Employee sign-in opens the mobile experience"
+              : "Select your role, then choose your account"}
+          </p>
         </div>
 
         <div className="mb-5 grid gap-2">

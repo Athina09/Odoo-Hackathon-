@@ -9,13 +9,46 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SocialRouteImport } from './routes/social'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as ReportsRouteImport } from './routes/reports'
+import { Route as MobileRouteImport } from './routes/mobile'
 import { Route as ManagerRouteImport } from './routes/manager'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as GovernanceRouteImport } from './routes/governance'
+import { Route as GamificationRouteImport } from './routes/gamification'
 import { Route as EnvironmentRouteImport } from './routes/environment'
+import { Route as DigitalTwinRouteImport } from './routes/digital-twin'
 import { Route as DepartmentRouteImport } from './routes/department'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as MobileIndexRouteImport } from './routes/mobile/index'
+import { Route as MobileRewardsRouteImport } from './routes/mobile/rewards'
+import { Route as MobileNotificationsRouteImport } from './routes/mobile/notifications'
+import { Route as MobileLeaderboardRouteImport } from './routes/mobile/leaderboard'
+import { Route as MobileCsrRouteImport } from './routes/mobile/csr'
+import { Route as MobileChallengesRouteImport } from './routes/mobile/challenges'
 
+const SocialRoute = SocialRouteImport.update({
+  id: '/social',
+  path: '/social',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportsRoute = ReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MobileRoute = MobileRouteImport.update({
+  id: '/mobile',
+  path: '/mobile',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ManagerRoute = ManagerRouteImport.update({
   id: '/manager',
   path: '/manager',
@@ -26,9 +59,24 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GovernanceRoute = GovernanceRouteImport.update({
+  id: '/governance',
+  path: '/governance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GamificationRoute = GamificationRouteImport.update({
+  id: '/gamification',
+  path: '/gamification',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EnvironmentRoute = EnvironmentRouteImport.update({
   id: '/environment',
   path: '/environment',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DigitalTwinRoute = DigitalTwinRouteImport.update({
+  id: '/digital-twin',
+  path: '/digital-twin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DepartmentRoute = DepartmentRouteImport.update({
@@ -46,31 +94,99 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MobileIndexRoute = MobileIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => MobileRoute,
+} as any)
+const MobileRewardsRoute = MobileRewardsRouteImport.update({
+  id: '/rewards',
+  path: '/rewards',
+  getParentRoute: () => MobileRoute,
+} as any)
+const MobileNotificationsRoute = MobileNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => MobileRoute,
+} as any)
+const MobileLeaderboardRoute = MobileLeaderboardRouteImport.update({
+  id: '/leaderboard',
+  path: '/leaderboard',
+  getParentRoute: () => MobileRoute,
+} as any)
+const MobileCsrRoute = MobileCsrRouteImport.update({
+  id: '/csr',
+  path: '/csr',
+  getParentRoute: () => MobileRoute,
+} as any)
+const MobileChallengesRoute = MobileChallengesRouteImport.update({
+  id: '/challenges',
+  path: '/challenges',
+  getParentRoute: () => MobileRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/department': typeof DepartmentRoute
+  '/digital-twin': typeof DigitalTwinRoute
   '/environment': typeof EnvironmentRoute
+  '/gamification': typeof GamificationRoute
+  '/governance': typeof GovernanceRoute
   '/login': typeof LoginRoute
   '/manager': typeof ManagerRoute
+  '/mobile': typeof MobileRouteWithChildren
+  '/reports': typeof ReportsRoute
+  '/settings': typeof SettingsRoute
+  '/social': typeof SocialRoute
+  '/mobile/challenges': typeof MobileChallengesRoute
+  '/mobile/csr': typeof MobileCsrRoute
+  '/mobile/leaderboard': typeof MobileLeaderboardRoute
+  '/mobile/notifications': typeof MobileNotificationsRoute
+  '/mobile/rewards': typeof MobileRewardsRoute
+  '/mobile/': typeof MobileIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/department': typeof DepartmentRoute
+  '/digital-twin': typeof DigitalTwinRoute
   '/environment': typeof EnvironmentRoute
+  '/gamification': typeof GamificationRoute
+  '/governance': typeof GovernanceRoute
   '/login': typeof LoginRoute
   '/manager': typeof ManagerRoute
+  '/reports': typeof ReportsRoute
+  '/settings': typeof SettingsRoute
+  '/social': typeof SocialRoute
+  '/mobile/challenges': typeof MobileChallengesRoute
+  '/mobile/csr': typeof MobileCsrRoute
+  '/mobile/leaderboard': typeof MobileLeaderboardRoute
+  '/mobile/notifications': typeof MobileNotificationsRoute
+  '/mobile/rewards': typeof MobileRewardsRoute
+  '/mobile': typeof MobileIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/department': typeof DepartmentRoute
+  '/digital-twin': typeof DigitalTwinRoute
   '/environment': typeof EnvironmentRoute
+  '/gamification': typeof GamificationRoute
+  '/governance': typeof GovernanceRoute
   '/login': typeof LoginRoute
   '/manager': typeof ManagerRoute
+  '/mobile': typeof MobileRouteWithChildren
+  '/reports': typeof ReportsRoute
+  '/settings': typeof SettingsRoute
+  '/social': typeof SocialRoute
+  '/mobile/challenges': typeof MobileChallengesRoute
+  '/mobile/csr': typeof MobileCsrRoute
+  '/mobile/leaderboard': typeof MobileLeaderboardRoute
+  '/mobile/notifications': typeof MobileNotificationsRoute
+  '/mobile/rewards': typeof MobileRewardsRoute
+  '/mobile/': typeof MobileIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -78,32 +194,111 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/department'
+    | '/digital-twin'
     | '/environment'
+    | '/gamification'
+    | '/governance'
     | '/login'
     | '/manager'
+    | '/mobile'
+    | '/reports'
+    | '/settings'
+    | '/social'
+    | '/mobile/challenges'
+    | '/mobile/csr'
+    | '/mobile/leaderboard'
+    | '/mobile/notifications'
+    | '/mobile/rewards'
+    | '/mobile/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin' | '/department' | '/environment' | '/login' | '/manager'
+  to:
+    | '/'
+    | '/admin'
+    | '/department'
+    | '/digital-twin'
+    | '/environment'
+    | '/gamification'
+    | '/governance'
+    | '/login'
+    | '/manager'
+    | '/reports'
+    | '/settings'
+    | '/social'
+    | '/mobile/challenges'
+    | '/mobile/csr'
+    | '/mobile/leaderboard'
+    | '/mobile/notifications'
+    | '/mobile/rewards'
+    | '/mobile'
   id:
     | '__root__'
     | '/'
     | '/admin'
     | '/department'
+    | '/digital-twin'
     | '/environment'
+    | '/gamification'
+    | '/governance'
     | '/login'
     | '/manager'
+    | '/mobile'
+    | '/reports'
+    | '/settings'
+    | '/social'
+    | '/mobile/challenges'
+    | '/mobile/csr'
+    | '/mobile/leaderboard'
+    | '/mobile/notifications'
+    | '/mobile/rewards'
+    | '/mobile/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
   DepartmentRoute: typeof DepartmentRoute
+  DigitalTwinRoute: typeof DigitalTwinRoute
   EnvironmentRoute: typeof EnvironmentRoute
+  GamificationRoute: typeof GamificationRoute
+  GovernanceRoute: typeof GovernanceRoute
   LoginRoute: typeof LoginRoute
   ManagerRoute: typeof ManagerRoute
+  MobileRoute: typeof MobileRouteWithChildren
+  ReportsRoute: typeof ReportsRoute
+  SettingsRoute: typeof SettingsRoute
+  SocialRoute: typeof SocialRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/social': {
+      id: '/social'
+      path: '/social'
+      fullPath: '/social'
+      preLoaderRoute: typeof SocialRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reports': {
+      id: '/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mobile': {
+      id: '/mobile'
+      path: '/mobile'
+      fullPath: '/mobile'
+      preLoaderRoute: typeof MobileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/manager': {
       id: '/manager'
       path: '/manager'
@@ -118,11 +313,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/governance': {
+      id: '/governance'
+      path: '/governance'
+      fullPath: '/governance'
+      preLoaderRoute: typeof GovernanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gamification': {
+      id: '/gamification'
+      path: '/gamification'
+      fullPath: '/gamification'
+      preLoaderRoute: typeof GamificationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/environment': {
       id: '/environment'
       path: '/environment'
       fullPath: '/environment'
       preLoaderRoute: typeof EnvironmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/digital-twin': {
+      id: '/digital-twin'
+      path: '/digital-twin'
+      fullPath: '/digital-twin'
+      preLoaderRoute: typeof DigitalTwinRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/department': {
@@ -146,16 +362,86 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mobile/': {
+      id: '/mobile/'
+      path: '/'
+      fullPath: '/mobile/'
+      preLoaderRoute: typeof MobileIndexRouteImport
+      parentRoute: typeof MobileRoute
+    }
+    '/mobile/rewards': {
+      id: '/mobile/rewards'
+      path: '/rewards'
+      fullPath: '/mobile/rewards'
+      preLoaderRoute: typeof MobileRewardsRouteImport
+      parentRoute: typeof MobileRoute
+    }
+    '/mobile/notifications': {
+      id: '/mobile/notifications'
+      path: '/notifications'
+      fullPath: '/mobile/notifications'
+      preLoaderRoute: typeof MobileNotificationsRouteImport
+      parentRoute: typeof MobileRoute
+    }
+    '/mobile/leaderboard': {
+      id: '/mobile/leaderboard'
+      path: '/leaderboard'
+      fullPath: '/mobile/leaderboard'
+      preLoaderRoute: typeof MobileLeaderboardRouteImport
+      parentRoute: typeof MobileRoute
+    }
+    '/mobile/csr': {
+      id: '/mobile/csr'
+      path: '/csr'
+      fullPath: '/mobile/csr'
+      preLoaderRoute: typeof MobileCsrRouteImport
+      parentRoute: typeof MobileRoute
+    }
+    '/mobile/challenges': {
+      id: '/mobile/challenges'
+      path: '/challenges'
+      fullPath: '/mobile/challenges'
+      preLoaderRoute: typeof MobileChallengesRouteImport
+      parentRoute: typeof MobileRoute
+    }
   }
 }
+
+interface MobileRouteChildren {
+  MobileChallengesRoute: typeof MobileChallengesRoute
+  MobileCsrRoute: typeof MobileCsrRoute
+  MobileLeaderboardRoute: typeof MobileLeaderboardRoute
+  MobileNotificationsRoute: typeof MobileNotificationsRoute
+  MobileRewardsRoute: typeof MobileRewardsRoute
+  MobileIndexRoute: typeof MobileIndexRoute
+}
+
+const MobileRouteChildren: MobileRouteChildren = {
+  MobileChallengesRoute: MobileChallengesRoute,
+  MobileCsrRoute: MobileCsrRoute,
+  MobileLeaderboardRoute: MobileLeaderboardRoute,
+  MobileNotificationsRoute: MobileNotificationsRoute,
+  MobileRewardsRoute: MobileRewardsRoute,
+  MobileIndexRoute: MobileIndexRoute,
+}
+
+const MobileRouteWithChildren =
+  MobileRoute._addFileChildren(MobileRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
   DepartmentRoute: DepartmentRoute,
+  DigitalTwinRoute: DigitalTwinRoute,
   EnvironmentRoute: EnvironmentRoute,
+  GamificationRoute: GamificationRoute,
+  GovernanceRoute: GovernanceRoute,
   LoginRoute: LoginRoute,
   ManagerRoute: ManagerRoute,
+  MobileRoute: MobileRouteWithChildren,
+  ReportsRoute: ReportsRoute,
+  SettingsRoute: SettingsRoute,
+  SocialRoute: SocialRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

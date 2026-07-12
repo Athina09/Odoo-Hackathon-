@@ -78,11 +78,11 @@ export interface FeedItem {
 }
 
 export const ESG_KPIS = {
-  overallScore: { value: 91, label: "Excellent", trend: "↑ +4%" },
-  carbon: { value: "124 tCO₂", trend: "↓ 12%" },
-  aiConfidence: { value: "94%", sub: "Verified" },
-  complianceIssues: { value: 4, sub: "2 Critical" },
-  csrParticipation: { value: "87%", trend: "↑ 8%" },
+  overallScore: { value: 82, label: "Good", trend: "↑ +2%" },
+  carbon: { value: "12.4 tCO₂", trend: "↓ 8%" },
+  aiConfidence: { value: "91%", sub: "Verified" },
+  complianceIssues: { value: 4, sub: "2 Critical · Mfg" },
+  csrParticipation: { value: "72%", trend: "Finance 31%" },
   challengesActive: { value: 18, sub: "6 ending soon" },
 };
 
@@ -202,22 +202,22 @@ export const facilities: Facility[] = [
 ];
 
 export const departments: DepartmentRow[] = [
-  { id: "mfg", department: "Manufacturing", esg: 71, carbon: "high", csr: 68, governance: 74, confidence: 83, risk: "high", status: "watch" },
-  { id: "hr", department: "HR", esg: 92, carbon: "low", csr: 94, governance: 96, confidence: 97, risk: "low", status: "excellent" },
-  { id: "it", department: "IT", esg: 88, carbon: "medium", csr: 85, governance: 90, confidence: 91, risk: "medium", status: "good" },
-  { id: "fin", department: "Finance", esg: 95, carbon: "low", csr: 93, governance: 98, confidence: 99, risk: "low", status: "excellent" },
-  { id: "ops", department: "Operations", esg: 79, carbon: "medium", csr: 77, governance: 82, confidence: 86, risk: "medium", status: "good" },
-  { id: "legal", department: "Legal & Compliance", esg: 90, carbon: "low", csr: 88, governance: 97, confidence: 95, risk: "low", status: "excellent" },
+  { id: "mfg", department: "Manufacturing", esg: 74, carbon: "high", csr: 88, governance: 62, confidence: 81, risk: "high", status: "watch" },
+  { id: "hr", department: "HR", esg: 93, carbon: "low", csr: 94, governance: 96, confidence: 97, risk: "low", status: "excellent" },
+  { id: "it", department: "IT", esg: 82, carbon: "low", csr: 58, governance: 89, confidence: 90, risk: "medium", status: "good" },
+  { id: "fin", department: "Finance", esg: 88, carbon: "low", csr: 31, governance: 97, confidence: 98, risk: "low", status: "excellent" },
+  { id: "ops", department: "Operations", esg: 79, carbon: "medium", csr: 77, governance: 79, confidence: 85, risk: "medium", status: "good" },
+  { id: "trn", department: "Transport", esg: 76, carbon: "high", csr: 65, governance: 91, confidence: 88, risk: "high", status: "watch" },
 ];
 
 export const liveInsightsSeed: FeedItem[] = [
-  { id: "1", t: "9s ago", text: "Manufacturing emissions increased 18%", tag: "carbon" },
-  { id: "2", t: "14s ago", text: "New CSR challenge uploaded", tag: "social" },
-  { id: "3", t: "1m ago", text: "HR completed diversity policy review", tag: "governance" },
-  { id: "4", t: "3m ago", text: "Finance reached Gold Badge", tag: "social" },
-  { id: "5", t: "6m ago", text: "Audit approved — Warehouse Q2", tag: "governance" },
-  { id: "6", t: "11m ago", text: "Carbon reduced by 7% — Chennai Plant", tag: "environment" },
-  { id: "7", t: "18m ago", text: "AI flagged overdue audit in HR", tag: "ai" },
+  { id: "1", t: "9s ago", text: "Transport fleet diesel added 2,340 kg CO₂ — largest single transaction this week", tag: "carbon" },
+  { id: "2", t: "22s ago", text: "Finance CSR participation at 31% — lowest in org; suggest lighter close-period volunteering", tag: "social" },
+  { id: "3", t: "1m ago", text: "Manufacturing fire exit issue overdue since Jul 5 — escalated to R. Iyer", tag: "governance" },
+  { id: "4", t: "3m ago", text: "HR drives 94% CSR participation despite low environmental footprint", tag: "social" },
+  { id: "5", t: "6m ago", text: "IT diversity index 0.42 — lowest department; review hiring pipeline", tag: "ai" },
+  { id: "6", t: "11m ago", text: "Manufacturing grid load spike: 6,080 kg CO₂ on Jul 1", tag: "environment" },
+  { id: "7", t: "18m ago", text: "Finance audit score 97 — strictest governance compliance in org", tag: "governance" },
 ];
 
 export const carbonTrend = [
@@ -238,11 +238,12 @@ export const esgRadar = [
 ];
 
 export const departmentScores = [
-  { name: "HR", value: 92 },
-  { name: "Finance", value: 95 },
-  { name: "IT", value: 88 },
-  { name: "Ops", value: 79 },
-  { name: "Mfg", value: 71 },
+  { name: "HR", value: 93 },
+  { name: "Finance", value: 88 },
+  { name: "IT", value: 82 },
+  { name: "Operations", value: 79 },
+  { name: "Transport", value: 76 },
+  { name: "Mfg", value: 74 },
 ];
 
 export const topEmitters = [

@@ -555,50 +555,100 @@
   transition: fill 0.3s ease;
 }/* EcoSphere light theme — scoped; AEGIS routes keep the dark command-center look */
 .eco-light {
-  --background: oklch(0.99 0.004 240);
-  --foreground: oklch(0.22 0.025 260);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.22 0.025 260);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.22 0.025 260);
-  --primary: oklch(0.50 0.13 230);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.96 0.008 240);
-  --secondary-foreground: oklch(0.28 0.03 260);
-  --muted: oklch(0.96 0.008 240);
-  --muted-foreground: oklch(0.50 0.02 250);
-  --accent: oklch(0.94 0.02 230);
-  --accent-foreground: oklch(0.28 0.03 260);
-  --destructive: oklch(0.55 0.22 25);
-  --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(0.90 0.01 240);
-  --border-primary: oklch(0.82 0.04 230);
-  --border-accent: oklch(0.88 0.03 280);
-  --input: oklch(0.98 0.005 240);
-  --ring: oklch(0.50 0.13 230);
-  --neon: oklch(0.46 0.13 220);
-  --neon-2: oklch(0.48 0.15 280);
-  --danger: oklch(0.55 0.22 25);
-  --warn: oklch(0.62 0.15 75);
-  --success: oklch(0.48 0.13 155);
-  --chart-1: oklch(0.50 0.13 230);
-  --chart-2: oklch(0.48 0.15 280);
-  --chart-3: oklch(0.62 0.15 75);
-  --chart-4: oklch(0.55 0.22 25);
-  --chart-5: oklch(0.48 0.13 155);
-  --sidebar: oklch(0.995 0.003 240);
-  --sidebar-foreground: oklch(0.35 0.03 260);
-  --sidebar-primary: oklch(0.50 0.13 230);
-  --sidebar-primary-foreground: oklch(0.99 0 0);
-  --sidebar-accent: oklch(0.94 0.015 240);
-  --sidebar-accent-foreground: oklch(0.28 0.03 260);
-  --sidebar-border: oklch(0.92 0.01 240);
-  --sidebar-ring: oklch(0.50 0.13 230);
+  /* ── Design system tokens — blue-forward industrial theme ── */
+  --bg-page: #EEF3FB;
+  --bg-card: #FFFFFF;
+  --bg-card-alt: #F4F8FE;
+  --border: #D4E0F5;
 
-  background: #f8fafc;
-  color: var(--foreground);
-  font-size: 1.125rem;
-  line-height: 1.6;
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #94A3B8;
+
+  --accent-teal: #3B82F6;
+  --accent-purple: #6366F1;
+  --accent-green: #22C55E;
+  --accent-amber: #F59E0B;
+  --accent-red: #EF4444;
+  --accent-blue: #2563EB;
+
+  --map-dark-bg: #0A1628;
+  --unit-blue: #60A5FA;
+
+  /* Soft tints for pills, badges, hovers */
+  --accent-teal-bg: #EFF6FF;
+  --accent-purple-bg: #EEF2FF;
+  --accent-green-bg: #ECFDF5;
+  --accent-amber-bg: #FFFBEB;
+  --accent-red-bg: #FEF2F2;
+  --accent-blue-bg: #DBEAFE;
+
+  /* Legacy aliases (components may reference either form) */
+  --eco-bg-page: var(--bg-page);
+  --eco-bg-card: var(--bg-card);
+  --eco-bg-card-alt: var(--bg-card-alt);
+  --eco-border: var(--border);
+  --eco-text-primary: var(--text-primary);
+  --eco-text-secondary: var(--text-secondary);
+  --eco-text-muted: var(--text-muted);
+  --eco-accent-teal: var(--accent-teal);
+  --eco-accent-teal-bg: var(--accent-teal-bg);
+  --eco-accent-purple: var(--accent-purple);
+  --eco-accent-purple-bg: var(--accent-purple-bg);
+  --eco-accent-green: var(--accent-green);
+  --eco-accent-green-bg: var(--accent-green-bg);
+  --eco-accent-amber: var(--accent-amber);
+  --eco-accent-amber-bg: var(--accent-amber-bg);
+  --eco-accent-red: var(--accent-red);
+  --eco-accent-red-bg: var(--accent-red-bg);
+  --eco-accent-blue: var(--accent-blue);
+  --eco-accent-blue-bg: var(--accent-blue-bg);
+  --eco-map-dark-bg: var(--map-dark-bg);
+
+  /* shadcn / Tailwind bridge */
+  --background: var(--bg-page);
+  --foreground: var(--text-primary);
+  --card: var(--bg-card);
+  --card-foreground: var(--text-primary);
+  --popover: var(--bg-card);
+  --popover-foreground: var(--text-primary);
+  --primary: var(--accent-blue);
+  --primary-foreground: #ffffff;
+  --secondary: var(--bg-page);
+  --secondary-foreground: var(--text-primary);
+  --muted: var(--bg-page);
+  --muted-foreground: var(--text-secondary);
+  --accent: var(--accent-blue-bg);
+  --accent-foreground: var(--text-primary);
+  --destructive: var(--accent-red);
+  --destructive-foreground: #ffffff;
+  --border-primary: color-mix(in srgb, var(--accent-blue) 25%, transparent);
+  --border-accent: var(--border);
+  --input: var(--bg-card);
+  --ring: var(--accent-blue);
+  --neon: var(--accent-blue);
+  --neon-2: var(--accent-purple);
+  --danger: var(--accent-red);
+  --warn: var(--accent-amber);
+  --success: var(--accent-green);
+  --chart-1: var(--accent-blue);
+  --chart-2: var(--accent-purple);
+  --chart-3: var(--accent-amber);
+  --chart-4: var(--accent-red);
+  --chart-5: var(--accent-green);
+  --sidebar: var(--bg-card);
+  --sidebar-foreground: var(--text-secondary);
+  --sidebar-primary: var(--accent-teal);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: var(--accent-teal-bg);
+  --sidebar-accent-foreground: var(--text-primary);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--accent-teal);
+
+  background: var(--bg-page);
+  color: var(--text-primary);
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 /* One step up from default Tailwind scale inside EcoSphere */
@@ -648,25 +698,107 @@
 }
 
 .eco-light .glass {
-  background: #ffffff;
-  border: 1px solid oklch(0.90 0.01 240);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-  box-shadow:
-    0 1px 2px oklch(0.22 0.03 260 / 0.05),
-    0 1px 3px oklch(0.22 0.03 260 / 0.04);
+  box-shadow: none;
+}
+
+.eco-light .eco-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(37, 99, 235, 0.04);
+}
+
+.eco-light .eco-card-header {
+  background: var(--bg-card-alt);
+  border-bottom: 1px solid var(--border);
+}
+
+/* ── EcoSphere geographic heatmap — AEGIS RiskMap theme (dark teal sea, dark land) ── */
+.eco-light .eco-heatmap .leaflet-tile-pane img,
+.eco-heatmap .leaflet-tile-pane img {
+  filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(0.9) !important;
+}
+
+.eco-heatmap .leaflet-tile {
+  filter: none !important;
+}
+
+.eco-light .eco-heatmap .leaflet-container,
+.eco-heatmap .leaflet-container {
+  background: #122c34 !important;
+}
+
+.eco-heatmap .eco-dark-surface-map {
+  position: relative;
+  background: #122c34;
+}
+
+.eco-light .eco-dark-surface {
+  box-shadow: 0 4px 20px rgba(15, 35, 48, 0.28);
+}
+
+.eco-heatmap.eco-dark-surface {
+  border-color: rgba(25, 70, 110, 0.45);
+}
+
+.eco-light .eco-dark-surface-bg {
+  background-color: #061018;
+  background-image:
+    linear-gradient(180deg, #061018 0%, #0A1628 55%, #0F2744 100%),
+    radial-gradient(ellipse at 18% 0%, rgba(59, 130, 246, 0.12) 0%, transparent 52%),
+    radial-gradient(ellipse at 82% 100%, rgba(37, 99, 235, 0.08) 0%, transparent 48%);
+}
+
+.eco-light .eco-dark-surface-map .leaflet-container,
+.eco-heatmap .eco-dark-surface-map .leaflet-container {
+  background: #122c34 !important;
+}
+
+.eco-light .eco-heatmap .esg-heatmap-label,
+.eco-heatmap .esg-heatmap-label {
+  background: transparent !important;
+  border: none !important;
+}
+
+.eco-light .eco-heatmap .esg-heatmap-label span,
+.eco-heatmap .esg-heatmap-label span {
+  position: relative;
+  left: -50%;
+  top: 6px;
+  display: inline-block;
+  transform: translateX(-50%);
+  color: rgba(220, 235, 245, 0.75);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.eco-light .eco-heatmap .esg-heatmap-label--active,
+.eco-heatmap .esg-heatmap-label--active {
+  color: #ffffff !important;
+  font-size: 12px !important;
+  text-shadow:
+    0 0 12px rgba(59, 130, 246, 0.9),
+    0 1px 6px rgba(0, 0, 0, 0.9) !important;
 }
 
 .eco-light .glass-strong {
-  background: #ffffff;
-  border: 1px solid oklch(0.90 0.01 240);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-  box-shadow: 0 4px 6px oklch(0.22 0.03 260 / 0.06);
+  box-shadow: none;
 }
 
 .eco-light .neon-text {
-  color: oklch(0.38 0.10 230);
+  color: var(--text-primary);
   text-shadow: none;
   font-weight: 600;
 }
@@ -675,7 +807,7 @@
   background: none;
   -webkit-background-clip: unset;
   background-clip: unset;
-  color: var(--foreground);
+  color: var(--text-primary);
 }
 
 .eco-light .glow-primary,
@@ -700,5 +832,170 @@
 .eco-light .eco-kpis .text-\[11px\] {
   font-size: 0.875rem;
 }
+
+/* ── Digital Twin floor-plan panel only (dark surface scoped to .dt-floor-panel) ── */
+@keyframes dt-flow-dash {
+  to { stroke-dashoffset: -12; }
+}
+
+@keyframes dt-sensor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+@keyframes dt-online-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.85); }
+}
+
+.dt-floor-panel .dt-blueprint-bg,
+.eco-light .dt-floor-panel .eco-dark-surface-bg {
+  background-color: var(--map-dark-bg);
+  background-image:
+    radial-gradient(ellipse at 15% 0%, rgba(59, 130, 246, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 100%, rgba(37, 99, 235, 0.08) 0%, transparent 45%),
+    linear-gradient(180deg, #0A1628 0%, #0F2744 100%),
+    linear-gradient(rgba(96, 165, 250, 0.056) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(96, 165, 250, 0.056) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+}
+
+.dt-floor-panel .dt-blueprint-zone {
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+.dt-floor-panel .dt-blueprint-zone:hover {
+  filter: brightness(1.08);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.dt-floor-panel .dt-blueprint-zone:hover .dt-zone-metrics {
+  opacity: 1;
+}
+
+.dt-floor-panel .dt-zone-metrics {
+  opacity: 0.92;
+  transition: opacity 0.2s ease;
+}
+
+.dt-floor-panel .dt-blueprint-zone:hover .dt-forecast-card {
+  border-color: rgba(96, 165, 250, 0.35);
+  background: rgba(0, 0, 0, 0.32);
+}
+
+.dt-floor-panel .dt-blueprint-zone:hover .dt-forecast-delta {
+  animation: dt-forecast-nudge 1.2s ease-in-out infinite;
+}
+
+@keyframes dt-forecast-nudge {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-1px); }
+}
+
+.dt-floor-panel .dt-flow-line {
+  animation: dt-flow-dash 1.8s linear infinite;
+}
+
+.dt-floor-panel .dt-online-dot {
+  animation: dt-online-pulse 2s ease-in-out infinite;
+}
+
+.dt-floor-panel .dt-sensor-pulse .dt-online-dot {
+  animation: dt-sensor-blink 1.6s ease-in-out infinite;
+}
+
+.dt-floor-panel .dt-zone-selected {
+  z-index: 5;
+  outline: 2px solid #93C5FD;
+  outline-offset: 0;
+  animation: dt-zone-select-blink 1.25s ease-in-out infinite;
+}
+
+@keyframes dt-zone-select-blink {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(96, 165, 250, 0.35);
+    outline-color: #93C5FD;
+    filter: brightness(1);
+  }
+  50% {
+    box-shadow: 0 0 18px 3px rgba(96, 165, 250, 0.55);
+    outline-color: #ffffff;
+    filter: brightness(1.12);
+  }
+}
+
+.dt-floor-panel .dt-value-pulse {
+  animation: dt-value-flash 200ms ease-out;
+}
+
+@keyframes dt-value-flash {
+  0% { opacity: 1; }
+  40% { opacity: 0.35; }
+  100% { opacity: 1; }
+}
+
+.dt-floor-panel .dt-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: #334155;
+  outline: none;
+}
+
+.dt-floor-panel .dt-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #3B82F6;
+  border: 2px solid #0A1628;
+  cursor: pointer;
+}
+
+.dt-floor-panel .dt-range::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #3B82F6;
+  border: 2px solid #0A1628;
+  cursor: pointer;
+}
+
+/* Legacy twin animations (kept for compatibility) */
+@keyframes dt-electric-pulse {
+  0%, 100% { box-shadow: inset 0 0 12px rgba(20, 184, 166, 0.2); }
+  50% { box-shadow: inset 0 0 22px rgba(20, 184, 166, 0.55); }
+}
+
+@keyframes dt-critical-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
+  50% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+}
+
+@keyframes dt-smoke {
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 1; filter: brightness(1.15); }
+}
+
+@keyframes dt-glow-green {
+  0%, 100% { box-shadow: inset 0 0 8px rgba(34, 197, 94, 0.25); }
+  50% { box-shadow: inset 0 0 16px rgba(34, 197, 94, 0.45); }
+}
+
+@keyframes dt-glow-solar {
+  0%, 100% { box-shadow: inset 0 0 10px rgba(20, 184, 166, 0.3); }
+  50% { box-shadow: inset 0 0 18px rgba(20, 184, 166, 0.55); }
+}
+
+.dt-pulse-electric { animation: dt-electric-pulse 2s ease-in-out infinite; }
+.dt-pulse-critical { animation: dt-critical-pulse 1.4s ease-in-out infinite; }
+.dt-smoke { animation: dt-smoke 2.5s ease-in-out infinite; }
+.dt-glow-normal { animation: dt-glow-green 3s ease-in-out infinite; }
+.dt-glow-solar { animation: dt-glow-solar 2.8s ease-in-out infinite; }
+.dt-zone-widget { min-height: 100%; }
 
 

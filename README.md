@@ -8,6 +8,44 @@ Environmental, Social and Governance (ESG) has become a critical aspect of moder
 
 ---
 
+## Login & passwords
+
+Run the app (`npm run install:frontend && npm run dev` from this folder), then open **http://localhost:8090/login**.
+
+Passwords are **per role** — any account under a role uses the same password.
+
+| Role | Name | Email | Password | Lands on |
+|------|------|-------|----------|----------|
+| **Super Admin** | Priya Natarajan | `superadmin@ecosphere.in` | `admin123` | `/` — ESG Command Dashboard |
+| **ESG Manager** | Alex Morgan | `alex.morgan@ecosphere.in` | `manager` | `/` — ESG Command Dashboard |
+| **Department Manager** | John Carter (Manufacturing) | `john.carter@ecosphere.in` | `dept123` | `/department` |
+| **Department Manager** | Emily Watson (HR) | `emily.watson@ecosphere.in` | `dept123` | `/department` |
+| **Department Manager** | Michael Brown (Finance) | `michael.brown@ecosphere.in` | `dept123` | `/department` |
+| **Employee** | Sarah Johnson | `sarah.j@ecosphere.in` | `employee` | `/mobile` |
+| **Employee** | David Wilson | `david.w@ecosphere.in` | `employee` | `/mobile` |
+
+**Quick copy**
+
+```
+Super Admin:     superadmin@ecosphere.in / admin123
+ESG Manager:     alex.morgan@ecosphere.in / manager
+Dept Manager:    john.carter@ecosphere.in / dept123
+Employee:        sarah.j@ecosphere.in / employee
+```
+
+**Role passwords**
+
+| Role | Password |
+|------|----------|
+| Super Admin | `admin123` |
+| ESG Manager | `manager` |
+| Department Manager | `dept123` |
+| Employee | `employee` |
+
+On the login page: pick your **role** → select your **account** → enter the **role password** → **Sign in**.
+
+---
+
 ## Challenge statement
 
 Build an ESG Management Platform that enables organizations to **measure**, **manage**, and **improve** their Environmental, Social and Governance performance. The platform should integrate operational data, employee participation, and compliance activities into a unified dashboard while encouraging sustainability through gamification.
@@ -34,7 +72,7 @@ The **Executive Command Center** (`/`) is a working frontend prototype aligned w
 - **AI live feed** — environment, social, governance, and carbon insights
 - **Department performance table** — E, S, G scores, risk, and status per department
 - **Charts** — carbon trend, CSR participation, governance compliance, top emitters, ESG health breakdown
-- **Navigation shell** — Environment · Social · Governance · Challenges · Reports · Audits · Settings (sidebar IA from spec)
+- **Navigation shell** — Environment · Social · Governance · Digital Twin · Gamification · Reports · Settings (sidebar IA from spec)
 
 Demo data lives in `frontend/src/data/ecosphere.ts`. The heatmap reuses Tamil Nadu district coordinates for geographic consistency.
 
@@ -192,15 +230,19 @@ npm run install:frontend
 npm run dev
 ```
 
-Open **http://localhost:8090/** for the Executive Command Center (login at `/login`).
+Open **http://localhost:8090/** — you will be redirected to **`/login`** if not signed in.
 
-### Demo logins
+### How to sign in
 
-| Role | Email | Password |
-|------|-------|----------|
-| Super Admin | `superadmin@ecosphere.in` | `admin123` |
-| ESG Manager | `alex.morgan@ecosphere.in` | `manager` |
-| Department Manager | `john.carter@ecosphere.in` | `dept123` |
+See **[Login & passwords](#login--passwords)** at the top of this README for the full account table.
+
+1. Open **http://localhost:8090/login**
+2. Choose your **role** (Super Admin, ESG Manager, Department Manager, or Employee)
+3. Select your **account** from the list (assigned in Administration for non–Super Admin roles)
+4. Enter the **role password** (same password for every account in that role)
+5. Click **Sign in** — you land on the home screen for that role (see table above)
+
+After login, open **Digital Twin** from the sidebar (`/digital-twin`) — Super Admin and ESG Manager see all facilities; other web roles are scoped to their assigned facility.
 
 ### Build for production
 
@@ -219,9 +261,11 @@ frontend/
 │   ├── routes/
 │   │   ├── index.tsx                 # ESG Command Center (/)
 │   │   ├── login.tsx                 # Role-based login
+│   │   ├── digital-twin.tsx          # Digital Twin floor view
 │   │   ├── admin.tsx                 # Super Admin console
 │   │   ├── manager.tsx               # ESG Manager hub
 │   │   ├── department.tsx            # Department Manager dashboard
+│   │   ├── mobile/                   # Employee mobile app
 │   │   └── environment.tsx           # Environment cases
 │   ├── components/ecosphere/
 │   │   ├── EcoShell.tsx              # Layout (sidebar + header)

@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { useEcoAuth } from "@/context/EcoAuthContext";
 import { getDepartmentEmployees, getDepartmentPerformance } from "@/lib/ecosphere-department";
+import { ApprovalQueuePanel } from "@/components/ecosphere/ApprovalQueuePanel";
 import { Button } from "@/components/ui/button";
 import { AlertTriangle, FileDown, Users, Gauge, Cloud } from "lucide-react";
 
@@ -70,6 +71,9 @@ export function DepartmentManagerConsole() {
           <Button type="button" size="sm" variant="outline">
             Approve pending
           </Button>
+        </div>
+        <div className="mt-4">
+          <ApprovalQueuePanel departmentOnly />
         </div>
         <table className="mt-4 w-full text-base">
           <thead>

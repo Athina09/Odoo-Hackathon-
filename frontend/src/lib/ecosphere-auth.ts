@@ -1,7 +1,11 @@
 import type { EcoRole } from "@/data/ecosphere-mock";
+import {
+  DEPARTMENT_FACILITY_MAP,
+  getFacilityById,
+} from "@/data/digital-twin";
 import type { EcoAdminConfig } from "@/lib/ecosphere-config-store";
 
-export type PortalRole = "SUPER_ADMIN" | "ESG_MANAGER" | "DEPARTMENT_MANAGER";
+export type PortalRole = "SUPER_ADMIN" | "ESG_MANAGER" | "DEPARTMENT_MANAGER" | "EMPLOYEE";
 
 export interface EcoSessionUser {
   id: string;
@@ -10,6 +14,8 @@ export interface EcoSessionUser {
   role: EcoRole;
   departmentId?: string;
   departmentName?: string;
+  factoryId?: string;
+  facilityName?: string;
 }
 
 export interface PortalLoginAccount {
@@ -28,6 +34,7 @@ export const PORTAL_ROLE_PASSWORDS: Record<PortalRole, string> = {
   SUPER_ADMIN: "admin123",
   ESG_MANAGER: "manager",
   DEPARTMENT_MANAGER: "dept123",
+  EMPLOYEE: "employee",
 };
 
 export const demoLoginUsers = [
@@ -57,16 +64,33 @@ export function setEcoSession(user: EcoSessionUser | null) {
   else localStorage.removeItem(SESSION_KEY);
 }
 
+function facilityForDepartment(departmentId?: string): { factoryId?: string; facilityName?: string } {
+  if (!departmentId) return {};
+  const factoryId = DEPARTMENT_FACILITY_MAP[departmentId];
+  const facility = factoryId ? getFacilityById(factoryId) : undefined;
+  return facility ? { factoryId: facility.id, facilityName: facility.name } : {};
+}
+
+function withFacility(session: EcoSessionUser): EcoSessionUser {
+  if (session.factoryId) return session;
+  if (session.role === "SUPER_ADMIN" || session.role === "ESG_MANAGER") {
+    const hq = getFacilityById("FAC001");
+    return hq ? { ...session, factoryId: hq.id, facilityName: hq.name } : session;
+  }
+  return { ...session, ...facilityForDepartment(session.departmentId) };
+}
+
 export function getHomeRouteForRole(role: EcoRole): string {
   switch (role) {
     case "SUPER_ADMIN":
-      return "/";
     case "ESG_MANAGER":
-      return "/manager";
+      return "/";
     case "DEPARTMENT_MANAGER":
       return "/department";
+    case "EMPLOYEE":
+      return "/mobile";
     default:
-      return "/";
+      return "/login";
   }
 }
 
@@ -95,6 +119,27 @@ export function getPortalAccounts(config: EcoAdminConfig, role: PortalRole): Por
         };
       })
       .filter((a): a is PortalLoginAccount => a !== null);
+  }
+
+  if (role === "EMPLOYEE") {
+    const managerIds = new Set([
+      ...config.roleAssignments.esgManagers.map(m => m.employeeId),
+      ...config.roleAssignments.departmentManagers.map(m => m.employeeId),
+    ]);
+    return config.employees
+      .filter(e => e.role === "EMPLOYEE" && !managerIds.has(e.id))
+      .map(emp => {
+        const dept = config.departments.find(d => d.id === emp.departmentId);
+        return {
+          id: emp.id,
+          name: emp.name,
+          email: emp.email,
+          role: "EMPLOYEE" as const,
+          departmentId: emp.departmentId,
+          departmentName: dept?.name,
+          passwordHint: PORTAL_ROLE_PASSWORDS.EMPLOYEE,
+        };
+      });
   }
 
   return config.roleAssignments.departmentManagers
@@ -130,7 +175,7 @@ export function authenticateEcoUser(
       u => u.email.toLowerCase() === normalized && u.role === "SUPER_ADMIN",
     );
     if (!match) return null;
-    return { id: match.id, name: match.name, email: match.email, role: "SUPER_ADMIN" };
+    return withFacility({ id: match.id, name: match.name, email: match.email, role: "SUPER_ADMIN" });
   }
 
   if (expectedRole === "ESG_MANAGER") {
@@ -138,7 +183,26 @@ export function authenticateEcoUser(
     if (!emp) return null;
     const assigned = config.roleAssignments.esgManagers.some(m => m.employeeId === emp.id);
     if (!assigned) return null;
-    return { id: emp.id, name: emp.name, email: emp.email, role: "ESG_MANAGER" };
+    return withFacility({ id: emp.id, name: emp.name, email: emp.email, role: "ESG_MANAGER" });
+  }
+
+  if (expectedRole === "EMPLOYEE") {
+    const emp = config.employees.find(e => e.email.toLowerCase() === normalized);
+    if (!emp || emp.role !== "EMPLOYEE") return null;
+    const managerIds = new Set([
+      ...config.roleAssignments.esgManagers.map(m => m.employeeId),
+      ...config.roleAssignments.departmentManagers.map(m => m.employeeId),
+    ]);
+    if (managerIds.has(emp.id)) return null;
+    const dept = config.departments.find(d => d.id === emp.departmentId);
+    return {
+      id: emp.id,
+      name: emp.name,
+      email: emp.email,
+      role: "EMPLOYEE",
+      departmentId: emp.departmentId,
+      departmentName: dept?.name,
+    };
   }
 
   const emp = config.employees.find(e => e.email.toLowerCase() === normalized);
@@ -146,12 +210,12 @@ export function authenticateEcoUser(
   const assignment = config.roleAssignments.departmentManagers.find(m => m.employeeId === emp.id);
   if (!assignment) return null;
   const dept = config.departments.find(d => d.id === assignment.departmentId);
-  return {
+  return withFacility({
     id: emp.id,
     name: emp.name,
     email: emp.email,
     role: "DEPARTMENT_MANAGER",
     departmentId: assignment.departmentId,
     departmentName: dept?.name,
-  };
+  });
 }

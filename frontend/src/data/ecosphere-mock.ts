@@ -105,13 +105,12 @@ export const ecoSphereMockData: EcoSphereMockData = {
   },
 
   departments: [
-    { id: "DEP001", name: "Manufacturing", head: "John Carter", employeeCount: 42 },
-    { id: "DEP002", name: "Human Resources", head: "Emily Watson", employeeCount: 18 },
+    { id: "DEP001", name: "Manufacturing", head: "R. Iyer", employeeCount: 42 },
+    { id: "DEP002", name: "HR", head: "Emily Watson", employeeCount: 18 },
     { id: "DEP003", name: "Finance", head: "Michael Brown", employeeCount: 15 },
-    { id: "DEP004", name: "Operations", head: "Sophia Davis", employeeCount: 30 },
-    { id: "DEP005", name: "Fleet & Logistics", head: "David Wilson", employeeCount: 25 },
-    { id: "DEP006", name: "Sales & Marketing", head: "Sarah Johnson", employeeCount: 28 },
-    { id: "DEP007", name: "IT", head: "Alex Morgan", employeeCount: 20 },
+    { id: "DEP004", name: "Operations", head: "K. Menon", employeeCount: 30 },
+    { id: "DEP005", name: "Transport", head: "David Wilson", employeeCount: 25 },
+    { id: "DEP006", name: "IT", head: "S. Rao", employeeCount: 20 },
   ],
 
   emissionFactors: [
