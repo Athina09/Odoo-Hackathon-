@@ -14,3 +14,7 @@ backend/data/
 backend/__pycache__/
 backend/**/__pycache__/
 .venv/
+*.pyc
+*.pyo
+*.pyd
+
