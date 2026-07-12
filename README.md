@@ -223,14 +223,49 @@ Organization Dashboard & Reports
 - Node.js 18+
 - npm
 
-### Install & run
+### Install & run (frontend only)
 
 ```bash
 npm run install:frontend
 npm run dev
 ```
 
+### Full stack (frontend + API + RAG + mobile bootstrap)
+
+```bash
+npm run install:all
+npm run dev:all
+```
+
+| Service | URL |
+|---------|-----|
+| EcoSphere app | http://localhost:8090/ |
+| Login | http://localhost:8090/login |
+| **Mobile app** (Employee role) | http://localhost:8090/mobile |
+| API docs | http://127.0.0.1:8000/docs |
+| RAG dashboard | http://127.0.0.1:8501 |
+
 Open **http://localhost:8090/** — you will be redirected to **`/login`** if not signed in.
+
+### API routes
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/api/health` | Backend health check |
+| GET | `/api/esg/kpis` | Command Center KPIs |
+| GET | `/api/esg/departments` | Department master data |
+| GET | `/api/esg/carbon-transactions` | Carbon ledger (`?department=` optional) |
+| GET | `/api/esg/csr-activities` | CSR activities |
+| GET | `/api/esg/compliance-issues` | Governance issues |
+| GET | `/api/esg/challenges` | Gamification challenges |
+| GET | `/api/mobile/bootstrap/{employeeId}` | Initialize mobile session |
+| GET | `/api/rag/search?query=` | ESG insight RAG retrieval |
+| GET | `/api/rag/flow` | RAG pipeline stages |
+| GET | `/api/rag/metrics` | Retrieval eval metrics |
+
+### CI
+
+GitHub Actions (`.github/workflows/ci.yml`) on push to `main`: frontend lint + build, backend smoke tests.
 
 ### How to sign in
 
@@ -278,7 +313,13 @@ frontend/
 │   └── data/ecosphere.ts             # Demo KPIs, facilities, departments, feed
 ├── package.json
 └── vite.config.ts
-backend/                              # API & data (optional for full stack)
+backend/                              # FastAPI — ESG API, mobile bootstrap, RAG
+├── main.py
+├── seed_data.py
+├── rag_pipeline.py
+├── streamlit_rag_dashboard.py
+└── routes/                           # esg, mobile, rag
+.github/workflows/ci.yml              # Frontend + backend CI
 ```
 
 ---

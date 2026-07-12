@@ -4,6 +4,7 @@ import {
   saveEmployeeState,
   type EmployeeGamificationState,
 } from "@/lib/ecosphere-employee-store";
+import { initializeMobileFromApi } from "@/lib/ecosphere-api";
 
 interface EmployeeGamificationContextValue {
   state: EmployeeGamificationState;
@@ -27,6 +28,27 @@ export function EmployeeGamificationProvider({
 
   useEffect(() => {
     setState(loadEmployeeState(employeeId));
+  }, [employeeId]);
+
+  useEffect(() => {
+    let cancelled = false;
+    void initializeMobileFromApi(employeeId).then(bootstrap => {
+      if (cancelled || !bootstrap) return;
+      const local = loadEmployeeState(employeeId);
+      const merged: EmployeeGamificationState = {
+        ...local,
+        employeeId,
+        xp: bootstrap.xp,
+        points: bootstrap.points,
+        rank: bootstrap.rank,
+        badges: bootstrap.badges.length ? bootstrap.badges : local.badges,
+      };
+      saveEmployeeState(merged);
+      setState(merged);
+    });
+    return () => {
+      cancelled = true;
+    };
   }, [employeeId]);
 
   const refresh = useCallback(() => {
