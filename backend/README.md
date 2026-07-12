@@ -23,7 +23,7 @@ Run everything from the project root:
 npm run dev:all
 ```
 
-Or separately: `uvicorn` here, `npm run dev` at repo root (Vite proxies `/api` and `/pmi` to port 8000), and `streamlit run streamlit_rag_dashboard.py` below.
+Or separately: `uvicorn` here, `npm run dev` at repo root (runs `frontend/` via Vite; proxies `/api` and `/pmi` to port 8000), and `streamlit run streamlit_rag_dashboard.py` below.
 
 ## Encrypted stores
 

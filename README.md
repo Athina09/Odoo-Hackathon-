@@ -36,7 +36,7 @@ The **Executive Command Center** (`/ecosphere`) is a working frontend prototype 
 - **Charts** — carbon trend, CSR participation, governance compliance, top emitters, ESG health breakdown
 - **Navigation shell** — Environment · Social · Governance · Challenges · Reports · Audits · Settings (sidebar IA from spec)
 
-Demo data lives in `src/data/ecosphere.ts`. The heatmap reuses Tamil Nadu district coordinates for geographic consistency.
+Demo data lives in `frontend/src/data/ecosphere.ts`. The heatmap reuses Tamil Nadu district coordinates for geographic consistency.
 
 ---
 
@@ -188,7 +188,7 @@ Organization Dashboard & Reports
 ### Install & run
 
 ```bash
-npm install
+npm run install:frontend
 npm run dev
 ```
 
@@ -206,16 +206,20 @@ npm run preview
 ## Project structure
 
 ```
-src/
-├── routes/ecosphere.tsx          # Executive Command Center page
-├── components/ecosphere/
-│   ├── EcoShell.tsx              # Layout (sidebar + header)
-│   ├── EcoKpiRow.tsx             # Top KPI cards
-│   ├── EsgHeatmap.tsx            # Tamil Nadu ESG heatmap
-│   ├── AiLiveFeed.tsx            # AI insights stream
-│   ├── DepartmentTable.tsx       # Department ESG scores
-│   └── EcoChartsGrid.tsx         # Trends & health charts
-└── data/ecosphere.ts             # Demo KPIs, facilities, departments, feed
+frontend/
+├── src/
+│   ├── routes/ecosphere.tsx          # Executive Command Center page
+│   ├── components/ecosphere/
+│   │   ├── EcoShell.tsx              # Layout (sidebar + header)
+│   │   ├── EcoKpiRow.tsx             # Top KPI cards
+│   │   ├── EsgHeatmap.tsx            # Tamil Nadu ESG heatmap
+│   │   ├── AiLiveFeed.tsx            # AI insights stream
+│   │   ├── DepartmentTable.tsx       # Department ESG scores
+│   │   └── EcoChartsGrid.tsx         # Trends & health charts
+│   └── data/ecosphere.ts             # Demo KPIs, facilities, departments, feed
+├── package.json
+└── vite.config.ts
+backend/                              # API & data (optional for full stack)
 ```
 
 ---

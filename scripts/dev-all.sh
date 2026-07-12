@@ -65,7 +65,7 @@ if port_busy "$VITE_PORT" && [[ "$VITE_PORT" == 8081 ]]; then
   echo "Frontend already running (check http://localhost:8080 or :8081)"
 else
   echo "Starting frontend (vite)..."
-  npm run dev -- --port "$VITE_PORT" --strictPort false &
+  (cd frontend && npm run dev -- --port "$VITE_PORT" --strictPort false) &
   PIDS+=($!)
 fi
 
