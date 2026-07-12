@@ -171,8 +171,9 @@ function LoginForm() {
             </label>
             {accounts.length === 0 ? (
               <p className="rounded-lg border border-warn/30 bg-warn/8 px-3 py-2 text-sm text-warn">
-                No {ROLE_OPTIONS.find(r => r.role === selectedRole)?.label} accounts assigned yet. Super Admin can
-                assign people in Administration → People.
+                {!ready
+                  ? "Loading accounts…"
+                  : `No ${ROLE_OPTIONS.find(r => r.role === selectedRole)?.label} accounts assigned yet. Super Admin can assign people in Administration → People.`}
               </p>
             ) : (
               <select

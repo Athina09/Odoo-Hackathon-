@@ -38,6 +38,112 @@ We designed EcoSphere for real adoption: role-gated web views for admins and man
 
 ---
 
+## App UI — screenshots
+
+Real screens from the running app. Every role sees the **EcoSphere AI** button (bottom-right on web, above the tab bar on mobile) plus **AI confidence** scores on dashboards, the digital twin, and employee impact views.
+
+### Web — leadership & managers
+
+| Screen | What it shows |
+|--------|----------------|
+| **Login** | Role picker — Super Admin, ESG Manager, Dept Manager, Employee |
+| **Command Center** | ESG KPIs, Tamil Nadu heatmap, **AI Live Insights** feed, department table |
+| **Charts & AI** | ESG radar, carbon trend, health score, **AI recommendations** |
+| **Digital Twin** | Live plant blueprint, zone telemetry, **AI model confidence** |
+| **Social** | CSR participation, diversity index, contributor spotlight |
+| **Gamification** | Season leaderboard, badges, active challenges |
+| **Reports** | Typed reports + custom builder with PDF/Excel/CSV export |
+| **Report preview** | Slide-over preview with KPIs and export actions |
+| **Settings** | ESG weight sliders, auto-emission & badge rules |
+| **Dept Manager** | Scoped manufacturing dashboard with **AI confidence** |
+
+<p align="center">
+  <img src="docs/screenshots/01-login.png" alt="EcoSphere login — role picker" width="720" />
+</p>
+<p align="center"><em>Login — pick your role and sign in</em></p>
+
+<p align="center">
+  <img src="docs/screenshots/02-command-center.png" alt="ESG Command Center with AI live feed" width="900" />
+</p>
+<p align="center"><em>Command Center — KPIs, heatmap, AI Live Insights, department performance</em></p>
+
+<p align="center">
+  <img src="docs/screenshots/03-command-center-charts.png" alt="ESG charts and AI recommendations" width="900" />
+</p>
+<p align="center"><em>Charts — ESG breakdown, carbon trend, AI recommendations</em></p>
+
+<p align="center">
+  <img src="docs/screenshots/04-digital-twin.png" alt="Digital twin plant blueprint with AI confidence" width="900" />
+</p>
+<p align="center"><em>Digital Twin — live zones, energy/CO₂ telemetry, AI model confidence</em></p>
+
+<p align="center">
+  <img src="docs/screenshots/05-social-dashboard.png" alt="Social dashboard CSR and diversity" width="900" />
+</p>
+<p align="center"><em>Social — CSR participation heatmap, diversity by department</em></p>
+
+<p align="center">
+  <img src="docs/screenshots/06-gamification.png" alt="Gamification hub leaderboard and challenges" width="900" />
+</p>
+<p align="center"><em>Gamification — season leaderboard, badges, challenge kanban</em></p>
+
+<p align="center">
+  <img src="docs/screenshots/07-reports.png" alt="Reports and custom report builder" width="900" />
+</p>
+<p align="center"><em>Reports — typed reports + custom builder with live preview</em></p>
+
+<p align="center">
+  <img src="docs/screenshots/08-report-preview.png" alt="Environmental report preview export" width="900" />
+</p>
+<p align="center"><em>Report preview — KPIs, data table, PDF/Excel/CSV export</em></p>
+
+<p align="center">
+  <img src="docs/screenshots/09-settings.png" alt="Settings and ESG configuration" width="900" />
+</p>
+<p align="center"><em>Settings — ESG weights, emission rules, notifications</em></p>
+
+<p align="center">
+  <img src="docs/screenshots/10-department-manager.png" alt="Department manager manufacturing dashboard" width="900" />
+</p>
+<p align="center"><em>Department Manager — scoped emissions, team CSR, AI confidence</em></p>
+
+### Mobile — employee app (`/mobile`)
+
+| Screen | What it shows |
+|--------|----------------|
+| **Home** | XP ring, rank, CSR map + weekly XP chart |
+| **Challenges** | Joined challenges with progress bars |
+| **Impact** | Personal kWh/CO₂ saved, **live digital twin**, impact charts |
+| **Impact in words** | Plain-language narrative + **AI tips** for next actions |
+| **Leaderboard** | Org top 5 + your position highlighted |
+
+<p align="center">
+  <img src="docs/screenshots/11-mobile-home.png" alt="Employee mobile home XP and CSR map" width="420" />
+</p>
+<p align="center"><em>Mobile Home — XP, badges, CSR map, weekly XP chart</em></p>
+
+<p align="center">
+  <img src="docs/screenshots/12-mobile-challenges.png" alt="Employee mobile challenges joined" width="420" />
+</p>
+<p align="center"><em>Challenges — join, track progress, submit photo evidence</em></p>
+
+<p align="center">
+  <img src="docs/screenshots/13-mobile-impact-twin.png" alt="Employee impact digital twin live floor" width="420" />
+</p>
+<p align="center"><em>Impact — personal savings + compact live digital twin</em></p>
+
+<p align="center">
+  <img src="docs/screenshots/14-mobile-impact-words.png" alt="Your impact in words AI narrative" width="420" />
+</p>
+<p align="center"><em>Impact in words — narrative summary + AI tips for you</em></p>
+
+<p align="center">
+  <img src="docs/screenshots/15-mobile-leaderboard.png" alt="Employee mobile leaderboard ranks" width="420" />
+</p>
+<p align="center"><em>Ranks — org leaderboard with your row highlighted</em></p>
+
+---
+
 ## EcoSphere AI
 
 **EcoSphere AI** is the intelligence layer across the product — not a bolt-on chat widget, but AI woven into how people explore and act on ESG data.

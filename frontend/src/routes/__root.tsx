@@ -7,6 +7,7 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
+import { useEffect } from "react";
 
 import appCss from "../styles.css?url";
 
@@ -35,6 +36,18 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
+  const staleChunk =
+    import.meta.env.DEV &&
+    /Failed to fetch dynamically imported module|Loading chunk .* failed/i.test(error.message);
+
+  useEffect(() => {
+    if (!staleChunk) return;
+    const key = "ecosphere-chunk-reload";
+    if (!sessionStorage.getItem(key)) {
+      sessionStorage.setItem(key, "1");
+      window.location.reload();
+    }
+  }, [staleChunk]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -45,6 +58,9 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
         <p className="mt-2 text-sm text-muted-foreground">
           Something went wrong on our end. You can try refreshing or head back home.
         </p>
+        {staleChunk && (
+          <p className="mt-2 text-xs text-muted-foreground">Reloading dev modules…</p>
+        )}
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
             onClick={() => {
@@ -110,6 +126,10 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+
+  useEffect(() => {
+    sessionStorage.removeItem("ecosphere-chunk-reload");
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

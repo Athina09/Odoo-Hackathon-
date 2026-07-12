@@ -87,7 +87,7 @@ export function SuperAdminConsole() {
             items={config.emissionFactors}
             onChange={emissionFactors => updateConfig({ emissionFactors })}
             fields={["name", "unit", "factor"]}
-            placeholders={["Fuel type", "Unit", "kg CO₂ factor"]}
+            placeholders={{ name: "Fuel type", unit: "Unit", factor: "kg CO₂ factor" }}
           />
         </TabsContent>
 
@@ -98,7 +98,7 @@ export function SuperAdminConsole() {
             items={config.sustainabilityGoals}
             onChange={sustainabilityGoals => updateConfig({ sustainabilityGoals })}
             fields={["title", "target", "deadline"]}
-            placeholders={["Goal", "Target", "Deadline"]}
+            placeholders={{ title: "Goal", target: "Target", deadline: "Deadline" }}
           />
         </TabsContent>
 
@@ -109,7 +109,7 @@ export function SuperAdminConsole() {
               items={config.badges}
               onChange={badges => updateConfig({ badges })}
               fields={["name"]}
-              placeholders={["Badge name"]}
+              placeholders={{ name: "Badge name" }}
               numericFields={{ xpRequired: "XP" }}
             />
             <ListEditor
@@ -117,7 +117,7 @@ export function SuperAdminConsole() {
               items={config.rewards}
               onChange={rewards => updateConfig({ rewards })}
               fields={["name"]}
-              placeholders={["Reward name"]}
+              placeholders={{ name: "Reward name" }}
               numericFields={{ points: "Points" }}
             />
           </div>

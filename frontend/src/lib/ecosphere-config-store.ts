@@ -58,7 +58,32 @@ export function loadEcoAdminConfig(): EcoAdminConfig {
   try {
     const raw = localStorage.getItem(CONFIG_KEY);
     if (!raw) return getDefaultEcoAdminConfig();
-    return { ...getDefaultEcoAdminConfig(), ...JSON.parse(raw) } as EcoAdminConfig;
+    const parsed = JSON.parse(raw) as Partial<EcoAdminConfig>;
+    const defaults = getDefaultEcoAdminConfig();
+    return {
+      ...defaults,
+      ...parsed,
+      organization: { ...defaults.organization, ...parsed.organization },
+      employees: parsed.employees ?? defaults.employees,
+      departments: parsed.departments ?? defaults.departments,
+      roleAssignments: {
+        esgManagers: parsed.roleAssignments?.esgManagers ?? defaults.roleAssignments.esgManagers,
+        departmentManagers:
+          parsed.roleAssignments?.departmentManagers ?? defaults.roleAssignments.departmentManagers,
+      },
+      notificationSettings: {
+        ...defaults.notificationSettings,
+        ...parsed.notificationSettings,
+        enabledTypes:
+          parsed.notificationSettings?.enabledTypes ?? defaults.notificationSettings.enabledTypes,
+      },
+      emissionFactors: parsed.emissionFactors ?? defaults.emissionFactors,
+      sustainabilityGoals: parsed.sustainabilityGoals ?? defaults.sustainabilityGoals,
+      badges: parsed.badges ?? defaults.badges,
+      rewards: parsed.rewards ?? defaults.rewards,
+      roles: parsed.roles ?? defaults.roles,
+      notificationTypes: parsed.notificationTypes ?? defaults.notificationTypes,
+    };
   } catch {
     return getDefaultEcoAdminConfig();
   }
