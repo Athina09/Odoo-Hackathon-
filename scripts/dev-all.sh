@@ -57,20 +57,22 @@ else
   sleep 1
 fi
 
-VITE_PORT=8080
-if port_busy 8080; then
-  VITE_PORT=8081
+VITE_PORT=8090
+if port_busy 8090; then
+  echo "Port 8090 is in use. Stop the other process or run: cd frontend && npm run dev -- --port 8091"
+  VITE_PORT=8091
 fi
-if port_busy "$VITE_PORT" && [[ "$VITE_PORT" == 8081 ]]; then
-  echo "Frontend already running (check http://localhost:8080 or :8081)"
+if port_busy "$VITE_PORT"; then
+  echo "Frontend already running (check http://localhost:8090)"
 else
-  echo "Starting frontend (vite)..."
-  (cd frontend && npm run dev -- --port "$VITE_PORT" --strictPort false) &
+  echo "Starting EcoSphere frontend (vite :${VITE_PORT})..."
+  (cd frontend && npm run dev -- --port "$VITE_PORT" --strictPort) &
   PIDS+=($!)
 fi
 
 echo ""
-echo "  App (React)     → http://localhost:${VITE_PORT:-8080}/"
+echo "  EcoSphere app   → http://localhost:${VITE_PORT:-8090}/ecosphere"
+echo "  Login           → http://localhost:${VITE_PORT:-8090}/ecosphere/login"
 echo "  API             → http://127.0.0.1:8000/docs"
 echo "  RAG dashboard   → http://127.0.0.1:8501"
 echo ""

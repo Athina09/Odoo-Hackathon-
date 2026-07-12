@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import L from "leaflet";
+import type { Map as LeafletMap } from "leaflet";
 import { heatmapZones } from "@/data/data";
 import { facilities } from "@/data/ecosphere";
 import { MapInteractChrome } from "@/components/aegis/MapInteractChrome";
@@ -19,51 +19,59 @@ function zoneRadius(risk: number) {
 export function EsgHeatmap() {
   const ref = useRef<HTMLDivElement>(null);
   const shellRef = useRef<HTMLDivElement>(null);
-  const mapRef = useRef<L.Map | null>(null);
+  const mapRef = useRef<LeafletMap | null>(null);
   const [fullscreen, setFullscreen] = useState(false);
 
   const zones = useMemo(() => heatmapZones, []);
 
   useEffect(() => {
-    if (!ref.current) return;
+    if (!ref.current || typeof window === "undefined") return;
 
-    const map = L.map(ref.current, {
-      center: TN_OVERVIEW,
-      zoom: TN_ZOOM,
-      scrollWheelZoom: true,
-      zoomControl: false,
-      attributionControl: false,
+    let map: LeafletMap;
+    let cancelled = false;
+
+    void import("leaflet").then(({ default: L }) => {
+      if (cancelled || !ref.current) return;
+
+      map = L.map(ref.current, {
+        center: TN_OVERVIEW,
+        zoom: TN_ZOOM,
+        scrollWheelZoom: true,
+        zoomControl: false,
+        attributionControl: false,
+      });
+      mapRef.current = map;
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
+
+      zones.forEach(z => {
+        const r = zoneRadius(z.risk);
+        const color = zoneColor(z.risk);
+        const site = facilities.find(f => f.district === z.district);
+
+        const m = L.circleMarker([z.lat, z.lng], {
+          radius: r,
+          color,
+          fillColor: color,
+          fillOpacity: 0.35,
+          weight: 2,
+        }).addTo(map);
+
+        m.bindTooltip(
+          site
+            ? `<div style="font-size:11px"><b>${z.district}</b><br/>Site: ${site.name}<br/>Carbon: ${site.carbon}<br/>Energy: ${site.energy}<br/>Employees: ${site.employees}</div>`
+            : `<div style="font-size:11px"><b>${z.district}</b><br/>ESG exposure: ${z.risk}</div>`,
+          { direction: "top" },
+        );
+      });
+
+      const bounds = L.latLngBounds(zones.map(z => [z.lat, z.lng] as [number, number]));
+      map.fitBounds(bounds, { padding: [40, 40], maxZoom: 8 });
     });
-    mapRef.current = map;
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
-
-    zones.forEach(z => {
-      const r = zoneRadius(z.risk);
-      const color = zoneColor(z.risk);
-      const site = facilities.find(f => f.district === z.district);
-
-      const m = L.circleMarker([z.lat, z.lng], {
-        radius: r,
-        color,
-        fillColor: color,
-        fillOpacity: 0.35,
-        weight: 2,
-      }).addTo(map);
-
-      m.bindTooltip(
-        site
-          ? `<div style="font-size:11px"><b>${z.district}</b><br/>Site: ${site.name}<br/>Carbon: ${site.carbon}<br/>Energy: ${site.energy}<br/>Employees: ${site.employees}</div>`
-          : `<div style="font-size:11px"><b>${z.district}</b><br/>ESG exposure: ${z.risk}</div>`,
-        { direction: "top" },
-      );
-    });
-
-    const bounds = L.latLngBounds(zones.map(z => [z.lat, z.lng] as [number, number]));
-    map.fitBounds(bounds, { padding: [40, 40], maxZoom: 8 });
 
     return () => {
+      cancelled = true;
       mapRef.current = null;
-      map.remove();
+      map?.remove();
     };
   }, [zones]);
 

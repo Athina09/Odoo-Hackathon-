@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { Shell } from "@/components/aegis/Shell";
 import { StatCard } from "@/components/aegis/StatCard";
 import { RiskMap } from "@/components/aegis/RiskMap";
@@ -11,6 +11,9 @@ import { useRef, useState, useEffect } from "react";
 import { fetchStats, type StatsResponse } from "@/lib/api";
 
 export const Route = createFileRoute("/")({
+  beforeLoad: () => {
+    throw redirect({ to: "/ecosphere" });
+  },
   head: () => ({
     meta: [
       { title: "AEGIS — Forensic Command Center" },
