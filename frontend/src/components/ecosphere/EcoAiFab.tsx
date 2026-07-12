@@ -18,7 +18,7 @@ export function EcoAiFab() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setOpen(true)}
-        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full border border-[#22C55E]/50 bg-[#111827] px-4 py-3 text-sm font-semibold text-[#22C55E] shadow-[0_0_24px_rgba(34,197,94,0.25)]"
+        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full border border-primary/30 bg-white px-4 py-3 text-base font-semibold text-primary shadow-md"
       >
         <Bot className="h-5 w-5" />
         EcoSphere AI
@@ -30,7 +30,7 @@ export function EcoAiFab() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[60] flex items-end justify-end bg-black/50 p-4 sm:p-6"
+            className="fixed inset-0 z-[60] flex items-end justify-end bg-black/20 p-4 backdrop-blur-[2px] sm:p-6"
             onClick={() => setOpen(false)}
           >
             <motion.div
@@ -38,25 +38,25 @@ export function EcoAiFab() {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 24, opacity: 0 }}
               onClick={e => e.stopPropagation()}
-              className="w-full max-w-md rounded-2xl border border-[rgba(59,130,246,0.25)] bg-[#111827] p-5 shadow-2xl"
+              className="glass w-full max-w-md rounded-xl p-5 shadow-2xl"
             >
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 text-[#22C55E]">
+                <div className="flex items-center gap-2 text-primary">
                   <Sparkles className="h-4 w-4" />
                   <span className="font-semibold">EcoSphere AI</span>
                 </div>
-                <button type="button" onClick={() => setOpen(false)} className="text-slate-500 hover:text-white">
+                <button type="button" onClick={() => setOpen(false)} className="text-muted-foreground hover:text-foreground">
                   <X className="h-4 w-4" />
                 </button>
               </div>
-              <p className="mt-4 text-sm text-slate-300">Hello Athina 👋</p>
-              <p className="mt-1 text-sm text-slate-500">Need help with ESG?</p>
+              <p className="mt-4 text-base">Hello Athina 👋</p>
+              <p className="mt-1 text-base text-muted-foreground">Need help with ESG?</p>
               <div className="mt-4 space-y-2">
                 {PROMPTS.map(p => (
                   <button
                     key={p}
                     type="button"
-                    className="w-full rounded-lg border border-[rgba(59,130,246,0.2)] bg-[#0B1120] px-3 py-2 text-left text-xs text-slate-300 transition hover:border-[#22C55E]/40 hover:text-[#22C55E]"
+                    className="w-full rounded-lg border border-border bg-secondary px-3 py-2 text-left text-sm text-muted-foreground transition hover:border-primary/30 hover:bg-primary/10 hover:text-primary"
                   >
                     {p}
                   </button>

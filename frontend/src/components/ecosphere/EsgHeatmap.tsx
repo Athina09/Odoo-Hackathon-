@@ -53,7 +53,7 @@ export function EsgHeatmap() {
       m.bindTooltip(
         site
           ? `<div style="font-size:11px"><b>${z.district}</b><br/>Site: ${site.name}<br/>Carbon: ${site.carbon}<br/>Energy: ${site.energy}<br/>Employees: ${site.employees}</div>`
-          : `<div style="font-size:11px"><b>${z.district}</b><br/>Risk: ${z.risk}<br/>Crimes: ${z.crimes}</div>`,
+          : `<div style="font-size:11px"><b>${z.district}</b><br/>ESG exposure: ${z.risk}</div>`,
         { direction: "top" },
       );
     });
@@ -71,21 +71,16 @@ export function EsgHeatmap() {
     <div
       ref={shellRef}
       className={cn(
-        "relative overflow-hidden rounded-2xl border border-[rgba(59,130,246,0.25)] bg-[#111827]",
+        "relative overflow-hidden rounded-xl border border-border/50 bg-background",
         fullscreen ? "h-screen max-h-[100dvh] w-full rounded-none" : "h-[360px]",
       )}
     >
       <div ref={ref} className="h-full w-full min-h-[200px]" />
-      <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-[#22C55E]/15" />
-      <div className="pointer-events-none absolute left-3 top-3 z-[500] max-w-[calc(100%-5rem)] rounded-md border border-[rgba(59,130,246,0.35)] bg-[#0B1120]/75 px-2 py-1 text-[10px] uppercase tracking-widest text-slate-400 backdrop-blur">
+      <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-primary/20" />
+      <div className="pointer-events-none absolute left-3 top-3 z-[500] max-w-[calc(100%-5rem)] rounded-md border border-border bg-white/95 px-2 py-1 text-xs uppercase tracking-widest text-muted-foreground shadow-sm">
         ESG Heatmap · Tamil Nadu
       </div>
-      <MapInteractChrome
-        shellRef={shellRef}
-        mapRef={mapRef}
-        onFullscreenChange={setFullscreen}
-        className="[&_button]:border-[rgba(59,130,246,0.35)] [&_button]:bg-[#0B1120]/95 [&_button]:text-[#22C55E] [&_button:hover]:bg-[#22C55E]/10"
-      />
+      <MapInteractChrome shellRef={shellRef} mapRef={mapRef} onFullscreenChange={setFullscreen} />
     </div>
   );
 }

@@ -553,4 +553,152 @@
 /* ── Minimap node dots animated ───────────────────────────────────────────── */
 .react-flow__minimap-node {
   transition: fill 0.3s ease;
+}/* EcoSphere light theme — scoped; AEGIS routes keep the dark command-center look */
+.eco-light {
+  --background: oklch(0.99 0.004 240);
+  --foreground: oklch(0.22 0.025 260);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.025 260);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.025 260);
+  --primary: oklch(0.50 0.13 230);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.96 0.008 240);
+  --secondary-foreground: oklch(0.28 0.03 260);
+  --muted: oklch(0.96 0.008 240);
+  --muted-foreground: oklch(0.50 0.02 250);
+  --accent: oklch(0.94 0.02 230);
+  --accent-foreground: oklch(0.28 0.03 260);
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.90 0.01 240);
+  --border-primary: oklch(0.82 0.04 230);
+  --border-accent: oklch(0.88 0.03 280);
+  --input: oklch(0.98 0.005 240);
+  --ring: oklch(0.50 0.13 230);
+  --neon: oklch(0.46 0.13 220);
+  --neon-2: oklch(0.48 0.15 280);
+  --danger: oklch(0.55 0.22 25);
+  --warn: oklch(0.62 0.15 75);
+  --success: oklch(0.48 0.13 155);
+  --chart-1: oklch(0.50 0.13 230);
+  --chart-2: oklch(0.48 0.15 280);
+  --chart-3: oklch(0.62 0.15 75);
+  --chart-4: oklch(0.55 0.22 25);
+  --chart-5: oklch(0.48 0.13 155);
+  --sidebar: oklch(0.995 0.003 240);
+  --sidebar-foreground: oklch(0.35 0.03 260);
+  --sidebar-primary: oklch(0.50 0.13 230);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.94 0.015 240);
+  --sidebar-accent-foreground: oklch(0.28 0.03 260);
+  --sidebar-border: oklch(0.92 0.01 240);
+  --sidebar-ring: oklch(0.50 0.13 230);
+
+  background: #f8fafc;
+  color: var(--foreground);
+  font-size: 1.125rem;
+  line-height: 1.6;
 }
+
+/* One step up from default Tailwind scale inside EcoSphere */
+.eco-light :where(.text-xs) {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.eco-light :where(.text-sm) {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.eco-light :where(.text-base) {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.eco-light :where(.text-lg) {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.eco-light :where(.text-xl) {
+  font-size: 1.375rem;
+  line-height: 1.875rem;
+}
+
+.eco-light :where(.text-2xl) {
+  font-size: 1.625rem;
+  line-height: 2rem;
+}
+
+.eco-light :where(.text-3xl) {
+  font-size: 2rem;
+  line-height: 2.25rem;
+}
+
+.eco-light :where(.text-4xl) {
+  font-size: 2.375rem;
+  line-height: 2.5rem;
+}
+
+.eco-light :where(.text-5xl) {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.eco-light .glass {
+  background: #ffffff;
+  border: 1px solid oklch(0.90 0.01 240);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow:
+    0 1px 2px oklch(0.22 0.03 260 / 0.05),
+    0 1px 3px oklch(0.22 0.03 260 / 0.04);
+}
+
+.eco-light .glass-strong {
+  background: #ffffff;
+  border: 1px solid oklch(0.90 0.01 240);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: 0 4px 6px oklch(0.22 0.03 260 / 0.06);
+}
+
+.eco-light .neon-text {
+  color: oklch(0.38 0.10 230);
+  text-shadow: none;
+  font-weight: 600;
+}
+
+.eco-light .text-gradient {
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+  color: var(--foreground);
+}
+
+.eco-light .glow-primary,
+.eco-light .neon-border {
+  box-shadow: none;
+  outline: none;
+}
+
+.eco-light .scanline {
+  opacity: 0.06;
+}
+
+.eco-light .eco-kpis .font-mono.text-3xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+.eco-light .eco-kpis .uppercase.tracking-widest {
+  font-size: 0.875rem;
+}
+
+.eco-light .eco-kpis .text-\[11px\] {
+  font-size: 0.875rem;
+}
+
+

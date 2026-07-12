@@ -23,12 +23,23 @@ import {
   aiRecommendations,
 } from "@/data/ecosphere";
 
-const PIE_COLORS = ["#22C55E", "#06B6D4", "#F59E0B", "#EF4444", "#A78BFA"];
+const PIE_COLORS = ["oklch(0.50 0.13 230)", "oklch(0.48 0.15 280)", "oklch(0.62 0.15 75)", "oklch(0.55 0.22 25)", "oklch(0.48 0.13 155)"];
+
+const tickFill = "oklch(0.50 0.02 250)";
+
+const tooltipStyle = {
+  background: "#ffffff",
+  border: "1px solid oklch(0.90 0.01 240)",
+  borderRadius: "8px",
+  fontSize: "12px",
+  color: "oklch(0.22 0.025 260)",
+  boxShadow: "0 2px 8px oklch(0.22 0.03 260 / 0.08)",
+};
 
 function ChartCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-2xl border border-[rgba(59,130,246,0.25)] bg-[#111827] p-4">
-      <div className="mb-3 text-[10px] uppercase tracking-widest text-slate-500">{title}</div>
+    <div className="glass rounded-xl p-4">
+      <div className="mb-3 text-xs uppercase tracking-widest text-muted-foreground">{title}</div>
       <div className="h-[200px]">{children}</div>
     </div>
   );
@@ -40,9 +51,9 @@ export function EcoChartsGrid() {
       <ChartCard title="ESG Breakdown">
         <ResponsiveContainer width="100%" height="100%">
           <RadarChart data={esgRadar}>
-            <PolarGrid stroke="rgba(59,130,246,0.2)" />
-            <PolarAngleAxis dataKey="axis" tick={{ fill: "#94a3b8", fontSize: 10 }} />
-            <Radar dataKey="score" stroke="#22C55E" fill="#22C55E" fillOpacity={0.35} />
+            <PolarGrid stroke="oklch(0.90 0.01 240)" />
+            <PolarAngleAxis dataKey="axis" tick={{ fill: tickFill, fontSize: 11 }} />
+            <Radar dataKey="score" stroke="oklch(0.50 0.13 230)" fill="oklch(0.50 0.13 230)" fillOpacity={0.25} />
           </RadarChart>
         </ResponsiveContainer>
       </ChartCard>
@@ -50,10 +61,10 @@ export function EcoChartsGrid() {
       <ChartCard title="Carbon Trend">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={carbonTrend}>
-            <XAxis dataKey="month" tick={{ fill: "#64748b", fontSize: 10 }} axisLine={false} tickLine={false} />
-            <YAxis tick={{ fill: "#64748b", fontSize: 10 }} axisLine={false} tickLine={false} width={32} />
-            <Tooltip contentStyle={{ background: "#111827", border: "1px solid rgba(59,130,246,0.25)" }} />
-            <Line type="monotone" dataKey="tco2" stroke="#06B6D4" strokeWidth={2} dot={{ fill: "#06B6D4", r: 3 }} />
+            <XAxis dataKey="month" tick={{ fill: tickFill, fontSize: 11 }} axisLine={false} tickLine={false} />
+            <YAxis tick={{ fill: tickFill, fontSize: 11 }} axisLine={false} tickLine={false} width={32} />
+            <Tooltip contentStyle={tooltipStyle} />
+            <Line type="monotone" dataKey="tco2" stroke="oklch(0.50 0.13 230)" strokeWidth={2} dot={{ fill: "oklch(0.50 0.13 230)", r: 3 }} />
           </LineChart>
         </ResponsiveContainer>
       </ChartCard>
@@ -66,7 +77,7 @@ export function EcoChartsGrid() {
                 <Cell key={i} fill={PIE_COLORS[i % PIE_COLORS.length]} />
               ))}
             </Pie>
-            <Tooltip contentStyle={{ background: "#111827", border: "1px solid rgba(59,130,246,0.25)" }} />
+            <Tooltip contentStyle={tooltipStyle} />
           </PieChart>
         </ResponsiveContainer>
       </ChartCard>
@@ -74,25 +85,25 @@ export function EcoChartsGrid() {
       <ChartCard title="Top Carbon Emitters">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={topEmitters} layout="vertical" margin={{ left: 8 }}>
-            <XAxis type="number" tick={{ fill: "#64748b", fontSize: 10 }} axisLine={false} tickLine={false} />
-            <YAxis type="category" dataKey="site" tick={{ fill: "#94a3b8", fontSize: 9 }} width={90} axisLine={false} tickLine={false} />
-            <Bar dataKey="tco2" fill="#EF4444" radius={[0, 4, 4, 0]} />
+            <XAxis type="number" tick={{ fill: tickFill, fontSize: 11 }} axisLine={false} tickLine={false} />
+            <YAxis type="category" dataKey="site" tick={{ fill: tickFill, fontSize: 10 }} width={90} axisLine={false} tickLine={false} />
+            <Bar dataKey="tco2" fill="oklch(0.66 0.25 25)" radius={[0, 4, 4, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </ChartCard>
 
-      <div className="rounded-2xl border border-[rgba(59,130,246,0.25)] bg-[#111827] p-4 md:col-span-1 xl:col-span-2">
-        <div className="mb-3 text-[10px] uppercase tracking-widest text-slate-500">AI Recommendations</div>
+      <div className="glass rounded-xl p-4 md:col-span-1 xl:col-span-2">
+        <div className="mb-3 text-xs uppercase tracking-widest text-muted-foreground">AI Recommendations</div>
         <div className="grid gap-3 sm:grid-cols-2">
           {aiRecommendations.map(r => (
             <div
               key={r.id}
-              className="rounded-xl border border-[#22C55E]/25 bg-[#0B1120] p-4 transition hover:border-[#22C55E]/50"
+              className="rounded-lg border border-border bg-white p-4 transition hover:border-primary/30 hover:bg-primary/5"
             >
-              <div className="text-sm font-medium text-slate-100">{r.title}</div>
-              <div className="mt-2 flex flex-wrap gap-2 text-xs">
-                <span className="rounded-md bg-[#06B6D4]/15 px-2 py-0.5 text-[#06B6D4]">{r.impact}</span>
-                <span className="rounded-md bg-[#22C55E]/15 px-2 py-0.5 text-[#22C55E]">{r.esgBoost}</span>
+              <div className="text-base font-medium">{r.title}</div>
+              <div className="mt-2 flex flex-wrap gap-2 text-sm">
+                <span className="rounded-md border border-primary/30 bg-primary/10 px-2 py-0.5 text-primary">{r.impact}</span>
+                <span className="rounded-md border border-success/30 bg-success/10 px-2 py-0.5 text-success">{r.esgBoost}</span>
               </div>
             </div>
           ))}
@@ -104,24 +115,24 @@ export function EcoChartsGrid() {
 
 export function EsgHealthCard() {
   return (
-    <div className="rounded-2xl border border-[rgba(59,130,246,0.25)] bg-gradient-to-br from-[#111827] to-[#0B1120] p-5">
-      <div className="text-[10px] uppercase tracking-widest text-slate-500">ESG Health</div>
+    <div className="glass rounded-xl p-5">
+      <div className="text-xs uppercase tracking-widest text-muted-foreground">ESG Health</div>
       <div className="mt-2 flex items-end gap-2">
-        <span className="text-4xl font-bold text-[#22C55E]">91</span>
-        <span className="mb-1 text-sm text-slate-400">Excellent</span>
+        <span className="font-mono text-5xl font-semibold text-primary">91</span>
+        <span className="mb-1 text-base text-muted-foreground">Excellent</span>
       </div>
-      <div className="mt-4 grid grid-cols-2 gap-3 text-xs">
+      <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
         <div>
-          <div className="text-slate-500">Risk</div>
-          <div className="font-semibold text-[#22C55E]">Low</div>
+          <div className="text-muted-foreground">Risk</div>
+          <div className="font-semibold text-success">Low</div>
         </div>
         <div>
-          <div className="text-slate-500">Confidence</div>
-          <div className="font-semibold text-[#06B6D4]">95%</div>
+          <div className="text-muted-foreground">Confidence</div>
+          <div className="font-semibold text-neon-2">95%</div>
         </div>
-        <div className="col-span-2 border-t border-[rgba(59,130,246,0.15)] pt-3">
-          <div className="text-slate-500">Prediction next month</div>
-          <div className="font-mono text-lg text-white">94</div>
+        <div className="col-span-2 border-t border-border/40 pt-3">
+          <div className="text-muted-foreground">Prediction next month</div>
+          <div className="font-mono text-lg">94</div>
         </div>
       </div>
     </div>

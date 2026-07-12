@@ -17,7 +17,13 @@ import { Route as EcosphereRouteImport } from './routes/ecosphere'
 import { Route as CopilotRouteImport } from './routes/copilot'
 import { Route as AlertsRouteImport } from './routes/alerts'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EcosphereIndexRouteImport } from './routes/ecosphere.index'
 import { Route as CasesIndexRouteImport } from './routes/cases.index'
+import { Route as EcosphereManagerRouteImport } from './routes/ecosphere.manager'
+import { Route as EcosphereLoginRouteImport } from './routes/ecosphere.login'
+import { Route as EcosphereEnvironmentRouteImport } from './routes/ecosphere.environment'
+import { Route as EcosphereDepartmentRouteImport } from './routes/ecosphere.department'
+import { Route as EcosphereAdminRouteImport } from './routes/ecosphere.admin'
 import { Route as CasesCaseIdRouteImport } from './routes/cases.$caseId'
 
 const TimelineRoute = TimelineRouteImport.update({
@@ -60,10 +66,40 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EcosphereIndexRoute = EcosphereIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => EcosphereRoute,
+} as any)
 const CasesIndexRoute = CasesIndexRouteImport.update({
   id: '/cases/',
   path: '/cases/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const EcosphereManagerRoute = EcosphereManagerRouteImport.update({
+  id: '/manager',
+  path: '/manager',
+  getParentRoute: () => EcosphereRoute,
+} as any)
+const EcosphereLoginRoute = EcosphereLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => EcosphereRoute,
+} as any)
+const EcosphereEnvironmentRoute = EcosphereEnvironmentRouteImport.update({
+  id: '/environment',
+  path: '/environment',
+  getParentRoute: () => EcosphereRoute,
+} as any)
+const EcosphereDepartmentRoute = EcosphereDepartmentRouteImport.update({
+  id: '/department',
+  path: '/department',
+  getParentRoute: () => EcosphereRoute,
+} as any)
+const EcosphereAdminRoute = EcosphereAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => EcosphereRoute,
 } as any)
 const CasesCaseIdRoute = CasesCaseIdRouteImport.update({
   id: '/cases/$caseId',
@@ -75,38 +111,55 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/alerts': typeof AlertsRoute
   '/copilot': typeof CopilotRoute
-  '/ecosphere': typeof EcosphereRoute
+  '/ecosphere': typeof EcosphereRouteWithChildren
   '/heatmap': typeof HeatmapRoute
   '/reports': typeof ReportsRoute
   '/settings': typeof SettingsRoute
   '/timeline': typeof TimelineRoute
   '/cases/$caseId': typeof CasesCaseIdRoute
+  '/ecosphere/admin': typeof EcosphereAdminRoute
+  '/ecosphere/department': typeof EcosphereDepartmentRoute
+  '/ecosphere/environment': typeof EcosphereEnvironmentRoute
+  '/ecosphere/login': typeof EcosphereLoginRoute
+  '/ecosphere/manager': typeof EcosphereManagerRoute
   '/cases/': typeof CasesIndexRoute
+  '/ecosphere/': typeof EcosphereIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/alerts': typeof AlertsRoute
   '/copilot': typeof CopilotRoute
-  '/ecosphere': typeof EcosphereRoute
   '/heatmap': typeof HeatmapRoute
   '/reports': typeof ReportsRoute
   '/settings': typeof SettingsRoute
   '/timeline': typeof TimelineRoute
   '/cases/$caseId': typeof CasesCaseIdRoute
+  '/ecosphere/admin': typeof EcosphereAdminRoute
+  '/ecosphere/department': typeof EcosphereDepartmentRoute
+  '/ecosphere/environment': typeof EcosphereEnvironmentRoute
+  '/ecosphere/login': typeof EcosphereLoginRoute
+  '/ecosphere/manager': typeof EcosphereManagerRoute
   '/cases': typeof CasesIndexRoute
+  '/ecosphere': typeof EcosphereIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/alerts': typeof AlertsRoute
   '/copilot': typeof CopilotRoute
-  '/ecosphere': typeof EcosphereRoute
+  '/ecosphere': typeof EcosphereRouteWithChildren
   '/heatmap': typeof HeatmapRoute
   '/reports': typeof ReportsRoute
   '/settings': typeof SettingsRoute
   '/timeline': typeof TimelineRoute
   '/cases/$caseId': typeof CasesCaseIdRoute
+  '/ecosphere/admin': typeof EcosphereAdminRoute
+  '/ecosphere/department': typeof EcosphereDepartmentRoute
+  '/ecosphere/environment': typeof EcosphereEnvironmentRoute
+  '/ecosphere/login': typeof EcosphereLoginRoute
+  '/ecosphere/manager': typeof EcosphereManagerRoute
   '/cases/': typeof CasesIndexRoute
+  '/ecosphere/': typeof EcosphereIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -120,19 +173,30 @@ export interface FileRouteTypes {
     | '/settings'
     | '/timeline'
     | '/cases/$caseId'
+    | '/ecosphere/admin'
+    | '/ecosphere/department'
+    | '/ecosphere/environment'
+    | '/ecosphere/login'
+    | '/ecosphere/manager'
     | '/cases/'
+    | '/ecosphere/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/alerts'
     | '/copilot'
-    | '/ecosphere'
     | '/heatmap'
     | '/reports'
     | '/settings'
     | '/timeline'
     | '/cases/$caseId'
+    | '/ecosphere/admin'
+    | '/ecosphere/department'
+    | '/ecosphere/environment'
+    | '/ecosphere/login'
+    | '/ecosphere/manager'
     | '/cases'
+    | '/ecosphere'
   id:
     | '__root__'
     | '/'
@@ -144,14 +208,20 @@ export interface FileRouteTypes {
     | '/settings'
     | '/timeline'
     | '/cases/$caseId'
+    | '/ecosphere/admin'
+    | '/ecosphere/department'
+    | '/ecosphere/environment'
+    | '/ecosphere/login'
+    | '/ecosphere/manager'
     | '/cases/'
+    | '/ecosphere/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AlertsRoute: typeof AlertsRoute
   CopilotRoute: typeof CopilotRoute
-  EcosphereRoute: typeof EcosphereRoute
+  EcosphereRoute: typeof EcosphereRouteWithChildren
   HeatmapRoute: typeof HeatmapRoute
   ReportsRoute: typeof ReportsRoute
   SettingsRoute: typeof SettingsRoute
@@ -218,12 +288,54 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ecosphere/': {
+      id: '/ecosphere/'
+      path: '/'
+      fullPath: '/ecosphere/'
+      preLoaderRoute: typeof EcosphereIndexRouteImport
+      parentRoute: typeof EcosphereRoute
+    }
     '/cases/': {
       id: '/cases/'
       path: '/cases'
       fullPath: '/cases/'
       preLoaderRoute: typeof CasesIndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/ecosphere/manager': {
+      id: '/ecosphere/manager'
+      path: '/manager'
+      fullPath: '/ecosphere/manager'
+      preLoaderRoute: typeof EcosphereManagerRouteImport
+      parentRoute: typeof EcosphereRoute
+    }
+    '/ecosphere/login': {
+      id: '/ecosphere/login'
+      path: '/login'
+      fullPath: '/ecosphere/login'
+      preLoaderRoute: typeof EcosphereLoginRouteImport
+      parentRoute: typeof EcosphereRoute
+    }
+    '/ecosphere/environment': {
+      id: '/ecosphere/environment'
+      path: '/environment'
+      fullPath: '/ecosphere/environment'
+      preLoaderRoute: typeof EcosphereEnvironmentRouteImport
+      parentRoute: typeof EcosphereRoute
+    }
+    '/ecosphere/department': {
+      id: '/ecosphere/department'
+      path: '/department'
+      fullPath: '/ecosphere/department'
+      preLoaderRoute: typeof EcosphereDepartmentRouteImport
+      parentRoute: typeof EcosphereRoute
+    }
+    '/ecosphere/admin': {
+      id: '/ecosphere/admin'
+      path: '/admin'
+      fullPath: '/ecosphere/admin'
+      preLoaderRoute: typeof EcosphereAdminRouteImport
+      parentRoute: typeof EcosphereRoute
     }
     '/cases/$caseId': {
       id: '/cases/$caseId'
@@ -235,11 +347,33 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface EcosphereRouteChildren {
+  EcosphereAdminRoute: typeof EcosphereAdminRoute
+  EcosphereDepartmentRoute: typeof EcosphereDepartmentRoute
+  EcosphereEnvironmentRoute: typeof EcosphereEnvironmentRoute
+  EcosphereLoginRoute: typeof EcosphereLoginRoute
+  EcosphereManagerRoute: typeof EcosphereManagerRoute
+  EcosphereIndexRoute: typeof EcosphereIndexRoute
+}
+
+const EcosphereRouteChildren: EcosphereRouteChildren = {
+  EcosphereAdminRoute: EcosphereAdminRoute,
+  EcosphereDepartmentRoute: EcosphereDepartmentRoute,
+  EcosphereEnvironmentRoute: EcosphereEnvironmentRoute,
+  EcosphereLoginRoute: EcosphereLoginRoute,
+  EcosphereManagerRoute: EcosphereManagerRoute,
+  EcosphereIndexRoute: EcosphereIndexRoute,
+}
+
+const EcosphereRouteWithChildren = EcosphereRoute._addFileChildren(
+  EcosphereRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AlertsRoute: AlertsRoute,
   CopilotRoute: CopilotRoute,
-  EcosphereRoute: EcosphereRoute,
+  EcosphereRoute: EcosphereRouteWithChildren,
   HeatmapRoute: HeatmapRoute,
   ReportsRoute: ReportsRoute,
   SettingsRoute: SettingsRoute,
