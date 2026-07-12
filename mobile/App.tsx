@@ -9,7 +9,7 @@ import ProfileScreen from './screens/ProfileScreen';
 import MyActivityScreen from './screens/MyActivityScreen';
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState
+  const [currentPage, setCurrentPage] = useState<
     | 'loading'
     | 'login'
     | 'home'
