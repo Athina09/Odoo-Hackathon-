@@ -1,34 +1,115 @@
 # EcoSphere — ESG Management Platform
 
-**Odoo Hackathon submission** · Environmental, Social & Governance performance in one executive dashboard.
+**Odoo Hackathon submission** · Environmental, Social & Governance performance in one executive dashboard — plus an **employee mobile app**, **FastAPI backend**, and **ESG RAG** insight search.
 
-Environmental, Social and Governance (ESG) has become a critical aspect of modern businesses. Organizations are expected to monitor carbon emissions, promote employee well-being, and maintain governance compliance. While many ERP systems collect operational data, ESG reporting is often manual, disconnected, and difficult to monitor in real time.
-
-**EcoSphere** integrates ESG directly into day-to-day ERP operations by measuring sustainability metrics, encouraging employee participation, and providing meaningful reports for management.
+Organizations must monitor carbon emissions, promote employee well-being, and maintain governance compliance. **EcoSphere** integrates ESG into day-to-day operations: executive dashboards for leadership, a mobile app for employees, typed & custom reports, digital twin facility monitoring, and an API + RAG layer for AI-assisted insights.
 
 **Repo:** [github.com/Athina09/Odoo-Hackathon-](https://github.com/Athina09/Odoo-Hackathon-)
 
 ---
 
-## Login & passwords
+## Quick start
+
+### Prerequisites
+
+| Tool | Version |
+|------|---------|
+| Node.js | 18+ |
+| npm | 9+ |
+| Python | 3.10+ |
+
+### Install everything
 
 ```bash
-npm run install:all   # or: npm run install:frontend
-npm run dev:all       # full stack — or: npm run dev (frontend only)
+git clone https://github.com/Athina09/Odoo-Hackathon-.git
+cd Odoo-Hackathon-
+npm run install:all
 ```
+
+This installs frontend dependencies and creates `backend/.venv` with FastAPI, Uvicorn, and Streamlit.
+
+### Run full stack (recommended)
+
+Starts **frontend** (:8090), **FastAPI API** (:8000), and **RAG dashboard** (:8501):
+
+```bash
+npm run dev:all
+```
+
+| Service | URL |
+|---------|-----|
+| EcoSphere web app | http://localhost:8090/ |
+| Login | http://localhost:8090/login |
+| **Employee mobile app** | http://localhost:8090/mobile |
+| API root | http://127.0.0.1:8000/ |
+| API docs (Swagger) | http://127.0.0.1:8000/docs |
+| **ESG RAG dashboard** | http://127.0.0.1:8501 |
+
+Press `Ctrl+C` in the terminal to stop all services started by `dev:all`.
+
+### Frontend only
+
+```bash
+npm run install:frontend
+npm run dev
+```
+
+Works without Python — uses local mock data and `localStorage` for employee gamification.
+
+### Backend only
+
+```bash
+npm run install:backend
+cd backend
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
+uvicorn main:app --host 127.0.0.1 --port 8000 --reload
+```
+
+### RAG dashboard only
+
+```bash
+cd backend
+source .venv/bin/activate
+streamlit run streamlit_rag_dashboard.py
+```
+
+Open http://127.0.0.1:8501 — search ESG insights, view pipeline stages, and retrieval metrics.
+
+### Production build
+
+```bash
+npm run build
+npm run preview
+```
+
+### npm scripts
+
+| Script | Description |
+|--------|-------------|
+| `npm run dev` | Frontend dev server (port 8090) |
+| `npm run dev:all` | Frontend + FastAPI + Streamlit RAG |
+| `npm run install:all` | Frontend deps + Python venv |
+| `npm run install:backend` | Create venv + `pip install -r requirements.txt` |
+| `npm run install:frontend` | `npm install` in `frontend/` |
+| `npm run build` | Production frontend build |
+| `npm run lint` | ESLint |
+
+---
+
+## Login & passwords
 
 Open **http://localhost:8090/login**
 
-Passwords are **per role** — any account under a role uses the same password.
+EcoSphere is for **leadership dashboards and the employee mobile app**. Pick your role → select your account → enter the role password.
 
 | Role | Name | Email | Password | Lands on |
 |------|------|-------|----------|----------|
-| **Super Admin** | Priya Natarajan | `superadmin@ecosphere.in` | `admin123` | `/` — ESG Command Dashboard |
-| **ESG Manager** | Alex Morgan | `alex.morgan@ecosphere.in` | `manager` | `/` — ESG Command Dashboard |
+| **Super Admin** | Priya Natarajan | `superadmin@ecosphere.in` | `admin123` | `/` |
+| **ESG Manager** | Alex Morgan | `alex.morgan@ecosphere.in` | `manager` | `/` |
 | **Department Manager** | John Carter (Manufacturing) | `john.carter@ecosphere.in` | `dept123` | `/department` |
 | **Department Manager** | Emily Watson (HR) | `emily.watson@ecosphere.in` | `dept123` | `/department` |
 | **Department Manager** | Michael Brown (Finance) | `michael.brown@ecosphere.in` | `dept123` | `/department` |
-| **Employee** | Sarah Johnson | `sarah.j@ecosphere.in` | `employee` | `/mobile` |
+| **Employee** | Sarah Johnson (IT) | `sarah.j@ecosphere.in` | `employee` | `/mobile` |
 | **Employee** | David Wilson | `david.w@ecosphere.in` | `employee` | `/mobile` |
 
 **Quick copy**
@@ -47,142 +128,90 @@ Employee:        sarah.j@ecosphere.in / employee
 | Department Manager | `dept123` |
 | Employee | `employee` |
 
-On the login page: pick your **role** → select your **account** → enter the **role password** → **Sign in**.
-
-**Employees:** sign in with the **Employee** role and you land directly on the mobile app — no extra setup. Works in any phone browser; add to home screen for an app-like experience.
+**Sign out** is available in the top header (web roles) and mobile header (employees).
 
 ---
 
-## Employee mobile app — easy to use
-
-EcoSphere is built so **employees can participate in ESG without training**. Sign in as **Employee** → you're on the mobile app immediately at `/mobile`.
-
-| Step | What employees do |
-|------|-------------------|
-| 1. **Sign in** | Role: Employee → pick your name → password `employee` |
-| 2. **Home** | See XP, rank, badges, weekly charts, and a CSR activity map |
-| 3. **Challenges** | Tap **Join** → **Take photo** (camera opens on phone) → **Submit** |
-| 4. **CSR** | Register for an activity → **Upload proof** with one tap |
-| 5. **Ranks** | Your position is always shown — even if you're outside the top 5 |
-| 6. **Rewards** | Redeem points from the catalog |
-| 7. **Alerts** | Approvals, badge unlocks, and challenge updates |
-
-**Why it's easy**
-
-- **Mobile-first UI** — bottom tab bar (Home · Challenges · CSR · Ranks · Rewards · Alerts)
-- **One-tap camera** — photo evidence for challenges and CSR; no forms or file paths
-- **Clear progress** — XP ring, progress bars, and “your position” on the leaderboard
-- **Visual dashboard** — maps and charts on Home so impact is obvious at a glance
-- **Works offline-ish** — gamification state saves locally; syncs from API when backend is running
-
-**Try it:** `sarah.j@ecosphere.in` / `employee` → http://localhost:8090/mobile
-
----
-
-## Quick start
-
-### Prerequisites
-
-- Node.js 18+
-- npm
-- Python 3.10+ (for backend / RAG dashboard)
-
-### Frontend only
-
-```bash
-npm run install:frontend
-npm run dev
-```
-
-### Full stack (recommended)
-
-Starts **frontend** (:8090), **FastAPI backend** (:8000), and **RAG dashboard** (:8501).
-
-```bash
-npm run install:all
-npm run dev:all
-```
-
-| Service | URL |
-|---------|-----|
-| EcoSphere web app | http://localhost:8090/ |
-| Login | http://localhost:8090/login |
-| **Mobile app** (Employee role) | http://localhost:8090/mobile |
-| API docs (Swagger) | http://127.0.0.1:8000/docs |
-| ESG RAG dashboard | http://127.0.0.1:8501 |
-
-### Backend only
-
-```bash
-npm run install:backend
-cd backend && source .venv/bin/activate && uvicorn main:app --host 127.0.0.1 --port 8000
-```
-
-### Production build
-
-```bash
-npm run build
-npm run preview
-```
-
-### npm scripts
-
-| Script | Description |
-|--------|-------------|
-| `npm run dev` | Frontend dev server (port 8090) |
-| `npm run dev:all` | Frontend + API + RAG dashboard |
-| `npm run install:all` | Install frontend deps + backend venv |
-| `npm run install:backend` | Create Python venv and install requirements |
-| `npm run build` | Production frontend build |
-| `npm run lint` | ESLint |
-
----
-
-## What is implemented
+## What we built
 
 ### Web dashboards (role-gated)
 
-| Route | Module | Highlights |
-|-------|--------|------------|
-| `/` | Command Center | KPI row, Tamil Nadu heatmap, AI live feed, department table, charts |
-| `/environment` | Environmental | Carbon transactions, emission factors, department carbon table |
-| `/social` | Social | CSR activities, participation heatmap, diversity metrics |
-| `/governance` | Governance | Compliance kanban, policy ack progress, audit scores |
-| `/gamification` | Gamification | Challenge kanban, leaderboard, badges, rewards catalog |
-| `/digital-twin` | Digital Twin | Plant blueprint, zone detail, zone history |
-| `/reports` | Reports | Typed report generation (PDF/Excel/CSV) + custom report builder |
-| `/settings` | Settings | Org config, departments, notification preferences |
-| `/admin` | Super Admin | Role assignments, employee management |
-| `/manager` | ESG Manager | Cross-department approvals and oversight |
+| Route | Who | Highlights |
+|-------|-----|------------|
+| `/` | Super Admin, ESG Manager | KPI row, Tamil Nadu heatmap, AI live feed, department table, ESG charts |
+| `/environment` | All web roles | Carbon transactions, emission factors, department carbon |
+| `/social` | All web roles | CSR activities, participation heatmap |
+| `/governance` | All web roles | Compliance kanban, policies, audits |
+| `/gamification` | Super Admin, ESG Manager | Challenge kanban, leaderboard, badges |
+| `/digital-twin` | Super Admin, ESG Manager | Live plant blueprint, zone telemetry, **AI confidence** KPI & per-zone scores |
+| `/reports` | All web roles | Typed reports + **custom report builder** (PDF/Excel/CSV) |
+| `/settings` | Super Admin | Org config, departments, notifications |
+| `/admin` | Super Admin | Role assignments, people management |
+| `/manager` | ESG Manager | Cross-department approvals |
 | `/department` | Dept Manager | Scoped department dashboard |
 
-### Mobile app (`/mobile` — Employee role)
+### EcoSphere AI (all roles)
 
-Designed for **everyday employees** — simple tabs, big buttons, camera upload, no ERP jargon.
+- Floating **EcoSphere AI** button (solid blue) on every logged-in screen
+- Role-specific suggested prompts (executive, manager, employee)
+- **AI confidence score** shown in the chat panel
+- Employees see it above the bottom tab bar on mobile
 
-| Tab | What you can do |
-|-----|-----------------|
-| **Home** | Personal ESG profile, XP ring, impact map, weekly XP chart, activity mix |
-| **Challenges** | Join challenges, take photos, track progress, submit for approval |
-| **CSR** | Browse activities, register, upload proof photos |
-| **Ranks** | Org leaderboard with **your position** highlighted + XP comparison chart |
-| **Rewards** | Redeem points for catalog items |
-| **Alerts** | Notifications for approvals and achievements |
+### Employee mobile app (`/mobile`)
 
-Mobile session bootstraps from **`GET /api/mobile/bootstrap/{employeeId}`** when the backend is running (falls back to local storage offline).
+Designed for everyday employees — no ERP training required.
+
+| Tab | Features |
+|-----|----------|
+| **Home** | XP ring, rank, badges, **CSR map + weekly XP chart** side-by-side, link to Impact |
+| **Impact** | Personal kWh/CO₂ saved, **live digital twin floor**, impact charts (radar, energy trend, zones), **impact in words** narrative |
+| **Challenges** | Join, progress bar, **camera photo evidence**, submit for approval |
+| **CSR** | Browse activities, register, upload proof |
+| **Ranks** | Full leaderboard with **your position** highlighted |
+| **Rewards** | Points redemption catalog |
+| **Alerts** | Approvals, badges, challenge updates |
+
+Mobile bootstraps from **`GET /api/mobile/bootstrap/{employeeId}`** when the backend is running; falls back to `localStorage` offline.
+
+**Try it:** `sarah.j@ecosphere.in` / `employee` → http://localhost:8090/mobile
 
 ### Reports
 
 - **Typed reports** — Environmental, Social, Governance, ESG Summary: Generate → preview slide-over → export
-- **Custom report builder** — filter by department, module, date range, employee, challenge, ESG category; live preview; export PDF / Excel / CSV
+- **Custom report builder** — filter by department, module, date range, employee, challenge, ESG category
+- Field-aware filters (employee/challenge disabled unless module matches)
+- Live preview table + export **PDF / Excel / CSV**
 
-### Backend API
+### Digital twin
 
-FastAPI backend with seeded ESG data mirroring the frontend mock datasets.
+- Live SCADA-style plant blueprint with zone widgets (energy, CO₂, temperature)
+- Facility KPIs including **AI Model Confidence**
+- Zone detail panel with per-zone confidence + AI insight
+- Zone history table with **AI Conf.** column
+- Employee Impact page shows a **compact live twin** linked to personal contribution
+
+---
+
+## FastAPI backend
+
+Python backend mirroring frontend ESG mock data. Entry point: `backend/main.py`.
+
+### Run manually
+
+```bash
+cd backend
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+uvicorn main:app --host 127.0.0.1 --port 8000 --reload
+```
+
+### API endpoints
 
 | Method | Path | Description |
 |--------|------|-------------|
-| GET | `/api/health` | Health check |
+| GET | `/` | API info + quick links |
+| GET | `/api/health` | Health check + seed version |
 | GET | `/api/esg/kpis` | Command Center KPIs |
 | GET | `/api/esg/departments` | Department master data |
 | GET | `/api/esg/emission-factors` | Emission factor catalog |
@@ -192,78 +221,76 @@ FastAPI backend with seeded ESG data mirroring the frontend mock datasets.
 | GET | `/api/esg/challenges` | Gamification challenges |
 | GET | `/api/esg/insights` | AI insight feed chunks |
 | GET | `/api/mobile/employees` | Employee list |
-| GET | `/api/mobile/bootstrap/{employeeId}` | **Initialize mobile app** (XP, challenges, CSR, notifications) |
+| GET | `/api/mobile/bootstrap/{employeeId}` | Initialize mobile app (XP, challenges, CSR, notifications) |
 | GET | `/api/mobile/challenges/catalog` | Challenge catalog |
 | GET | `/api/mobile/csr/catalog` | CSR catalog |
-| GET | `/api/rag/search?query=` | ESG insight RAG retrieval (`?module=` optional) |
+| GET | `/api/rag/search?query=` | ESG insight RAG search (`?module=` optional, `?n_results=`) |
 | GET | `/api/rag/flow` | RAG pipeline stage definitions |
 | GET | `/api/rag/metrics` | Retrieval evaluation metrics |
 
-Vite proxies `/api` → `http://127.0.0.1:8000` in development.
+**Example**
 
-### RAG pipeline
+```bash
+curl "http://127.0.0.1:8000/api/health"
+curl "http://127.0.0.1:8000/api/rag/search?query=manufacturing+carbon&module=Environmental"
+curl "http://127.0.0.1:8000/api/mobile/bootstrap/emp-sarah"
+```
 
-ESG insight retrieval over seeded ERP chunks:
+Vite proxies `/api` → `http://127.0.0.1:8000` during `npm run dev` / `dev:all`.
 
-1. **Ingest** — carbon, CSR, compliance, challenge data
-2. **Chunk** — one searchable row per insight with module + department metadata
-3. **Retrieve** — keyword overlap via `/api/rag/search`
-4. **Dashboard** — Streamlit UI at `:8501` for pipeline stages and live search
+### Backend files
 
-Planned stages (embed, rerank, generate) are documented in `/api/rag/flow`.
+| File | Purpose |
+|------|---------|
+| `main.py` | FastAPI app, CORS, router registration |
+| `seed_data.py` | ESG, mobile, and RAG seed data |
+| `routes/esg.py` | `/api/esg/*` |
+| `routes/mobile.py` | `/api/mobile/*` |
+| `routes/rag.py` | `/api/rag/*` |
+| `rag_pipeline.py` | Chunk retrieval + pipeline stage metadata |
+| `rag_metrics.py` | Precision/recall-style eval on seed queries |
+| `streamlit_rag_dashboard.py` | Interactive RAG UI |
+| `requirements.txt` | fastapi, uvicorn, streamlit, pandas |
 
 ---
 
-## Challenge statement
+## RAG pipeline
 
-Build an ESG Management Platform that enables organizations to **measure**, **manage**, and **improve** their Environmental, Social and Governance performance. The platform should integrate operational data, employee participation, and compliance activities into a unified dashboard while encouraging sustainability through gamification.
+ESG insight retrieval over seeded ERP text chunks (carbon events, CSR, compliance, challenges).
 
-### Core modules
+### Pipeline stages
 
-| Pillar | Scope |
-|--------|--------|
-| **Environmental** | Carbon accounting, emission factors, sustainability goals, carbon reports |
-| **Social** | CSR activities, employee participation, diversity metrics, engagement |
-| **Governance** | Policies, audits, compliance tracking, governance reports |
-| **Gamification** | Challenges, badges, XP, rewards, leaderboards |
+1. **Ingest** — load carbon, CSR, compliance, challenge records from `seed_data.py`
+2. **Chunk** — one searchable document per insight with `module` + `department` metadata
+3. **Retrieve** — keyword overlap scoring via `/api/rag/search`
+4. **Evaluate** — precision metrics on held-out queries (`/api/rag/metrics`)
+5. **Dashboard** — Streamlit UI for live search and pipeline status
 
-**Design mockup:** [Excalidraw wireframe](https://link.excalidraw.com/l/65VNwvy7c4X/2m6lz9Ln4)
+Planned extensions (documented in `/api/rag/flow`): embeddings, reranking, LLM answer generation.
 
----
+### How to use RAG
 
-## Business workflow
+**Option A — Streamlit dashboard**
 
+```bash
+npm run dev:all          # starts everything including :8501
+# or backend only:
+cd backend && source .venv/bin/activate && streamlit run streamlit_rag_dashboard.py
 ```
-Master Configuration
-│
-▼
-Departments · Categories · Emission Factors · Products
-Goals · Policies · Challenges
-│
-▼
-Daily Business Operations
-(Purchase • Manufacturing • Expenses • Fleet)
-│
-▼
-Carbon Transactions
-│
-▼
-Employee Participation (CSR) · Challenge Participation
-Policy Acknowledgements · Audits
-│
-▼
-Environmental Score    Social Score    Governance Score
-│
-▼
-Department Total Score
-│
-▼
-Overall ESG Score
-(weighted: Environmental 40% / Social 30% / Governance 30%, configurable)
-│
-▼
-Organization Dashboard & Reports
+
+Open http://127.0.0.1:8501 → enter a query → filter by module → see matched chunks.
+
+**Option B — REST API**
+
+```bash
+curl "http://127.0.0.1:8000/api/rag/search?query=plastic+waste&n_results=5"
+curl "http://127.0.0.1:8000/api/rag/flow"
+curl "http://127.0.0.1:8000/api/rag/metrics"
 ```
+
+**Option C — Swagger UI**
+
+http://127.0.0.1:8000/docs → expand **rag** tag → try `/api/rag/search`.
 
 ---
 
@@ -272,11 +299,11 @@ Organization Dashboard & Reports
 | Layer | Stack |
 |-------|--------|
 | **Frontend** | React 19, TypeScript, TanStack Router, Tailwind CSS, Framer Motion |
-| **Charts** | Recharts, Chart.js |
-| **Map** | Leaflet + OpenStreetMap (Tamil Nadu facility heatmap) |
+| **Charts** | Recharts |
+| **Map** | Leaflet + OpenStreetMap (Tamil Nadu heatmap) |
 | **UI** | Radix UI / shadcn-style primitives |
 | **Backend** | FastAPI, Python 3.10+, Uvicorn |
-| **RAG** | Custom keyword retrieval + Streamlit dashboard |
+| **RAG** | Keyword retrieval + Streamlit dashboard + eval metrics |
 | **Export** | SheetJS (Excel), jsPDF (PDF), client-side CSV |
 | **CI** | GitHub Actions — frontend lint/build + backend smoke tests |
 
@@ -288,52 +315,88 @@ Organization Dashboard & Reports
 Odoo-Hackathon-/
 ├── frontend/
 │   ├── src/
-│   │   ├── routes/                   # TanStack file routes
-│   │   │   ├── index.tsx             # Command Center (/)
+│   │   ├── routes/                     # TanStack file routes
+│   │   │   ├── index.tsx               # Command Center
 │   │   │   ├── login.tsx
-│   │   │   ├── environment.tsx
-│   │   │   ├── social.tsx
-│   │   │   ├── governance.tsx
-│   │   │   ├── gamification.tsx
 │   │   │   ├── digital-twin.tsx
 │   │   │   ├── reports.tsx
-│   │   │   ├── settings.tsx
-│   │   │   └── mobile/               # Employee mobile app
+│   │   │   └── mobile/                 # Employee app (home, impact, challenges, csr, …)
 │   │   ├── components/ecosphere/
-│   │   │   ├── screens/              # Page-level dashboards
-│   │   │   ├── ds/                   # Design system (KPI, heatmap, table)
-│   │   │   ├── mobile/               # Mobile screens + shell
-│   │   │   ├── digital-twin/         # Floor blueprint, zone widgets
+│   │   │   ├── screens/                # Page dashboards + DigitalTwinPage
+│   │   │   ├── mobile/                 # MobileShell, challenges, CSR, impact, twin
+│   │   │   ├── digital-twin/           # FloorPanel, LiveZoneWidget, zone detail
+│   │   │   ├── ds/                     # KPI, heatmap, ConfidenceBar, AiConfidenceBadge
+│   │   │   ├── EcoAiFab.tsx            # AI chatbot (all roles)
 │   │   │   ├── CustomReportBuilder.tsx
 │   │   │   └── ReportPreview.tsx
 │   │   ├── lib/
-│   │   │   ├── ecosphere-api.ts      # Backend API client
-│   │   │   ├── report-builder.ts     # Custom report filter + export
-│   │   │   └── ecosphere-auth.ts     # Role-based login
-│   │   ├── data/
-│   │   │   ├── ecosphere.ts          # Command Center demo data
-│   │   │   ├── ecosphere-modules.ts  # Per-module rows & KPIs
-│   │   │   └── ecosphere-mock.ts     # Org master data
-│   │   └── context/                  # Auth + gamification state
+│   │   │   ├── ecosphere-api.ts        # Backend API client
+│   │   │   ├── report-builder.ts       # Custom reports + export
+│   │   │   ├── employee-impact.ts      # Personal impact + twin linkage
+│   │   │   ├── eco-ai-confidence.ts    # Role/zone AI confidence helpers
+│   │   │   └── ecosphere-auth.ts       # Role-based login
+│   │   ├── data/                       # Mock ESG + digital twin data
+│   │   └── context/                    # Auth + employee gamification
 │   └── package.json
 ├── backend/
-│   ├── main.py                       # FastAPI entry point
-│   ├── seed_data.py                  # ESG + mobile + RAG seed data
-│   ├── rag_pipeline.py               # Insight retrieval
-│   ├── rag_metrics.py                # Eval metrics
-│   ├── streamlit_rag_dashboard.py    # RAG UI (:8501)
+│   ├── main.py
+│   ├── seed_data.py
+│   ├── rag_pipeline.py
+│   ├── rag_metrics.py
+│   ├── streamlit_rag_dashboard.py
+│   ├── requirements.txt
 │   └── routes/
-│       ├── esg.py                    # /api/esg/*
-│       ├── mobile.py                 # /api/mobile/*
-│       └── rag.py                    # /api/rag/*
+│       ├── esg.py
+│       ├── mobile.py
+│       └── rag.py
 ├── scripts/
-│   ├── dev-all.sh                    # Start full dev stack
-│   └── init-backend.sh               # Backend venv setup
-├── .github/workflows/ci.yml          # CI pipeline
+│   ├── dev-all.sh                      # Start frontend + API + RAG
+│   └── init-backend.sh                 # Backend venv setup
+├── .env.example
+├── .github/workflows/ci.yml
 └── package.json
 ```
 
-Demo data: `frontend/src/data/ecosphere.ts`, `ecosphere-modules.ts`, `ecosphere-mock.ts` · Backend mirror: `backend/seed_data.py`
+Demo data: `frontend/src/data/` · Backend mirror: `backend/seed_data.py`
+
+---
+
+## Environment (optional)
+
+```bash
+cp .env.example .env
+```
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `API_PORT` | `8000` | FastAPI port |
+| `RAG_DASHBOARD_PORT` | `8501` | Streamlit RAG port |
+
+---
+
+## Challenge statement
+
+Build an ESG Management Platform that enables organizations to **measure**, **manage**, and **improve** Environmental, Social and Governance performance — integrating operational data, **employee participation**, compliance, and gamification.
+
+| Pillar | Scope |
+|--------|--------|
+| **Environmental** | Carbon accounting, emission factors, sustainability goals |
+| **Social** | CSR activities, employee participation, diversity |
+| **Governance** | Policies, audits, compliance tracking |
+| **Gamification** | Challenges, badges, XP, rewards, leaderboards |
+
+**Design mockup:** [Excalidraw wireframe](https://link.excalidraw.com/l/65VNwvy7c4X/2m6lz9Ln4)
+
+---
+
+## Business workflow
+
+```
+Master Configuration → Daily Operations → Carbon Transactions
+  → Employee CSR & Challenges → E/S/G Scores → Org Dashboard & Reports
+```
+
+Weighted ESG: Environmental 40% / Social 30% / Governance 30% (configurable in settings).
 
 ---
 
@@ -341,24 +404,22 @@ Demo data: `frontend/src/data/ecosphere.ts`, `ecosphere-modules.ts`, `ecosphere-
 
 | Rule | Description |
 |------|-------------|
-| **Reward redemption** | Employees redeem Points/XP for catalog rewards; stock and balance are updated |
-| **Notifications** | In-app/email for compliance issues, CSR/challenge approvals, policy reminders, badge unlocks |
-| **Auto emission calculation** | When enabled, carbon transactions derive from Purchase/Manufacturing/Expense/Fleet via emission factors |
-| **Evidence requirement** | When enabled, CSR participation cannot be approved without proof |
-| **Badge auto-award** | When enabled, badges assign automatically when unlock rules are satisfied |
-| **Compliance ownership** | Every issue has Owner + Due Date; overdue open issues are flagged and notified |
+| **Reward redemption** | Points/XP redeem for catalog rewards |
+| **Notifications** | Compliance, CSR/challenge approvals, badge unlocks |
+| **Auto emission calculation** | Carbon from Purchase/Manufacturing/Expense/Fleet via factors |
+| **Evidence requirement** | CSR/challenges may require photo proof before approval |
+| **Badge auto-award** | Badges when unlock rules are met |
+| **Compliance ownership** | Issues have owner + due date; overdue flagged |
 
 ---
 
-## Roadmap (ERP integration)
+## Roadmap (Odoo ERP integration)
 
-This submission focuses on the **unified executive dashboard**, **mobile employee app**, **reports**, and **API/RAG layer**. A full Odoo integration would:
-
-1. Sync master data (departments, emission factors, policies, badges, rewards)
-2. Ingest transactional ERP events (purchases, manufacturing, fleet) into carbon transactions
-3. Drive gamification (challenges, XP, leaderboards) from real employee actions
-4. Replace keyword RAG with vector embeddings over live ERP documents
-5. Enforce business rules via Odoo settings (auto-carbon, evidence, notifications)
+1. Sync master data from Odoo (departments, factors, policies, badges)
+2. Ingest real ERP transactions into carbon ledger
+3. Drive gamification from live employee actions
+4. Replace keyword RAG with vector embeddings over ERP documents
+5. Enforce business rules via Odoo settings
 
 ---
 

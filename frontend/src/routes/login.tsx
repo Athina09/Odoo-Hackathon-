@@ -127,10 +127,11 @@ function LoginForm() {
             <Leaf className="h-6 w-6 text-primary" />
           </div>
           <h1 className="text-2xl font-semibold text-foreground">Sign in to EcoSphere</h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            {selectedRole === "EMPLOYEE"
-              ? "Employee sign-in opens the mobile experience"
-              : "Select your role, then choose your account"}
+          <p className="mt-2 text-sm text-muted-foreground">
+            For leadership dashboards and the employee mobile app — select your role below.
+          </p>
+          <p className="mt-1 text-xs text-muted-foreground">
+            Managers use the web console; employees sign in to open challenges, CSR, impact & rewards on mobile.
           </p>
         </div>
 

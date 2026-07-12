@@ -1,6 +1,7 @@
 export { KpiCard } from "./KpiCard";
 export { StatusPill } from "./StatusPill";
 export { ConfidenceBar } from "./ConfidenceBar";
+export { AiConfidenceBadge } from "./AiConfidenceBadge";
 export { LiveInsightRow } from "./LiveInsightRow";
 export { AiInsightsCard } from "./AiInsightsCard";
 export { DataTable } from "./DataTable";

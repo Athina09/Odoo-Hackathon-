@@ -1,6 +1,5 @@
 import { EcoSidebar } from "./EcoSidebar";
 import { EcoHeader } from "./EcoHeader";
-import { EcoAiFab } from "./EcoAiFab";
 
 export function EcoShell({ children }: { children: React.ReactNode }) {
   return (
@@ -10,7 +9,6 @@ export function EcoShell({ children }: { children: React.ReactNode }) {
         <EcoHeader />
         <main className="relative flex-1 overflow-auto">{children}</main>
       </div>
-      <EcoAiFab />
     </div>
   );
 }

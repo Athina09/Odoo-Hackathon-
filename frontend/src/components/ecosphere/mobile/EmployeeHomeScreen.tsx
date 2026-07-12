@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { Trophy, Target } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { Trophy, Target, Leaf } from "lucide-react";
 import { useEcoAuth } from "@/context/EcoAuthContext";
 import { useEmployeeGamification } from "@/context/EmployeeGamificationContext";
 import {
@@ -10,6 +11,7 @@ import {
   loadEmployeeState,
 } from "@/lib/ecosphere-employee-store";
 import { CelebrationOverlay } from "./CelebrationOverlay";
+import { EmployeeDashboardViz } from "./EmployeeDashboardViz";
 
 function ProgressRing({ progress }: { progress: number }) {
   const r = 42;
@@ -106,6 +108,23 @@ export function EmployeeHomeScreen() {
           </div>
         )}
       </section>
+
+      <Link
+        to="/mobile/impact"
+        className="eco-card flex items-center gap-3 border border-[var(--accent-teal)]/40 bg-[var(--accent-teal-bg)]/50 p-4 transition hover:border-[var(--accent-teal)]"
+      >
+        <div className="grid h-10 w-10 place-items-center rounded-full bg-[var(--accent-teal)] text-white">
+          <Leaf className="h-5 w-5" />
+        </div>
+        <div className="min-w-0 flex-1">
+          <p className="font-semibold text-[var(--text-primary)]">See your impact & energy twin</p>
+          <p className="text-xs text-[var(--text-muted)]">
+            How your actions reduce facility energy · digital twin supply view
+          </p>
+        </div>
+      </Link>
+
+      <EmployeeDashboardViz departmentName={user?.departmentName} state={state} />
 
       <section>
         <h2 className="mb-2 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-[var(--text-secondary)]">

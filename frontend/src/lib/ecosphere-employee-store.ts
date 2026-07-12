@@ -180,6 +180,27 @@ export function updateChallengeProgress(
   };
 }
 
+export function attachChallengeEvidence(
+  state: EmployeeGamificationState,
+  enrollmentId: string,
+  evidenceUrl: string,
+): EmployeeGamificationState {
+  return {
+    ...state,
+    challenges: state.challenges.map(c => {
+      if (c.id !== enrollmentId) return c;
+      const progress = Math.min(c.progress + 1, c.progressTarget);
+      return { ...c, evidenceUrl, progress };
+    }),
+  };
+}
+
+export function canSubmitChallenge(enrollment: ChallengeEnrollment): boolean {
+  if (enrollment.status !== "in_progress") return false;
+  if (enrollment.evidenceRequired) return Boolean(enrollment.evidenceUrl);
+  return enrollment.progress >= enrollment.progressTarget;
+}
+
 export function submitChallenge(
   state: EmployeeGamificationState,
   enrollmentId: string,

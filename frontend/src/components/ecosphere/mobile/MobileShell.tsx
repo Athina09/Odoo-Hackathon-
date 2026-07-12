@@ -1,11 +1,12 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Home, Trophy, Heart, Medal, Gift, Bell, LogOut } from "lucide-react";
+import { Home, Trophy, Heart, Medal, Gift, Bell, LogOut, Leaf } from "lucide-react";
 import { useNavigate } from "@tanstack/react-router";
 import { useEcoAuth } from "@/context/EcoAuthContext";
 import { cn } from "@/lib/utils";
 
 const TABS = [
   { to: "/mobile", label: "Home", icon: Home, match: (p: string) => p === "/mobile" || p === "/mobile/" },
+  { to: "/mobile/impact", label: "Impact", icon: Leaf, match: (p: string) => p.startsWith("/mobile/impact") },
   { to: "/mobile/challenges", label: "Challenges", icon: Trophy, match: (p: string) => p.startsWith("/mobile/challenges") },
   { to: "/mobile/csr", label: "CSR", icon: Heart, match: (p: string) => p.startsWith("/mobile/csr") },
   { to: "/mobile/leaderboard", label: "Ranks", icon: Medal, match: (p: string) => p.startsWith("/mobile/leaderboard") },
@@ -26,6 +27,7 @@ export function MobileShell({ children }: { children: React.ReactNode }) {
             EcoSphere
           </div>
           <div className="text-sm font-semibold text-[var(--text-primary)]">{user?.name ?? "Employee"}</div>
+          <div className="text-[10px] text-[var(--text-muted)]">Employee mobile app</div>
         </div>
         <button
           type="button"
@@ -33,10 +35,10 @@ export function MobileShell({ children }: { children: React.ReactNode }) {
             logout();
             navigate({ to: "/login" });
           }}
-          className="grid h-9 w-9 place-items-center rounded-full border border-[var(--border)] text-[var(--text-secondary)]"
-          aria-label="Sign out"
+          className="inline-flex items-center gap-1.5 rounded-full border border-rose-200 bg-rose-50 px-3 py-1.5 text-xs font-semibold text-rose-700 transition hover:bg-rose-100"
         >
-          <LogOut className="h-4 w-4" />
+          <LogOut className="h-3.5 w-3.5" />
+          Sign out
         </button>
       </header>
 
@@ -51,7 +53,7 @@ export function MobileShell({ children }: { children: React.ReactNode }) {
                 key={to}
                 to={to}
                 className={cn(
-                  "flex min-w-0 flex-1 flex-col items-center gap-0.5 py-2 text-[10px] font-medium transition",
+                  "flex min-w-0 flex-1 flex-col items-center gap-0.5 py-2 text-[9px] font-medium transition",
                   active ? "text-[var(--accent-teal)]" : "text-[var(--text-muted)]",
                 )}
               >

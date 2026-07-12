@@ -7,6 +7,8 @@ import {
 } from "@/data/digital-twin";
 import type { ZoneTelemetry, TwinPrediction } from "@/lib/digital-twin-engine";
 import { shortRootCause, zoneEnergyDeltaPct } from "@/lib/digital-twin-blueprint";
+import { zoneAiConfidence } from "@/lib/eco-ai-confidence";
+import { ConfidenceBar } from "@/components/ecosphere/ds";
 
 function MetricRow({ label, value }: { label: string; value: string }) {
   return (
@@ -43,6 +45,9 @@ function FacilitySummary({
         <MetricRow label="Net carbon" value={`${prediction.currentCarbonT} tCO₂`} />
         <MetricRow label="Prediction confidence" value={`${prediction.confidence}%`} />
       </div>
+      <div className="mt-2">
+        <ConfidenceBar value={prediction.confidence} />
+      </div>
       {watchZones.length > 0 && (
         <div className="mt-4">
           <div className="mb-2 text-[11px] font-semibold uppercase tracking-[0.05em] text-[var(--text-secondary)]">
@@ -71,6 +76,7 @@ function ZoneDetail({
 }) {
   const delta = zoneEnergyDeltaPct(zone.energyKwh, zone.energyBaselineKwh);
   const rootCause = shortRootCause(zone.topContributor);
+  const zoneConfidence = zoneAiConfidence(zone.sparkline);
 
   return (
     <>
@@ -113,6 +119,11 @@ function ZoneDetail({
         <MetricRow label="Uptime" value={`${zone.uptimePct}%`} />
         <MetricRow label="Efficiency" value={`${zone.efficiencyPct}%`} />
         <MetricRow label="Temperature" value={`${zone.temperatureC}°C`} />
+        <MetricRow label="Zone AI confidence" value={`${zoneConfidence}%`} />
+      </div>
+
+      <div className="mt-3">
+        <ConfidenceBar value={zoneConfidence} />
       </div>
 
       <div className="mt-4 rounded-lg border border-[var(--border)] bg-[var(--bg-page)] px-3 py-2.5">
@@ -121,7 +132,8 @@ function ZoneDetail({
         </div>
         <p className="text-sm leading-relaxed text-[var(--text-secondary)]">{zone.aiNote}</p>
         <p className="mt-2 text-xs text-[var(--text-muted)]">
-          Model confidence: {prediction.confidence}% · Top factor: {zone.topContributor}
+          Facility model: {prediction.confidence}% · Zone model: {zoneConfidence}% · Top factor:{" "}
+          {zone.topContributor}
         </p>
       </div>
     </>

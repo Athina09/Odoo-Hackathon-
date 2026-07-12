@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { Building2, ChevronDown, Filter } from "lucide-react";
-import { DataTable, KpiCard, StatusPill } from "@/components/ecosphere/ds";
+import { DataTable, KpiCard, StatusPill, ConfidenceBar } from "@/components/ecosphere/ds";
+import { AiConfidenceBadge } from "@/components/ecosphere/ds/AiConfidenceBadge";
 import { FloorPanel } from "@/components/ecosphere/digital-twin/FloorPanel";
 import { ZoneDetailPanel } from "@/components/ecosphere/digital-twin/ZoneDetailPanel";
 import { useEcoAuth } from "@/context/EcoAuthContext";
@@ -37,8 +38,8 @@ export function DigitalTwinPage() {
   );
 
   const kpis = useMemo(
-    () => buildDigitalTwinKpis(facility, twinState.telemetry),
-    [facility, twinState.telemetry],
+    () => buildDigitalTwinKpis(facility, twinState.telemetry, twinState.prediction.confidence),
+    [facility, twinState.telemetry, twinState.prediction.confidence],
   );
 
   const selectedZone = twinState.telemetry.find(z => z.zoneId === selectedZoneId) ?? null;
@@ -64,6 +65,13 @@ export function DigitalTwinPage() {
             <h1 className="text-2xl font-bold text-[var(--text-primary)]">Digital Twin</h1>
           </div>
           <p className="mt-1 text-sm text-[var(--text-muted)]">{facility.name}</p>
+          <div className="mt-2">
+            <AiConfidenceBadge
+              value={twinState.prediction.confidence}
+              label="Twin forecast confidence"
+              className="inline-block"
+            />
+          </div>
         </div>
         {isSuperAdmin && (
           <div className="flex items-center gap-1.5 rounded-md border border-[var(--border)] bg-[var(--bg-card)] px-2 py-1">
@@ -93,7 +101,7 @@ export function DigitalTwinPage() {
         )}
       </div>
 
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-5">
         {kpis.map(kpi => (
           <KpiCard key={kpi.label} {...kpi} />
         ))}
@@ -106,6 +114,7 @@ export function DigitalTwinPage() {
           selectedZoneId={selectedZoneId}
           onSelectZone={setSelectedZoneId}
           districtLabel={getDistrictForFacility(facilityId)}
+          aiConfidence={twinState.prediction.confidence}
         />
         <ZoneDetailPanel
           facility={facility}
@@ -141,6 +150,11 @@ export function DigitalTwinPage() {
             align: "right",
           },
           { key: "occupancy", header: "Occupancy", render: r => r.occupancy },
+          {
+            key: "aiConf",
+            header: "AI Conf.",
+            render: r => <ConfidenceBar value={r.aiConfidence} />,
+          },
           {
             key: "incident",
             header: "Last Incident",

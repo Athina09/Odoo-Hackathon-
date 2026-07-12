@@ -26,6 +26,7 @@ import { Route as MobileIndexRouteImport } from './routes/mobile/index'
 import { Route as MobileRewardsRouteImport } from './routes/mobile/rewards'
 import { Route as MobileNotificationsRouteImport } from './routes/mobile/notifications'
 import { Route as MobileLeaderboardRouteImport } from './routes/mobile/leaderboard'
+import { Route as MobileImpactRouteImport } from './routes/mobile/impact'
 import { Route as MobileCsrRouteImport } from './routes/mobile/csr'
 import { Route as MobileChallengesRouteImport } from './routes/mobile/challenges'
 
@@ -114,6 +115,11 @@ const MobileLeaderboardRoute = MobileLeaderboardRouteImport.update({
   path: '/leaderboard',
   getParentRoute: () => MobileRoute,
 } as any)
+const MobileImpactRoute = MobileImpactRouteImport.update({
+  id: '/impact',
+  path: '/impact',
+  getParentRoute: () => MobileRoute,
+} as any)
 const MobileCsrRoute = MobileCsrRouteImport.update({
   id: '/csr',
   path: '/csr',
@@ -141,6 +147,7 @@ export interface FileRoutesByFullPath {
   '/social': typeof SocialRoute
   '/mobile/challenges': typeof MobileChallengesRoute
   '/mobile/csr': typeof MobileCsrRoute
+  '/mobile/impact': typeof MobileImpactRoute
   '/mobile/leaderboard': typeof MobileLeaderboardRoute
   '/mobile/notifications': typeof MobileNotificationsRoute
   '/mobile/rewards': typeof MobileRewardsRoute
@@ -161,6 +168,7 @@ export interface FileRoutesByTo {
   '/social': typeof SocialRoute
   '/mobile/challenges': typeof MobileChallengesRoute
   '/mobile/csr': typeof MobileCsrRoute
+  '/mobile/impact': typeof MobileImpactRoute
   '/mobile/leaderboard': typeof MobileLeaderboardRoute
   '/mobile/notifications': typeof MobileNotificationsRoute
   '/mobile/rewards': typeof MobileRewardsRoute
@@ -183,6 +191,7 @@ export interface FileRoutesById {
   '/social': typeof SocialRoute
   '/mobile/challenges': typeof MobileChallengesRoute
   '/mobile/csr': typeof MobileCsrRoute
+  '/mobile/impact': typeof MobileImpactRoute
   '/mobile/leaderboard': typeof MobileLeaderboardRoute
   '/mobile/notifications': typeof MobileNotificationsRoute
   '/mobile/rewards': typeof MobileRewardsRoute
@@ -206,6 +215,7 @@ export interface FileRouteTypes {
     | '/social'
     | '/mobile/challenges'
     | '/mobile/csr'
+    | '/mobile/impact'
     | '/mobile/leaderboard'
     | '/mobile/notifications'
     | '/mobile/rewards'
@@ -226,6 +236,7 @@ export interface FileRouteTypes {
     | '/social'
     | '/mobile/challenges'
     | '/mobile/csr'
+    | '/mobile/impact'
     | '/mobile/leaderboard'
     | '/mobile/notifications'
     | '/mobile/rewards'
@@ -247,6 +258,7 @@ export interface FileRouteTypes {
     | '/social'
     | '/mobile/challenges'
     | '/mobile/csr'
+    | '/mobile/impact'
     | '/mobile/leaderboard'
     | '/mobile/notifications'
     | '/mobile/rewards'
@@ -390,6 +402,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MobileLeaderboardRouteImport
       parentRoute: typeof MobileRoute
     }
+    '/mobile/impact': {
+      id: '/mobile/impact'
+      path: '/impact'
+      fullPath: '/mobile/impact'
+      preLoaderRoute: typeof MobileImpactRouteImport
+      parentRoute: typeof MobileRoute
+    }
     '/mobile/csr': {
       id: '/mobile/csr'
       path: '/csr'
@@ -410,6 +429,7 @@ declare module '@tanstack/react-router' {
 interface MobileRouteChildren {
   MobileChallengesRoute: typeof MobileChallengesRoute
   MobileCsrRoute: typeof MobileCsrRoute
+  MobileImpactRoute: typeof MobileImpactRoute
   MobileLeaderboardRoute: typeof MobileLeaderboardRoute
   MobileNotificationsRoute: typeof MobileNotificationsRoute
   MobileRewardsRoute: typeof MobileRewardsRoute
@@ -419,6 +439,7 @@ interface MobileRouteChildren {
 const MobileRouteChildren: MobileRouteChildren = {
   MobileChallengesRoute: MobileChallengesRoute,
   MobileCsrRoute: MobileCsrRoute,
+  MobileImpactRoute: MobileImpactRoute,
   MobileLeaderboardRoute: MobileLeaderboardRoute,
   MobileNotificationsRoute: MobileNotificationsRoute,
   MobileRewardsRoute: MobileRewardsRoute,

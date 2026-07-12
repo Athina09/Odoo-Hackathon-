@@ -187,15 +187,16 @@ export function EcoSidebar() {
         )}
       </div>
 
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col items-center gap-2 pb-1">
         {user ? (
           <button
             type="button"
             onClick={handleLogout}
-            className="grid h-10 w-10 place-items-center rounded-full border border-[var(--eco-border)] bg-[var(--eco-bg-page)] text-[var(--eco-text-secondary)] transition hover:border-[var(--eco-accent-red)] hover:bg-[var(--eco-accent-red-bg)] hover:text-[var(--eco-accent-red)]"
-            title={`${user.name} · ${roleLabels[user.role] ?? user.role} · Sign out`}
+            className="flex w-12 flex-col items-center gap-0.5 rounded-xl border border-rose-200 bg-rose-50 px-1 py-2 text-rose-700 transition hover:bg-rose-100"
+            title={`${user.name} · Sign out`}
           >
             <LogOut className="h-4 w-4" />
+            <span className="text-[8px] font-bold leading-none">Sign out</span>
           </button>
         ) : (
           <Link

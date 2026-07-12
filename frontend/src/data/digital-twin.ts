@@ -1,7 +1,8 @@
 import type { CSSProperties } from "react";
 import type { KpiCardProps, PillTone } from "@/components/ecosphere/ds";
-import { Activity, AlertTriangle, Leaf, Zap } from "lucide-react";
+import { Activity, AlertTriangle, Leaf, Sparkles, Zap } from "lucide-react";
 import type { EcoSessionUser } from "@/lib/ecosphere-auth";
+import { zoneAiConfidence } from "@/lib/eco-ai-confidence";
 
 export type ZoneStatus = "normal" | "watch" | "critical";
 
@@ -685,6 +686,7 @@ export function computeFacilityHealth(zones: DigitalTwinZone[]): number {
 export function buildDigitalTwinKpis(
   facility: DigitalTwinFacility,
   zones: DigitalTwinZone[],
+  aiConfidence?: number,
 ): KpiCardProps[] {
   const watchCritical = zones.filter(z => z.status === "watch" || z.status === "critical").length;
   const totalEnergy = zones.reduce((sum, z) => sum + Math.max(0, z.energyKwh), 0);
@@ -730,6 +732,19 @@ export function buildDigitalTwinKpis(
       trend: netCo2 < grossCo2 ? `−${solarCo2Offset} kg offset` : "no offset",
       trendDirection: "down",
     },
+    ...(aiConfidence != null
+      ? [
+          {
+            label: "AI Model Confidence",
+            value: `${aiConfidence}%`,
+            subtitle: aiConfidence >= 90 ? "High trust" : aiConfidence >= 80 ? "Good fit" : "Review signals",
+            icon: Sparkles,
+            iconColor: "teal" as const,
+            trend: "twin + forecast model",
+            trendDirection: "up" as const,
+          },
+        ]
+      : []),
   ];
 }
 
@@ -741,9 +756,12 @@ export interface ZoneHistoryRow {
   co2_24h: number;
   occupancy: string;
   lastIncident: string;
+  aiConfidence: number;
 }
 
-export function buildZoneHistoryRows(zones: DigitalTwinZone[]): ZoneHistoryRow[] {
+export function buildZoneHistoryRows(
+  zones: Array<DigitalTwinZone & { sparkline?: number[] }>,
+): ZoneHistoryRow[] {
   return zones.map(z => ({
     id: z.zoneId,
     zone: z.name,
@@ -752,5 +770,6 @@ export function buildZoneHistoryRows(zones: DigitalTwinZone[]): ZoneHistoryRow[]
     co2_24h: z.co2Kg,
     occupancy: `${z.occupancy}/${z.occupancyCapacity}`,
     lastIncident: z.lastIncident,
+    aiConfidence: zoneAiConfidence(z.sparkline),
   }));
 }

@@ -26,7 +26,7 @@ const DEFAULT_HEIGHT = 400;
 export function HeatmapPanel({
   label,
   zones,
-  height = DEFAULT_HEIGHT,
+  height,
   highlightDistrict,
   subtitle,
   compact = false,
@@ -43,7 +43,8 @@ export function HeatmapPanel({
   const mapRef = useRef<LeafletMap | null>(null);
   const [fullscreen, setFullscreen] = useState(false);
   const data = useMemo(() => zones, [zones]);
-  const panelHeight = compact ? 200 : height;
+  const panelHeight = height ?? (compact ? 200 : DEFAULT_HEIGHT);
+  const mapZoom = compact && panelHeight <= 220 ? 6 : compact ? 7 : TN_MAP_ZOOM;
 
   useEffect(() => {
     if (!ref.current || typeof window === "undefined") return;
@@ -56,8 +57,9 @@ export function HeatmapPanel({
 
       map = L.map(ref.current, {
         center: TN_MAP_CENTER,
-        zoom: compact ? 6 : TN_MAP_ZOOM,
+        zoom: mapZoom,
         scrollWheelZoom: !compact,
+        touchZoom: true,
         zoomControl: false,
         attributionControl: false,
       });
@@ -110,7 +112,7 @@ export function HeatmapPanel({
       mapRef.current = null;
       map?.remove();
     };
-  }, [data, highlightDistrict, compact]);
+  }, [data, highlightDistrict, compact, mapZoom, panelHeight]);
 
   const shell = (
     <>

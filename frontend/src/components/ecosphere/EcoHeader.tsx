@@ -63,7 +63,7 @@ export function EcoHeader() {
             type="button"
             variant="secondary"
             size="sm"
-            className="h-8 gap-1 text-sm hover:border-danger/30 hover:bg-danger/10 hover:text-danger"
+            className="h-8 gap-1.5 border-rose-200 bg-rose-50 text-sm font-semibold text-rose-700 hover:border-rose-300 hover:bg-rose-100"
             onClick={handleLogout}
           >
             <LogOut className="h-3.5 w-3.5" /> Sign out
