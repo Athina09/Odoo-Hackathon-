@@ -40,7 +40,7 @@ We designed EcoSphere for real adoption: role-gated web views for admins and man
 
 ## App UI — screenshots
 
-Real screens from the running app. Every role sees the **EcoSphere AI** button (bottom-right on web dashboards, above the tab bar on the employee view) plus **AI confidence** scores on dashboards, the digital twin, and employee impact screens.
+Real screens from the running app. Every role sees the **EcoSphere AI** button (bottom-right on web dashboards) plus **AI confidence** scores on dashboards and the digital twin.
 
 ### Web — leadership & managers
 
@@ -53,9 +53,6 @@ Real screens from the running app. Every role sees the **EcoSphere AI** button (
 | **Social** | CSR participation, diversity index, contributor spotlight |
 | **Gamification** | Season leaderboard, badges, active challenges |
 | **Reports** | Typed reports + custom builder with PDF/Excel/CSV export |
-| **Report preview** | Slide-over preview with KPIs and export actions |
-| **Settings** | ESG weight sliders, auto-emission & badge rules |
-| **Dept Manager** | Scoped manufacturing dashboard with **AI confidence** |
 
 <p align="center">
   <img src="docs/screenshots/01-login.png" alt="EcoSphere login — role picker" width="900" />
@@ -92,55 +89,7 @@ Real screens from the running app. Every role sees the **EcoSphere AI** button (
 </p>
 <p align="center"><em>Reports — typed reports + custom builder with live preview</em></p>
 
-<p align="center">
-  <img src="docs/screenshots/08-report-preview.png" alt="Environmental report preview export" width="1100" />
-</p>
-<p align="center"><em>Report preview — KPIs, data table, PDF/Excel/CSV export</em></p>
-
-<p align="center">
-  <img src="docs/screenshots/09-settings.png" alt="Settings and ESG configuration" width="1100" />
-</p>
-<p align="center"><em>Settings — ESG weights, emission rules, notifications</em></p>
-
-<p align="center">
-  <img src="docs/screenshots/10-department-manager.png" alt="Department manager manufacturing dashboard" width="1100" />
-</p>
-<p align="center"><em>Department Manager — scoped emissions, team CSR, AI confidence</em></p>
-
-### Employee view (`/mobile`)
-
-| Screen | What it shows |
-|--------|----------------|
-| **Home** | XP ring, rank, CSR map + weekly XP chart |
-| **Challenges** | Joined challenges with progress bars |
-| **Impact** | Personal kWh/CO₂ saved, **live digital twin**, impact charts |
-| **Impact in words** | Plain-language narrative + **AI tips** for next actions |
-| **Leaderboard** | Org top 5 + your position highlighted |
-
-<p align="center">
-  <img src="docs/screenshots/11-mobile-home.png" alt="Employee home — XP and CSR map" width="900" />
-</p>
-<p align="center"><em>Employee Home — XP, badges, CSR map, weekly XP chart</em></p>
-
-<p align="center">
-  <img src="docs/screenshots/12-mobile-challenges.png" alt="Employee challenges" width="900" />
-</p>
-<p align="center"><em>Challenges — join, track progress, submit photo evidence</em></p>
-
-<p align="center">
-  <img src="docs/screenshots/13-mobile-impact-twin.png" alt="Employee impact digital twin" width="900" />
-</p>
-<p align="center"><em>Impact — personal savings + compact live digital twin</em></p>
-
-<p align="center">
-  <img src="docs/screenshots/14-mobile-impact-words.png" alt="Your impact in words AI narrative" width="900" />
-</p>
-<p align="center"><em>Impact in words — narrative summary + AI tips for you</em></p>
-
-<p align="center">
-  <img src="docs/screenshots/15-mobile-leaderboard.png" alt="Employee leaderboard ranks" width="900" />
-</p>
-<p align="center"><em>Ranks — org leaderboard with your row highlighted</em></p>
+<p align="center"><strong>See more screenshots…</strong> → <a href="docs/screenshots/">docs/screenshots/</a> (report preview, settings, dept manager, employee home, challenges, impact, leaderboard)</p>
 
 ---
 
