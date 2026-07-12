@@ -49,6 +49,34 @@ Employee:        sarah.j@ecosphere.in / employee
 
 On the login page: pick your **role** → select your **account** → enter the **role password** → **Sign in**.
 
+**Employees:** sign in with the **Employee** role and you land directly on the mobile app — no extra setup. Works in any phone browser; add to home screen for an app-like experience.
+
+---
+
+## Employee mobile app — easy to use
+
+EcoSphere is built so **employees can participate in ESG without training**. Sign in as **Employee** → you're on the mobile app immediately at `/mobile`.
+
+| Step | What employees do |
+|------|-------------------|
+| 1. **Sign in** | Role: Employee → pick your name → password `employee` |
+| 2. **Home** | See XP, rank, badges, weekly charts, and a CSR activity map |
+| 3. **Challenges** | Tap **Join** → **Take photo** (camera opens on phone) → **Submit** |
+| 4. **CSR** | Register for an activity → **Upload proof** with one tap |
+| 5. **Ranks** | Your position is always shown — even if you're outside the top 5 |
+| 6. **Rewards** | Redeem points from the catalog |
+| 7. **Alerts** | Approvals, badge unlocks, and challenge updates |
+
+**Why it's easy**
+
+- **Mobile-first UI** — bottom tab bar (Home · Challenges · CSR · Ranks · Rewards · Alerts)
+- **One-tap camera** — photo evidence for challenges and CSR; no forms or file paths
+- **Clear progress** — XP ring, progress bars, and “your position” on the leaderboard
+- **Visual dashboard** — maps and charts on Home so impact is obvious at a glance
+- **Works offline-ish** — gamification state saves locally; syncs from API when backend is running
+
+**Try it:** `sarah.j@ecosphere.in` / `employee` → http://localhost:8090/mobile
+
 ---
 
 ## Quick start
@@ -130,12 +158,16 @@ npm run preview
 
 ### Mobile app (`/mobile` — Employee role)
 
-- Home — XP, rank, badges, recommended challenges
-- CSR — register and track activities
-- Challenges — enroll, submit evidence, track progress
-- Leaderboard — department rankings
-- Rewards — redeem points catalog
-- Notifications — approvals and badge unlocks
+Designed for **everyday employees** — simple tabs, big buttons, camera upload, no ERP jargon.
+
+| Tab | What you can do |
+|-----|-----------------|
+| **Home** | Personal ESG profile, XP ring, impact map, weekly XP chart, activity mix |
+| **Challenges** | Join challenges, take photos, track progress, submit for approval |
+| **CSR** | Browse activities, register, upload proof photos |
+| **Ranks** | Org leaderboard with **your position** highlighted + XP comparison chart |
+| **Rewards** | Redeem points for catalog items |
+| **Alerts** | Notifications for approvals and achievements |
 
 Mobile session bootstraps from **`GET /api/mobile/bootstrap/{employeeId}`** when the backend is running (falls back to local storage offline).
 
