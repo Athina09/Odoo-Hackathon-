@@ -118,27 +118,27 @@ Real screens from the running app. Every role sees the **EcoSphere AI** button (
 | **Leaderboard** | Org top 5 + your position highlighted |
 
 <p align="center">
-  <img src="docs/screenshots/11-mobile-home.png" alt="Employee home — XP and CSR map" width="750" />
+  <img src="docs/screenshots/11-mobile-home.png" alt="Employee home — XP and CSR map" width="900" />
 </p>
 <p align="center"><em>Employee Home — XP, badges, CSR map, weekly XP chart</em></p>
 
 <p align="center">
-  <img src="docs/screenshots/12-mobile-challenges.png" alt="Employee challenges" width="750" />
+  <img src="docs/screenshots/12-mobile-challenges.png" alt="Employee challenges" width="900" />
 </p>
 <p align="center"><em>Challenges — join, track progress, submit photo evidence</em></p>
 
 <p align="center">
-  <img src="docs/screenshots/13-mobile-impact-twin.png" alt="Employee impact digital twin" width="750" />
+  <img src="docs/screenshots/13-mobile-impact-twin.png" alt="Employee impact digital twin" width="900" />
 </p>
 <p align="center"><em>Impact — personal savings + compact live digital twin</em></p>
 
 <p align="center">
-  <img src="docs/screenshots/14-mobile-impact-words.png" alt="Your impact in words AI narrative" width="750" />
+  <img src="docs/screenshots/14-mobile-impact-words.png" alt="Your impact in words AI narrative" width="900" />
 </p>
 <p align="center"><em>Impact in words — narrative summary + AI tips for you</em></p>
 
 <p align="center">
-  <img src="docs/screenshots/15-mobile-leaderboard.png" alt="Employee leaderboard ranks" width="750" />
+  <img src="docs/screenshots/15-mobile-leaderboard.png" alt="Employee leaderboard ranks" width="900" />
 </p>
 <p align="center"><em>Ranks — org leaderboard with your row highlighted</em></p>
 
