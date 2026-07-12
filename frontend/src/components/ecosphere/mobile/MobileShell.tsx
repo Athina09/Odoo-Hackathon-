@@ -27,7 +27,7 @@ export function MobileShell({ children }: { children: React.ReactNode }) {
             EcoSphere
           </div>
           <div className="text-sm font-semibold text-[var(--text-primary)]">{user?.name ?? "Employee"}</div>
-          <div className="text-[10px] text-[var(--text-muted)]">Employee mobile app</div>
+          <div className="text-[10px] text-[var(--text-muted)]">Employee view</div>
         </div>
         <button
           type="button"

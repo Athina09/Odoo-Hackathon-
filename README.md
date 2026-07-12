@@ -1,8 +1,8 @@
 # EcoSphere — ESG Management Platform
 
-**Odoo Hackathon submission** · Environmental, Social & Governance performance in one executive dashboard — plus an **employee mobile app**, **FastAPI backend**, and **ESG RAG** insight search.
+**Odoo Hackathon submission** · Environmental, Social & Governance performance in one executive dashboard — plus an **employee view**, **FastAPI backend**, and **ESG RAG** insight search.
 
-Organizations must monitor carbon emissions, promote employee well-being, and maintain governance compliance. **EcoSphere** integrates ESG into day-to-day operations: executive dashboards for leadership, a mobile app for employees, typed & custom reports, digital twin facility monitoring, and an API + RAG layer for AI-assisted insights.
+Organizations must monitor carbon emissions, promote employee well-being, and maintain governance compliance. **EcoSphere** integrates ESG into day-to-day operations: executive dashboards for leadership, a dedicated **employee** experience at `/mobile`, typed & custom reports, digital twin facility monitoring, and an API + RAG layer for AI-assisted insights.
 
 **Repo:** [github.com/Athina09/Odoo-Hackathon-](https://github.com/Athina09/Odoo-Hackathon-)
 
@@ -25,22 +25,22 @@ Build an ESG Management Platform that enables organizations to **measure**, **ma
 
 ## Our solution
 
-**EcoSphere** is our answer to that challenge: one platform where leadership monitors ESG KPIs, department managers act on scoped data, and employees participate through a mobile app — without ERP training.
+**EcoSphere** is our answer to that challenge: one platform where leadership monitors ESG KPIs, department managers act on scoped data, and employees participate through a **dedicated employee view** — without ERP training.
 
 | Layer | What it does |
 |-------|----------------|
 | **Executive dashboards** | Command center, environment/social/governance modules, digital twin, typed & custom reports |
-| **Employee mobile app** | Challenges, CSR, leaderboard, personal impact, photo evidence submission |
-| **FastAPI backend** | REST API mirroring ESG data, mobile bootstrap, health checks |
+| **Employee view** (`/mobile`) | Challenges, CSR, leaderboard, personal impact, photo evidence submission |
+| **FastAPI backend** | REST API mirroring ESG data, employee bootstrap, health checks |
 | **AI layer** | **EcoSphere AI** assistant on every role, RAG search over ESG insights, AI confidence on digital twin zones |
 
-We designed EcoSphere for real adoption: role-gated web views for admins and managers, a frictionless `/mobile` experience for staff, and **AI-assisted insights** so teams can ask questions, surface risks faster, and trust telemetry with confidence scores — not just static charts.
+We designed EcoSphere for real adoption: role-gated web views for admins and managers, a frictionless **employee** experience at `/mobile`, and **AI-assisted insights** so teams can ask questions, surface risks faster, and trust telemetry with confidence scores — not just static charts.
 
 ---
 
 ## App UI — screenshots
 
-Real screens from the running app. Every role sees the **EcoSphere AI** button (bottom-right on web, above the tab bar on mobile) plus **AI confidence** scores on dashboards, the digital twin, and employee impact views.
+Real screens from the running app. Every role sees the **EcoSphere AI** button (bottom-right on web dashboards, above the tab bar on the employee view) plus **AI confidence** scores on dashboards, the digital twin, and employee impact screens.
 
 ### Web — leadership & managers
 
@@ -107,7 +107,7 @@ Real screens from the running app. Every role sees the **EcoSphere AI** button (
 </p>
 <p align="center"><em>Department Manager — scoped emissions, team CSR, AI confidence</em></p>
 
-### Mobile — employee app (`/mobile`)
+### Employee view (`/mobile`)
 
 | Screen | What it shows |
 |--------|----------------|
@@ -118,17 +118,17 @@ Real screens from the running app. Every role sees the **EcoSphere AI** button (
 | **Leaderboard** | Org top 5 + your position highlighted |
 
 <p align="center">
-  <img src="docs/screenshots/11-mobile-home.png" alt="Employee mobile home XP and CSR map" width="420" />
+  <img src="docs/screenshots/11-mobile-home.png" alt="Employee home — XP and CSR map" width="420" />
 </p>
-<p align="center"><em>Mobile Home — XP, badges, CSR map, weekly XP chart</em></p>
+<p align="center"><em>Employee Home — XP, badges, CSR map, weekly XP chart</em></p>
 
 <p align="center">
-  <img src="docs/screenshots/12-mobile-challenges.png" alt="Employee mobile challenges joined" width="420" />
+  <img src="docs/screenshots/12-mobile-challenges.png" alt="Employee challenges" width="420" />
 </p>
 <p align="center"><em>Challenges — join, track progress, submit photo evidence</em></p>
 
 <p align="center">
-  <img src="docs/screenshots/13-mobile-impact-twin.png" alt="Employee impact digital twin live floor" width="420" />
+  <img src="docs/screenshots/13-mobile-impact-twin.png" alt="Employee impact digital twin" width="420" />
 </p>
 <p align="center"><em>Impact — personal savings + compact live digital twin</em></p>
 
@@ -138,7 +138,7 @@ Real screens from the running app. Every role sees the **EcoSphere AI** button (
 <p align="center"><em>Impact in words — narrative summary + AI tips for you</em></p>
 
 <p align="center">
-  <img src="docs/screenshots/15-mobile-leaderboard.png" alt="Employee mobile leaderboard ranks" width="420" />
+  <img src="docs/screenshots/15-mobile-leaderboard.png" alt="Employee leaderboard ranks" width="420" />
 </p>
 <p align="center"><em>Ranks — org leaderboard with your row highlighted</em></p>
 
@@ -150,7 +150,7 @@ Real screens from the running app. Every role sees the **EcoSphere AI** button (
 
 | Capability | Where you see it |
 |------------|------------------|
-| **AI chat assistant** | Floating **EcoSphere AI** button (solid blue) on every logged-in screen — web and mobile |
+| **AI chat assistant** | Floating **EcoSphere AI** button (solid blue) on every logged-in screen — web dashboards and employee view |
 | **Role-aware prompts** | Suggested questions tailored to Super Admin, ESG Manager, Dept Manager, and Employee |
 | **Confidence scoring** | AI confidence in the chat panel; facility-wide and per-zone scores on the digital twin |
 | **ESG RAG search** | FastAPI `/api/rag/search` + Streamlit dashboard (:8501) to retrieve insight chunks from carbon, CSR, compliance, and challenge data |
@@ -192,7 +192,7 @@ npm run dev:all
 |---------|-----|
 | EcoSphere web app | http://localhost:8090/ |
 | Login | http://localhost:8090/login |
-| **Employee mobile app** | http://localhost:8090/mobile |
+| **Employee view** | http://localhost:8090/mobile |
 | API root | http://127.0.0.1:8000/ |
 | API docs (Swagger) | http://127.0.0.1:8000/docs |
 | **ESG RAG dashboard** | http://127.0.0.1:8501 |
@@ -252,7 +252,7 @@ npm run preview
 
 Open **http://localhost:8090/login**
 
-EcoSphere is for **leadership dashboards and the employee mobile app**. Pick your role → select your account → enter the role password.
+EcoSphere is for **leadership dashboards and the employee view**. Pick your role → select your account → enter the role password.
 
 | Role | Name | Email | Password | Lands on |
 |------|------|-------|----------|----------|
@@ -280,7 +280,7 @@ Employee:        sarah.j@ecosphere.in / employee
 | Department Manager | `dept123` |
 | Employee | `employee` |
 
-**Sign out** is available in the top header (web roles) and mobile header (employees).
+**Sign out** is available in the top header (web roles) and the employee view header.
 
 ---
 
@@ -307,11 +307,11 @@ Employee:        sarah.j@ecosphere.in / employee
 - Floating **EcoSphere AI** button (solid blue) on every logged-in screen
 - Role-specific suggested prompts (executive, manager, employee)
 - **AI confidence score** shown in the chat panel
-- Employees see it above the bottom tab bar on mobile
+- Employees see it above the bottom tab bar on the employee view
 
-### Employee mobile app (`/mobile`)
+### Employee view (`/mobile`)
 
-Designed for everyday employees — no ERP training required.
+Designed for everyday employees — mobile-friendly layout in the browser (not a separate native app).
 
 | Tab | Features |
 |-----|----------|
@@ -323,7 +323,7 @@ Designed for everyday employees — no ERP training required.
 | **Rewards** | Points redemption catalog |
 | **Alerts** | Approvals, badges, challenge updates |
 
-Mobile bootstraps from **`GET /api/mobile/bootstrap/{employeeId}`** when the backend is running; falls back to `localStorage` offline.
+Employee data bootstraps from **`GET /api/mobile/bootstrap/{employeeId}`** when the backend is running; falls back to `localStorage` offline.
 
 **Try it:** `sarah.j@ecosphere.in` / `employee` → http://localhost:8090/mobile
 
@@ -373,7 +373,7 @@ uvicorn main:app --host 127.0.0.1 --port 8000 --reload
 | GET | `/api/esg/challenges` | Gamification challenges |
 | GET | `/api/esg/insights` | AI insight feed chunks |
 | GET | `/api/mobile/employees` | Employee list |
-| GET | `/api/mobile/bootstrap/{employeeId}` | Initialize mobile app (XP, challenges, CSR, notifications) |
+| GET | `/api/mobile/bootstrap/{employeeId}` | Initialize employee session (XP, challenges, CSR, notifications) |
 | GET | `/api/mobile/challenges/catalog` | Challenge catalog |
 | GET | `/api/mobile/csr/catalog` | CSR catalog |
 | GET | `/api/rag/search?query=` | ESG insight RAG search (`?module=` optional, `?n_results=`) |
@@ -472,10 +472,10 @@ Odoo-Hackathon-/
 │   │   │   ├── login.tsx
 │   │   │   ├── digital-twin.tsx
 │   │   │   ├── reports.tsx
-│   │   │   └── mobile/                 # Employee app (home, impact, challenges, csr, …)
+│   │   │   └── mobile/                 # Employee view routes (home, impact, challenges, csr, …)
 │   │   ├── components/ecosphere/
 │   │   │   ├── screens/                # Page dashboards + DigitalTwinPage
-│   │   │   ├── mobile/                 # MobileShell, challenges, CSR, impact, twin
+│   │   │   ├── mobile/                 # EmployeeShell, challenges, CSR, impact, twin
 │   │   │   ├── digital-twin/           # FloorPanel, LiveZoneWidget, zone detail
 │   │   │   ├── ds/                     # KPI, heatmap, ConfidenceBar, AiConfidenceBadge
 │   │   │   ├── EcoAiFab.tsx            # AI chatbot (all roles)

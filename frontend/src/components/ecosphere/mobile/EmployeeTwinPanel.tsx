@@ -6,7 +6,7 @@ import type { FacilityEnergySnapshot, ImpactNarrative } from "@/lib/employee-imp
 import { AiConfidenceBadge } from "@/components/ecosphere/ds/AiConfidenceBadge";
 import { EmployeeImpactNarrative } from "./EmployeeImpactNarrative";
 
-/** Compact live digital twin for employee mobile */
+/** Compact live digital twin for employee view */
 export function EmployeeTwinPanel({
   facility,
   narratives,

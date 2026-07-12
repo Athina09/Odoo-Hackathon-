@@ -73,7 +73,7 @@ fi
 echo ""
 echo "  EcoSphere app   → http://localhost:${VITE_PORT:-8090}/"
 echo "  Login           → http://localhost:${VITE_PORT:-8090}/login"
-echo "  Mobile app      → http://localhost:${VITE_PORT:-8090}/mobile (Employee role)"
+echo "  Employee view   → http://localhost:${VITE_PORT:-8090}/mobile (Employee role)"
 echo "  API docs        → http://127.0.0.1:8000/docs"
 echo "  RAG dashboard   → http://127.0.0.1:8501"
 echo ""

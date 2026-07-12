@@ -57,7 +57,7 @@ const ROLE_OPTIONS: {
   {
     role: "EMPLOYEE",
     label: "Employee",
-    description: "Mobile app — XP, challenges, CSR volunteering, rewards",
+    description: "Employee view — XP, challenges, CSR volunteering, rewards",
     icon: Smartphone,
   },
 ];
@@ -128,10 +128,10 @@ function LoginForm() {
           </div>
           <h1 className="text-2xl font-semibold text-foreground">Sign in to EcoSphere</h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            For leadership dashboards and the employee mobile app — select your role below.
+            For leadership dashboards and the employee view — select your role below.
           </p>
           <p className="mt-1 text-xs text-muted-foreground">
-            Managers use the web console; employees sign in to open challenges, CSR, impact & rewards on mobile.
+            Managers use the web console; employees sign in for challenges, CSR, impact & rewards at <code className="rounded bg-secondary px-1">/mobile</code>.
           </p>
         </div>
 
