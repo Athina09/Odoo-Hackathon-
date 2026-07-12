@@ -58,52 +58,52 @@ Real screens from the running app. Every role sees the **EcoSphere AI** button (
 | **Dept Manager** | Scoped manufacturing dashboard with **AI confidence** |
 
 <p align="center">
-  <img src="docs/screenshots/01-login.png" alt="EcoSphere login — role picker" width="720" />
+  <img src="docs/screenshots/01-login.png" alt="EcoSphere login — role picker" width="900" />
 </p>
 <p align="center"><em>Login — pick your role and sign in</em></p>
 
 <p align="center">
-  <img src="docs/screenshots/02-command-center.png" alt="ESG Command Center with AI live feed" width="900" />
+  <img src="docs/screenshots/02-command-center.png" alt="ESG Command Center with AI live feed" width="1100" />
 </p>
 <p align="center"><em>Command Center — KPIs, heatmap, AI Live Insights, department performance</em></p>
 
 <p align="center">
-  <img src="docs/screenshots/03-command-center-charts.png" alt="ESG charts and AI recommendations" width="900" />
+  <img src="docs/screenshots/03-command-center-charts.png" alt="ESG charts and AI recommendations" width="1100" />
 </p>
 <p align="center"><em>Charts — ESG breakdown, carbon trend, AI recommendations</em></p>
 
 <p align="center">
-  <img src="docs/screenshots/04-digital-twin.png" alt="Digital twin plant blueprint with AI confidence" width="900" />
+  <img src="docs/screenshots/04-digital-twin.png" alt="Digital twin plant blueprint with AI confidence" width="1100" />
 </p>
 <p align="center"><em>Digital Twin — live zones, energy/CO₂ telemetry, AI model confidence</em></p>
 
 <p align="center">
-  <img src="docs/screenshots/05-social-dashboard.png" alt="Social dashboard CSR and diversity" width="900" />
+  <img src="docs/screenshots/05-social-dashboard.png" alt="Social dashboard CSR and diversity" width="1100" />
 </p>
 <p align="center"><em>Social — CSR participation heatmap, diversity by department</em></p>
 
 <p align="center">
-  <img src="docs/screenshots/06-gamification.png" alt="Gamification hub leaderboard and challenges" width="900" />
+  <img src="docs/screenshots/06-gamification.png" alt="Gamification hub leaderboard and challenges" width="1100" />
 </p>
 <p align="center"><em>Gamification — season leaderboard, badges, challenge kanban</em></p>
 
 <p align="center">
-  <img src="docs/screenshots/07-reports.png" alt="Reports and custom report builder" width="900" />
+  <img src="docs/screenshots/07-reports.png" alt="Reports and custom report builder" width="1100" />
 </p>
 <p align="center"><em>Reports — typed reports + custom builder with live preview</em></p>
 
 <p align="center">
-  <img src="docs/screenshots/08-report-preview.png" alt="Environmental report preview export" width="900" />
+  <img src="docs/screenshots/08-report-preview.png" alt="Environmental report preview export" width="1100" />
 </p>
 <p align="center"><em>Report preview — KPIs, data table, PDF/Excel/CSV export</em></p>
 
 <p align="center">
-  <img src="docs/screenshots/09-settings.png" alt="Settings and ESG configuration" width="900" />
+  <img src="docs/screenshots/09-settings.png" alt="Settings and ESG configuration" width="1100" />
 </p>
 <p align="center"><em>Settings — ESG weights, emission rules, notifications</em></p>
 
 <p align="center">
-  <img src="docs/screenshots/10-department-manager.png" alt="Department manager manufacturing dashboard" width="900" />
+  <img src="docs/screenshots/10-department-manager.png" alt="Department manager manufacturing dashboard" width="1100" />
 </p>
 <p align="center"><em>Department Manager — scoped emissions, team CSR, AI confidence</em></p>
 
@@ -118,27 +118,27 @@ Real screens from the running app. Every role sees the **EcoSphere AI** button (
 | **Leaderboard** | Org top 5 + your position highlighted |
 
 <p align="center">
-  <img src="docs/screenshots/11-mobile-home.png" alt="Employee home — XP and CSR map" width="420" />
+  <img src="docs/screenshots/11-mobile-home.png" alt="Employee home — XP and CSR map" width="750" />
 </p>
 <p align="center"><em>Employee Home — XP, badges, CSR map, weekly XP chart</em></p>
 
 <p align="center">
-  <img src="docs/screenshots/12-mobile-challenges.png" alt="Employee challenges" width="420" />
+  <img src="docs/screenshots/12-mobile-challenges.png" alt="Employee challenges" width="750" />
 </p>
 <p align="center"><em>Challenges — join, track progress, submit photo evidence</em></p>
 
 <p align="center">
-  <img src="docs/screenshots/13-mobile-impact-twin.png" alt="Employee impact digital twin" width="420" />
+  <img src="docs/screenshots/13-mobile-impact-twin.png" alt="Employee impact digital twin" width="750" />
 </p>
 <p align="center"><em>Impact — personal savings + compact live digital twin</em></p>
 
 <p align="center">
-  <img src="docs/screenshots/14-mobile-impact-words.png" alt="Your impact in words AI narrative" width="420" />
+  <img src="docs/screenshots/14-mobile-impact-words.png" alt="Your impact in words AI narrative" width="750" />
 </p>
 <p align="center"><em>Impact in words — narrative summary + AI tips for you</em></p>
 
 <p align="center">
-  <img src="docs/screenshots/15-mobile-leaderboard.png" alt="Employee leaderboard ranks" width="420" />
+  <img src="docs/screenshots/15-mobile-leaderboard.png" alt="Employee leaderboard ranks" width="750" />
 </p>
 <p align="center"><em>Ranks — org leaderboard with your row highlighted</em></p>
 
