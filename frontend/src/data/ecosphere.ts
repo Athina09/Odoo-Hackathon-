@@ -268,12 +268,12 @@ export const aiRecommendations = [
 ];
 
 export const ecoNav = [
-  { to: "/ecosphere", label: "Dashboard", icon: "dashboard" },
-  { to: "/ecosphere/environment", label: "Environment", icon: "leaf" },
-  { to: "/ecosphere/social", label: "Social", icon: "users" },
-  { to: "/ecosphere/governance", label: "Governance", icon: "shield" },
-  { to: "/ecosphere/insights", label: "AI Insights", icon: "sparkles" },
-  { to: "/ecosphere/reports", label: "Reports", icon: "file" },
+  { to: "/", label: "Dashboard", icon: "dashboard" },
+  { to: "/environment", label: "Environment", icon: "leaf" },
+  { to: "/manager", label: "Social", icon: "users" },
+  { to: "/manager", label: "Governance", icon: "shield" },
+  { to: "/manager", label: "AI Insights", icon: "sparkles" },
+  { to: "/manager", label: "Reports", icon: "file" },
 ] as const;
 
 export type EsgSeverity = "low" | "medium" | "high" | "critical";

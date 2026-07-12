@@ -1,12 +1,13 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { SuperAdminConsole } from "@/components/ecosphere/admin/SuperAdminConsole";
+import { EcoPage } from "@/components/ecosphere/EcoPage";
 import { getEcoSession } from "@/lib/ecosphere-auth";
 
-export const Route = createFileRoute("/ecosphere/admin")({
+export const Route = createFileRoute("/admin")({
   beforeLoad: () => {
     const session = getEcoSession();
     if (!session || session.role !== "SUPER_ADMIN") {
-      throw redirect({ to: "/ecosphere/login", search: { redirect: "/ecosphere/admin" } });
+      throw redirect({ to: "/login", search: { redirect: "/admin" } });
     }
   },
   head: () => ({
@@ -16,5 +17,9 @@ export const Route = createFileRoute("/ecosphere/admin")({
 });
 
 function SuperAdminPage() {
-  return <SuperAdminConsole />;
+  return (
+    <EcoPage>
+      <SuperAdminConsole />
+    </EcoPage>
+  );
 }

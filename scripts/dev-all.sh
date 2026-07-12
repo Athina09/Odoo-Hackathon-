@@ -71,8 +71,8 @@ else
 fi
 
 echo ""
-echo "  EcoSphere app   → http://localhost:${VITE_PORT:-8090}/ecosphere"
-echo "  Login           → http://localhost:${VITE_PORT:-8090}/ecosphere/login"
+echo "  EcoSphere app   → http://localhost:${VITE_PORT:-8090}/"
+echo "  Login           → http://localhost:${VITE_PORT:-8090}/login"
 echo "  API             → http://127.0.0.1:8000/docs"
 echo "  RAG dashboard   → http://127.0.0.1:8501"
 echo ""

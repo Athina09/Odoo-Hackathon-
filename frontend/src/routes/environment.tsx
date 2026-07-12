@@ -1,10 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { EnvironmentCaseTable } from "@/components/ecosphere/EnvironmentCaseTable";
+import { EcoPage } from "@/components/ecosphere/EcoPage";
 
-export const Route = createFileRoute("/ecosphere/environment")({
+export const Route = createFileRoute("/environment")({
   head: () => ({
     meta: [
-      { title: "All Cases — EcoSphere Environment" },
+      { title: "Environment — EcoSphere" },
       { name: "description", content: "Browse all environmental compliance cases." },
     ],
   }),
@@ -13,9 +14,11 @@ export const Route = createFileRoute("/ecosphere/environment")({
 
 function EnvironmentPage() {
   return (
-    <div className="space-y-4 p-5">
-      <h1 className="text-2xl font-semibold text-foreground">All Cases</h1>
-      <EnvironmentCaseTable />
-    </div>
+    <EcoPage>
+      <div className="space-y-4 p-5">
+        <h1 className="text-2xl font-semibold text-foreground">All Cases</h1>
+        <EnvironmentCaseTable />
+      </div>
+    </EcoPage>
   );
 }

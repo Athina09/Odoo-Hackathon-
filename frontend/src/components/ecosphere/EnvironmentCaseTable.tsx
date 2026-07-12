@@ -61,7 +61,7 @@ export function EnvironmentCaseTable() {
               <td className="px-4 py-3 text-muted-foreground">{c.officer}</td>
               <td className="px-4 py-3 text-right">
                 <Link
-                  to="/ecosphere"
+                  to="/"
                   className="inline-flex items-center gap-1 rounded-md border border-border bg-secondary px-2 py-1 text-sm text-muted-foreground transition group-hover:border-primary/40 group-hover:text-primary"
                 >
                   Open <ChevronRight className="h-3 w-3" />

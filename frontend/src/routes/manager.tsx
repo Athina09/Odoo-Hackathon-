@@ -1,12 +1,13 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { EsgManagerConsole } from "@/components/ecosphere/manager/EsgManagerConsole";
+import { EcoPage } from "@/components/ecosphere/EcoPage";
 import { getEcoSession } from "@/lib/ecosphere-auth";
 
-export const Route = createFileRoute("/ecosphere/manager")({
+export const Route = createFileRoute("/manager")({
   beforeLoad: () => {
     const session = getEcoSession();
     if (!session || session.role !== "ESG_MANAGER") {
-      throw redirect({ to: "/ecosphere/login", search: { redirect: "/ecosphere/manager" } });
+      throw redirect({ to: "/login", search: { redirect: "/manager" } });
     }
   },
   head: () => ({
@@ -16,5 +17,9 @@ export const Route = createFileRoute("/ecosphere/manager")({
 });
 
 function EsgManagerPage() {
-  return <EsgManagerConsole />;
+  return (
+    <EcoPage>
+      <EsgManagerConsole />
+    </EcoPage>
+  );
 }

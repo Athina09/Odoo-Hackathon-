@@ -192,7 +192,7 @@ npm run install:frontend
 npm run dev
 ```
 
-Open **http://localhost:8090/ecosphere** for the Executive Command Center (login at `/ecosphere/login`).
+Open **http://localhost:8090/** for the Executive Command Center (login at `/login`).
 
 ### Build for production
 

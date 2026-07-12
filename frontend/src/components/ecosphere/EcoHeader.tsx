@@ -55,7 +55,7 @@ export function EcoHeader() {
             size="sm"
             className="h-7 gap-1 bg-primary/10 px-2 text-sm text-primary hover:bg-primary/15"
           >
-            <Link to="/ecosphere">
+            <Link to="/">
               <Sparkles className="h-3.5 w-3.5" /> Ask EcoSphere
             </Link>
           </Button>
@@ -65,24 +65,24 @@ export function EcoHeader() {
       <div className="ml-auto flex items-center gap-2">
         {!user && (
           <Button asChild variant="secondary" size="sm" className="h-8 gap-1 text-sm">
-            <Link to="/ecosphere/login" search={{ redirect: "/ecosphere/admin" }}>
+            <Link to="/login" search={{ redirect: "/admin" }}>
               <LogIn className="h-3.5 w-3.5" /> Sign in
             </Link>
           </Button>
         )}
         {isSuperAdmin && (
           <Button asChild variant="secondary" size="sm" className="h-8 gap-1 border-warn/30 bg-warn/10 text-sm text-warn">
-            <Link to="/ecosphere/admin">Administration</Link>
+            <Link to="/admin">Administration</Link>
           </Button>
         )}
         {isEsgManager && (
           <Button asChild variant="secondary" size="sm" className="h-8 gap-1 text-sm">
-            <Link to="/ecosphere/manager">ESG Hub</Link>
+            <Link to="/manager">ESG Hub</Link>
           </Button>
         )}
         {isDepartmentManager && (
           <Button asChild variant="secondary" size="sm" className="h-8 gap-1 text-sm">
-            <Link to="/ecosphere/department">My Department</Link>
+            <Link to="/department">My Department</Link>
           </Button>
         )}
         <div className="flex items-center gap-1.5 rounded-md border border-border bg-secondary px-2 py-1">

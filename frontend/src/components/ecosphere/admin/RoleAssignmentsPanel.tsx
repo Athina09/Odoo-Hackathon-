@@ -28,7 +28,7 @@ export function RoleAssignmentsPanel() {
     <div className="mx-auto max-w-5xl space-y-8">
       <div className="flex flex-wrap items-center justify-end gap-2 text-base">
         <Button asChild variant="ghost" size="sm" className="h-8 gap-1.5 text-muted-foreground">
-          <Link to="/ecosphere">
+          <Link to="/">
             Dashboard <ExternalLink className="h-3.5 w-3.5" />
           </Link>
         </Button>

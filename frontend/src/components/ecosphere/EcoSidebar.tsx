@@ -25,10 +25,10 @@ function navForRole(role: EcoRole | undefined): NavItem[] {
   if (role === "DEPARTMENT_MANAGER") {
     return [
       {
-        to: "/ecosphere/department",
+        to: "/department",
         label: "Dept Dashboard",
         icon: Building2,
-        match: p => p.startsWith("/ecosphere/department"),
+        match: p => p.startsWith("/department"),
       },
     ];
   }
@@ -36,31 +36,31 @@ function navForRole(role: EcoRole | undefined): NavItem[] {
   if (role === "ESG_MANAGER") {
     return [
       {
-        to: "/ecosphere/manager",
+        to: "/manager",
         label: "ESG Hub",
         icon: Shield,
-        match: p => p.startsWith("/ecosphere/manager"),
+        match: p => p.startsWith("/manager"),
       },
       {
-        to: "/ecosphere",
+        to: "/",
         label: "Org Overview",
         icon: LayoutDashboard,
-        match: p => p === "/ecosphere" || p === "/ecosphere/",
+        match: p => p === "/",
       },
       {
-        to: "/ecosphere/environment",
+        to: "/environment",
         label: "Environment",
         icon: Leaf,
-        match: p => p.startsWith("/ecosphere/environment"),
+        match: p => p.startsWith("/environment"),
       },
       {
-        to: "/ecosphere/manager",
+        to: "/manager",
         label: "AI Insights",
         icon: Sparkles,
         match: () => false,
       },
       {
-        to: "/ecosphere/manager",
+        to: "/manager",
         label: "Reports",
         icon: FileBarChart,
         match: () => false,
@@ -70,16 +70,16 @@ function navForRole(role: EcoRole | undefined): NavItem[] {
 
   return [
     {
-      to: "/ecosphere",
+      to: "/",
       label: "Command Center",
       icon: LayoutDashboard,
-      match: p => p === "/ecosphere" || p === "/ecosphere/",
+      match: p => p === "/",
     },
     {
-      to: "/ecosphere/environment",
+      to: "/environment",
       label: "Environment",
       icon: Leaf,
-      match: p => p.startsWith("/ecosphere/environment"),
+      match: p => p.startsWith("/environment"),
     },
   ];
 }
@@ -95,11 +95,14 @@ export function EcoSidebar() {
   const { user, isSuperAdmin, logout } = useEcoAuth();
   const items = navForRole(user?.role);
 
+  const homeTo =
+    user?.role === "DEPARTMENT_MANAGER" ? "/department" : user?.role === "ESG_MANAGER" ? "/manager" : "/";
+
   return (
     <aside className="z-20 flex w-[68px] shrink-0 flex-col items-center justify-between border-r border-sidebar-border bg-sidebar py-4 shadow-sm">
       <div className="flex flex-col items-center gap-2">
         <Link
-          to={user?.role === "DEPARTMENT_MANAGER" ? "/ecosphere/department" : user?.role === "ESG_MANAGER" ? "/ecosphere/manager" : "/ecosphere"}
+          to={homeTo}
           className="group relative mb-3 grid h-10 w-10 place-items-center rounded-lg border border-primary/25 bg-primary/10"
         >
           <Leaf className="h-5 w-5 text-primary" />
@@ -129,13 +132,13 @@ export function EcoSidebar() {
         })}
 
         {isSuperAdmin && (
-          <Link to="/ecosphere/admin" className="group relative">
+          <Link to="/admin" className="group relative">
             <motion.div
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.95 }}
               className={[
                 "grid h-10 w-10 place-items-center rounded-lg border transition-colors",
-                path.startsWith("/ecosphere/admin")
+                path.startsWith("/admin")
                   ? "border-warn/40 bg-warn/10 text-warn"
                   : "border-transparent text-muted-foreground hover:border-border hover:bg-warn/10 hover:text-warn",
               ].join(" ")}
@@ -150,9 +153,6 @@ export function EcoSidebar() {
       </div>
 
       <div className="flex flex-col items-center gap-2">
-        <Link to="/" className="mb-1 text-[10px] uppercase tracking-widest text-muted-foreground transition hover:text-primary">
-          AEGIS
-        </Link>
         {user ? (
           <button
             type="button"
@@ -164,7 +164,7 @@ export function EcoSidebar() {
           </button>
         ) : (
           <Link
-            to="/ecosphere/login"
+            to="/login"
             className="grid h-10 w-10 place-items-center rounded-full border border-border bg-secondary text-muted-foreground transition hover:text-primary"
             title="Sign in"
           >

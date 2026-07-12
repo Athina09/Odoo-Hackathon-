@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Crown, Leaf, LogIn, Shield, Users } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { EcoPage } from "@/components/ecosphere/EcoPage";
 import { useEcoAuth } from "@/context/EcoAuthContext";
 import {
   getHomeRouteForRole,
@@ -12,7 +13,7 @@ import {
 } from "@/lib/ecosphere-auth";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/ecosphere/login")({
+export const Route = createFileRoute("/login")({
   validateSearch: (s: Record<string, unknown>) => ({
     redirect: typeof s.redirect === "string" ? s.redirect : undefined,
   }),
@@ -46,6 +47,14 @@ const ROLE_OPTIONS: {
 ];
 
 function EcoLoginPage() {
+  return (
+    <EcoPage bare>
+      <LoginForm />
+    </EcoPage>
+  );
+}
+
+function LoginForm() {
   const { login, getAccountsForRole, ready, user } = useEcoAuth();
   const navigate = useNavigate();
   const { redirect } = Route.useSearch();
@@ -193,7 +202,7 @@ function EcoLoginPage() {
         </form>
 
         <p className="mt-6 text-center text-sm text-muted-foreground">
-          <Link to="/ecosphere" className="text-primary hover:underline">
+          <Link to="/" className="text-primary hover:underline">
             ← Back to dashboard
           </Link>
         </p>

@@ -69,7 +69,7 @@ export function EcoAuthProvider({ children }: { children: ReactNode }) {
   );
 
   const getHomeRoute = useCallback(
-    () => (user ? getHomeRouteForRole(user.role) : "/ecosphere/login"),
+    () => (user ? getHomeRouteForRole(user.role) : "/login"),
     [user],
   );
 

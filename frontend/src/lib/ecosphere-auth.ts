@@ -60,13 +60,13 @@ export function setEcoSession(user: EcoSessionUser | null) {
 export function getHomeRouteForRole(role: EcoRole): string {
   switch (role) {
     case "SUPER_ADMIN":
-      return "/ecosphere";
+      return "/";
     case "ESG_MANAGER":
-      return "/ecosphere/manager";
+      return "/manager";
     case "DEPARTMENT_MANAGER":
-      return "/ecosphere/department";
+      return "/department";
     default:
-      return "/ecosphere";
+      return "/";
   }
 }
 
