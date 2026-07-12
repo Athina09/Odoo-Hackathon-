@@ -1,5 +1,5 @@
-import { Link } from "@tanstack/react-router";
-import { Search, Mic, Sparkles, Filter, ChevronDown, Bell, LogIn } from "lucide-react";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { Search, Mic, Filter, ChevronDown, Bell, LogOut } from "lucide-react";
 import { motion } from "framer-motion";
 import { heatmapZones } from "@/data/data";
 import { Button } from "@/components/ui/button";
@@ -7,7 +7,13 @@ import { useEcoAuth } from "@/context/EcoAuthContext";
 
 export function EcoHeader() {
   const districts = heatmapZones.map(z => z.district);
-  const { user, isSuperAdmin, isEsgManager, isDepartmentManager } = useEcoAuth();
+  const navigate = useNavigate();
+  const { user, isSuperAdmin, isEsgManager, isDepartmentManager, logout } = useEcoAuth();
+
+  const handleLogout = () => {
+    logout();
+    navigate({ to: "/login" });
+  };
 
   const roleBadge =
     user?.role === "SUPER_ADMIN"
@@ -19,55 +25,46 @@ export function EcoHeader() {
           : null;
 
   return (
-    <header className="sticky top-0 z-10 flex items-center gap-3 border-b border-border bg-white/95 px-5 py-3 shadow-sm backdrop-blur-sm">
-      <div className="flex items-center gap-2">
+    <header className="sticky top-0 z-10 flex flex-wrap items-center gap-x-3 gap-y-2 border-b border-border bg-white/95 px-5 py-3 shadow-sm backdrop-blur-sm">
+      <div className="flex min-w-0 shrink-0 items-center gap-2">
         <span className="font-mono text-base font-semibold tracking-[0.25em] text-foreground">ECOSPHERE</span>
         <span className="rounded-md border border-primary/25 bg-primary/10 px-1.5 py-0.5 text-xs font-semibold uppercase tracking-wider text-primary">
           v1.0 · ESG-TN
         </span>
         {user && (
-          <span className="rounded-md border border-border bg-secondary px-1.5 py-0.5 text-xs text-muted-foreground">
+          <span className="hidden max-w-[11rem] truncate rounded-md border border-border bg-secondary px-1.5 py-0.5 text-xs text-muted-foreground sm:inline">
             {user.name}
             {roleBadge ? ` · ${roleBadge}` : ""}
           </span>
         )}
       </div>
 
-      <div className="relative ml-4 flex-1 max-w-2xl">
+      <div className="relative ml-4 min-w-0 flex-1 max-w-xl">
         <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <input
-          placeholder="Search employee, department, policy, challenge, audit, carbon…"
-          className="h-10 w-full rounded-lg border border-border bg-white pl-9 pr-28 text-base outline-none placeholder:text-muted-foreground/70 focus:border-primary/50 focus:ring-2 focus:ring-primary/15"
+          placeholder="Search departments, policies, audits…"
+          className="h-10 w-full rounded-lg border border-border bg-white pl-9 pr-10 text-sm outline-none placeholder:text-muted-foreground/70 focus:border-primary/50 focus:ring-2 focus:ring-primary/15"
         />
-        <div className="absolute right-1.5 top-1/2 flex -translate-y-1/2 items-center gap-1">
-          <motion.button
-            type="button"
-            whileTap={{ scale: 0.95 }}
-            className="grid h-7 w-7 place-items-center rounded-md text-muted-foreground hover:bg-secondary hover:text-primary"
-            aria-label="Voice search (demo)"
-          >
-            <Mic className="h-4 w-4" />
-          </motion.button>
+        <motion.button
+          type="button"
+          whileTap={{ scale: 0.95 }}
+          className="absolute right-1.5 top-1/2 grid h-7 w-7 -translate-y-1/2 place-items-center rounded-md text-muted-foreground hover:bg-secondary hover:text-primary"
+          aria-label="Voice search (demo)"
+        >
+          <Mic className="h-4 w-4" />
+        </motion.button>
+      </div>
+
+      <div className="flex shrink-0 items-center gap-2">
+        {user && (
           <Button
-            asChild
             type="button"
             variant="secondary"
             size="sm"
-            className="h-7 gap-1 bg-primary/10 px-2 text-sm text-primary hover:bg-primary/15"
+            className="h-8 gap-1 text-sm hover:border-danger/30 hover:bg-danger/10 hover:text-danger"
+            onClick={handleLogout}
           >
-            <Link to="/">
-              <Sparkles className="h-3.5 w-3.5" /> Ask EcoSphere
-            </Link>
-          </Button>
-        </div>
-      </div>
-
-      <div className="ml-auto flex items-center gap-2">
-        {!user && (
-          <Button asChild variant="secondary" size="sm" className="h-8 gap-1 text-sm">
-            <Link to="/login" search={{ redirect: "/admin" }}>
-              <LogIn className="h-3.5 w-3.5" /> Sign in
-            </Link>
+            <LogOut className="h-3.5 w-3.5" /> Sign out
           </Button>
         )}
         {isSuperAdmin && (

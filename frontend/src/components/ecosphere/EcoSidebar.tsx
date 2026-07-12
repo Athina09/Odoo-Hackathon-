@@ -1,4 +1,4 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import {
   LayoutDashboard,
   Leaf,
@@ -92,8 +92,14 @@ const roleLabels: Record<string, string> = {
 
 export function EcoSidebar() {
   const path = useRouterState({ select: s => s.location.pathname });
+  const navigate = useNavigate();
   const { user, isSuperAdmin, logout } = useEcoAuth();
   const items = navForRole(user?.role);
+
+  const handleLogout = () => {
+    logout();
+    navigate({ to: "/login" });
+  };
 
   const homeTo =
     user?.role === "DEPARTMENT_MANAGER" ? "/department" : user?.role === "ESG_MANAGER" ? "/manager" : "/";
@@ -156,8 +162,8 @@ export function EcoSidebar() {
         {user ? (
           <button
             type="button"
-            onClick={logout}
-            className="grid h-10 w-10 place-items-center rounded-full border border-border bg-secondary text-sidebar-foreground"
+            onClick={handleLogout}
+            className="grid h-10 w-10 place-items-center rounded-full border border-border bg-secondary text-sidebar-foreground transition hover:border-danger/30 hover:bg-danger/10 hover:text-danger"
             title={`${user.name} · ${roleLabels[user.role] ?? user.role} · Sign out`}
           >
             <LogOut className="h-4 w-4" />

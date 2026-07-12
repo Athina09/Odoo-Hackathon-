@@ -1,8 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { EnvironmentCaseTable } from "@/components/ecosphere/EnvironmentCaseTable";
 import { EcoPage } from "@/components/ecosphere/EcoPage";
+import { requireSession } from "@/lib/ecosphere-route-guards";
 
 export const Route = createFileRoute("/environment")({
+  beforeLoad: () => {
+    requireSession("/environment");
+  },
   head: () => ({
     meta: [
       { title: "Environment — EcoSphere" },

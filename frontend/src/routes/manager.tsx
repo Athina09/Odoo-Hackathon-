@@ -1,14 +1,11 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { EsgManagerConsole } from "@/components/ecosphere/manager/EsgManagerConsole";
 import { EcoPage } from "@/components/ecosphere/EcoPage";
-import { getEcoSession } from "@/lib/ecosphere-auth";
+import { requireRole } from "@/lib/ecosphere-route-guards";
 
 export const Route = createFileRoute("/manager")({
   beforeLoad: () => {
-    const session = getEcoSession();
-    if (!session || session.role !== "ESG_MANAGER") {
-      throw redirect({ to: "/login", search: { redirect: "/manager" } });
-    }
+    requireRole("ESG_MANAGER", "/manager");
   },
   head: () => ({
     meta: [{ title: "ESG Manager — EcoSphere" }],

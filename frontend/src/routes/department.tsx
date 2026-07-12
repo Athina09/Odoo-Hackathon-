@@ -1,14 +1,11 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { DepartmentManagerConsole } from "@/components/ecosphere/manager/DepartmentManagerConsole";
 import { EcoPage } from "@/components/ecosphere/EcoPage";
-import { getEcoSession } from "@/lib/ecosphere-auth";
+import { requireRole } from "@/lib/ecosphere-route-guards";
 
 export const Route = createFileRoute("/department")({
   beforeLoad: () => {
-    const session = getEcoSession();
-    if (!session || session.role !== "DEPARTMENT_MANAGER") {
-      throw redirect({ to: "/login", search: { redirect: "/department" } });
-    }
+    requireRole("DEPARTMENT_MANAGER", "/department");
   },
   head: () => ({
     meta: [{ title: "Department — EcoSphere" }],

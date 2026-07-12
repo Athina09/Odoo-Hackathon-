@@ -216,7 +216,13 @@ npm run preview
 ```
 frontend/
 ├── src/
-│   ├── routes/ecosphere.tsx          # Executive Command Center page
+│   ├── routes/
+│   │   ├── index.tsx                 # ESG Command Center (/)
+│   │   ├── login.tsx                 # Role-based login
+│   │   ├── admin.tsx                 # Super Admin console
+│   │   ├── manager.tsx               # ESG Manager hub
+│   │   ├── department.tsx            # Department Manager dashboard
+│   │   └── environment.tsx           # Environment cases
 │   ├── components/ecosphere/
 │   │   ├── EcoShell.tsx              # Layout (sidebar + header)
 │   │   ├── EcoKpiRow.tsx             # Top KPI cards
@@ -224,6 +230,7 @@ frontend/
 │   │   ├── AiLiveFeed.tsx            # AI insights stream
 │   │   ├── DepartmentTable.tsx       # Department ESG scores
 │   │   └── EcoChartsGrid.tsx         # Trends & health charts
+│   ├── context/EcoAuthContext.tsx    # Auth & admin config
 │   └── data/ecosphere.ts             # Demo KPIs, facilities, departments, feed
 ├── package.json
 └── vite.config.ts

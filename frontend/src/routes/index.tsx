@@ -5,12 +5,12 @@ import { AiLiveFeed } from "@/components/ecosphere/AiLiveFeed";
 import { DepartmentTable } from "@/components/ecosphere/DepartmentTable";
 import { EcoChartsGrid, EsgHealthCard } from "@/components/ecosphere/EcoChartsGrid";
 import { EcoPage } from "@/components/ecosphere/EcoPage";
-import { getEcoSession } from "@/lib/ecosphere-auth";
+import { requireSession } from "@/lib/ecosphere-route-guards";
 
 export const Route = createFileRoute("/")({
   beforeLoad: () => {
-    const session = getEcoSession();
-    if (session?.role === "DEPARTMENT_MANAGER") {
+    const session = requireSession("/");
+    if (session.role === "DEPARTMENT_MANAGER") {
       throw redirect({ to: "/department" });
     }
   },

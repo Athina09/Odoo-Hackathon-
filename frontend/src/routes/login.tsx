@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { Crown, Leaf, LogIn, Shield, Users } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { EcoPage } from "@/components/ecosphere/EcoPage";
 import { useEcoAuth } from "@/context/EcoAuthContext";
 import {
+  getEcoSession,
   getHomeRouteForRole,
   PORTAL_ROLE_PASSWORDS,
   type PortalLoginAccount,
@@ -17,6 +18,15 @@ export const Route = createFileRoute("/login")({
   validateSearch: (s: Record<string, unknown>) => ({
     redirect: typeof s.redirect === "string" ? s.redirect : undefined,
   }),
+  beforeLoad: ({ search }) => {
+    const session = getEcoSession();
+    if (!session) return;
+    const destination =
+      search.redirect && session.role === "SUPER_ADMIN"
+        ? search.redirect
+        : getHomeRouteForRole(session.role);
+    throw redirect({ to: destination });
+  },
   component: EcoLoginPage,
 });
 
@@ -201,11 +211,6 @@ function LoginForm() {
           </Button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-muted-foreground">
-          <Link to="/" className="text-primary hover:underline">
-            ← Back to dashboard
-          </Link>
-        </p>
       </div>
     </div>
   );
