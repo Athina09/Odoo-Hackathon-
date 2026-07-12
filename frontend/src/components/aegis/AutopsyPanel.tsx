@@ -611,7 +611,12 @@ export function AutopsyPanel({ caseId }: { caseId: string }) {
 
   function toggle(hs: Hotspot) {
     if (hs.severity === "critical") {
-      setClosedCriticals(prev => { const n = new Set(prev); n.has(hs.id) ? n.delete(hs.id) : n.add(hs.id); return n; });
+      setClosedCriticals(prev => {
+        const n = new Set(prev);
+        if (n.has(hs.id)) n.delete(hs.id);
+        else n.add(hs.id);
+        return n;
+      });
     } else {
       setDynSelected(prev => prev?.id === hs.id ? null : hs);
     }

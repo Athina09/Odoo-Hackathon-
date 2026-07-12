@@ -58,7 +58,7 @@ export const Copilot = forwardRef<CopilotHandle, CopilotProps>(function Copilot(
       let reply = "";
       if (data.results && data.results.length > 0) {
         reply = "Here is the relevant evidence I retrieved from the vector database:\n\n";
-        data.results.slice(0, 3).forEach((r: any, idx: number) => {
+        data.results.slice(0, 3).forEach((r: { metadata: { type?: string; confidence?: number }; document: string }) => {
           reply += `[${r.metadata.type?.toUpperCase() || 'UNKNOWN'} | Confidence: ${r.metadata.confidence || 0}%]\n${r.document}\n\n`;
         });
       } else {

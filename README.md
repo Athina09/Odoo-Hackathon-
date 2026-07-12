@@ -8,6 +8,52 @@ Organizations must monitor carbon emissions, promote employee well-being, and ma
 
 ---
 
+## Challenge statement
+
+Build an ESG Management Platform that enables organizations to **measure**, **manage**, and **improve** Environmental, Social and Governance performance — integrating operational data, **employee participation**, compliance, and gamification.
+
+| Pillar | Scope |
+|--------|--------|
+| **Environmental** | Carbon accounting, emission factors, sustainability goals |
+| **Social** | CSR activities, employee participation, diversity |
+| **Governance** | Policies, audits, compliance tracking |
+| **Gamification** | Challenges, badges, XP, rewards, leaderboards |
+
+**Design mockup:** [Excalidraw wireframe](https://link.excalidraw.com/l/65VNwvy7c4X/2m6lz9Ln4)
+
+---
+
+## Our solution
+
+**EcoSphere** is our answer to that challenge: one platform where leadership monitors ESG KPIs, department managers act on scoped data, and employees participate through a mobile app — without ERP training.
+
+| Layer | What it does |
+|-------|----------------|
+| **Executive dashboards** | Command center, environment/social/governance modules, digital twin, typed & custom reports |
+| **Employee mobile app** | Challenges, CSR, leaderboard, personal impact, photo evidence submission |
+| **FastAPI backend** | REST API mirroring ESG data, mobile bootstrap, health checks |
+| **AI layer** | **EcoSphere AI** assistant on every role, RAG search over ESG insights, AI confidence on digital twin zones |
+
+We designed EcoSphere for real adoption: role-gated web views for admins and managers, a frictionless `/mobile` experience for staff, and **AI-assisted insights** so teams can ask questions, surface risks faster, and trust telemetry with confidence scores — not just static charts.
+
+---
+
+## EcoSphere AI
+
+**EcoSphere AI** is the intelligence layer across the product — not a bolt-on chat widget, but AI woven into how people explore and act on ESG data.
+
+| Capability | Where you see it |
+|------------|------------------|
+| **AI chat assistant** | Floating **EcoSphere AI** button (solid blue) on every logged-in screen — web and mobile |
+| **Role-aware prompts** | Suggested questions tailored to Super Admin, ESG Manager, Dept Manager, and Employee |
+| **Confidence scoring** | AI confidence in the chat panel; facility-wide and per-zone scores on the digital twin |
+| **ESG RAG search** | FastAPI `/api/rag/search` + Streamlit dashboard (:8501) to retrieve insight chunks from carbon, CSR, compliance, and challenge data |
+| **Impact narratives** | Employees get plain-language “your impact in words” summaries linked to their contribution |
+
+Open any role after login and tap **EcoSphere AI** — or hit the RAG dashboard at http://127.0.0.1:8501 when running `npm run dev:all`.
+
+---
+
 ## Quick start
 
 ### Prerequisites
@@ -371,21 +417,6 @@ cp .env.example .env
 |----------|---------|-------------|
 | `API_PORT` | `8000` | FastAPI port |
 | `RAG_DASHBOARD_PORT` | `8501` | Streamlit RAG port |
-
----
-
-## Challenge statement
-
-Build an ESG Management Platform that enables organizations to **measure**, **manage**, and **improve** Environmental, Social and Governance performance — integrating operational data, **employee participation**, compliance, and gamification.
-
-| Pillar | Scope |
-|--------|--------|
-| **Environmental** | Carbon accounting, emission factors, sustainability goals |
-| **Social** | CSR activities, employee participation, diversity |
-| **Governance** | Policies, audits, compliance tracking |
-| **Gamification** | Challenges, badges, XP, rewards, leaderboards |
-
-**Design mockup:** [Excalidraw wireframe](https://link.excalidraw.com/l/65VNwvy7c4X/2m6lz9Ln4)
 
 ---
 

@@ -19,7 +19,7 @@ import { EvidenceNode } from "./EvidenceNode";
 
 // ── Extended types ────────────────────────────────────────────────────────────
 interface LiveNode extends ForensicNode { aiGenerated?: boolean }
-interface LiveEdge extends ForensicEdge {}
+type LiveEdge = ForensicEdge;
 
 type RelationFlowState =
   | null
