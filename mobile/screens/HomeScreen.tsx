@@ -1,5 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import {
+  Alert,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 
 const impactItems = [
   { icon: '⚡', value: '1,240', label: 'XP earned', color: '#EAF3FF' },
@@ -19,11 +26,25 @@ const tabs = [
   { icon: '⌂', label: 'Home' },
   { icon: '♻', label: 'Activities' },
   { icon: '🎁', label: 'Rewards' },
-  { icon: '🏆', label: 'Leaderboard' },
+  { icon: '🎯', label: 'Challenges' },
   { icon: '●', label: 'Profile' },
 ] as const;
 
-export default function HomeScreen() {
+type Props = {
+  onOpenActivities: () => void;
+  onOpenReward: () => void;
+  onOpenJoinChallenge: () => void;
+  onOpenProfile: () => void;
+  onOpenMyActivity: () => void;
+};
+
+export default function HomeScreen({
+  onOpenActivities,
+  onOpenReward,
+  onOpenJoinChallenge,
+  onOpenProfile,
+  onOpenMyActivity,
+}: Props) {
   const showComingSoon = (name: string) => {
     Alert.alert(name, `${name} will be available next.`);
   };
@@ -47,7 +68,9 @@ export default function HomeScreen() {
 
           <Pressable
             style={styles.notificationButton}
-            onPress={() => Alert.alert('Notifications', 'You have 2 new updates.')}
+            onPress={() =>
+              Alert.alert('Notifications', 'You have 2 new updates.')
+            }
           >
             <Text style={styles.notificationIcon}>♧</Text>
             <View style={styles.notificationDot} />
@@ -60,12 +83,12 @@ export default function HomeScreen() {
             <Text style={styles.userName}>Metrix 👋</Text>
           </View>
 
-          <View style={styles.profileOuter}>
+          <Pressable style={styles.profileOuter} onPress={onOpenProfile}>
             <View style={styles.profilePicture}>
               <Text style={styles.profileInitial}>M</Text>
             </View>
             <View style={styles.onlineDot} />
-          </View>
+          </Pressable>
         </View>
       </View>
 
@@ -82,18 +105,21 @@ export default function HomeScreen() {
               <Text style={styles.cardIcon}>🌍</Text>
               <Text style={styles.cardLabel}>ESG SCORE</Text>
             </View>
-            <Text style={styles.scoreValue}>
-              82%
-            </Text>
+
+            <Text style={styles.scoreValue}>82%</Text>
+
             <View style={styles.scoreTrack}>
               <View style={styles.scoreFill} />
             </View>
+
             <Text style={styles.scoreNote}>Great progress this month</Text>
           </View>
 
           <View style={styles.rankCard}>
             <Text style={styles.rankIcon}>🏅</Text>
-            <Text style={styles.cardLabel}>YOUR RANK</Text>
+            <Text style={[styles.cardLabel, styles.rankCardLabel]}>
+              YOUR RANK
+            </Text>
             <Text style={styles.rankValue}>#12</Text>
             <Text style={styles.rankNote}>in your organization</Text>
           </View>
@@ -104,9 +130,15 @@ export default function HomeScreen() {
         <View style={styles.impactGrid}>
           {impactItems.map((item) => (
             <View key={item.label} style={styles.impactCard}>
-              <View style={[styles.impactIconCircle, { backgroundColor: item.color }]}>
+              <View
+                style={[
+                  styles.impactIconCircle,
+                  { backgroundColor: item.color },
+                ]}
+              >
                 <Text style={styles.impactIcon}>{item.icon}</Text>
               </View>
+
               <Text style={styles.impactValue}>{item.value}</Text>
               <Text style={styles.impactLabel}>{item.label}</Text>
             </View>
@@ -120,11 +152,39 @@ export default function HomeScreen() {
             <Pressable
               key={action.label}
               style={styles.actionCard}
-              onPress={() => showComingSoon(action.label)}
+              onPress={() => {
+                if (action.label === 'Join CSR') {
+                  onOpenActivities();
+                  return;
+                }
+
+                if (action.label === 'Join challenge') {
+                  onOpenJoinChallenge();
+                  return;
+                }
+
+                if (action.label === 'Rewards') {
+                  onOpenReward();
+                  return;
+                }
+
+                if (action.label === 'My activity') {
+                  onOpenMyActivity();
+                  return;
+                }
+
+                showComingSoon(action.label);
+              }}
             >
-              <View style={[styles.actionIconCircle, { backgroundColor: action.color }]}>
+              <View
+                style={[
+                  styles.actionIconCircle,
+                  { backgroundColor: action.color },
+                ]}
+              >
                 <Text style={styles.actionIcon}>{action.icon}</Text>
               </View>
+
               <Text style={styles.actionLabel}>{action.label}</Text>
               <Text style={styles.actionArrow}>›</Text>
             </Pressable>
@@ -133,6 +193,7 @@ export default function HomeScreen() {
 
         <View style={styles.tipCard}>
           <Text style={styles.tipEmoji}>💡</Text>
+
           <View style={styles.tipTextBox}>
             <Text style={styles.tipTitle}>Today’s eco tip</Text>
             <Text style={styles.tipText}>
@@ -147,11 +208,31 @@ export default function HomeScreen() {
           <Pressable
             key={tab.label}
             style={styles.navItem}
-            onPress={() =>
-              tab.label === 'Home'
-                ? undefined
-                : showComingSoon(tab.label)
-            }
+            onPress={() => {
+              if (tab.label === 'Activities') {
+                onOpenActivities();
+                return;
+              }
+
+              if (tab.label === 'Rewards') {
+                onOpenReward();
+                return;
+              }
+
+              if (tab.label === 'Challenges') {
+                onOpenJoinChallenge();
+                return;
+              }
+
+              if (tab.label === 'Profile') {
+                onOpenProfile();
+                return;
+              }
+
+              if (tab.label !== 'Home') {
+                showComingSoon(tab.label);
+              }
+            }}
           >
             <Text
               style={[
@@ -161,6 +242,7 @@ export default function HomeScreen() {
             >
               {tab.icon}
             </Text>
+
             <Text
               style={[
                 styles.navLabel,
@@ -340,15 +422,15 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     letterSpacing: 0.8,
   },
+  rankCardLabel: {
+    marginTop: 5,
+    color: '#658095',
+  },
   scoreValue: {
     marginTop: 14,
     color: '#FFFFFF',
     fontSize: 31,
     fontWeight: '800',
-  },
-  scoreTotal: {
-    color: '#BBDDEF',
-    fontSize: 14,
   },
   scoreTrack: {
     height: 6,
@@ -371,9 +453,6 @@ const styles = StyleSheet.create({
   rankIcon: {
     fontSize: 27,
   },
-  rankCardLabel: {
-    color: '#658095',
-  },
   rankValue: {
     marginTop: 9,
     color: '#124D78',
@@ -384,6 +463,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     color: '#718A9C',
     fontSize: 10,
+    textAlign: 'center',
   },
   impactGrid: {
     flexDirection: 'row',
