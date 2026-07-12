@@ -27,7 +27,7 @@ Build an ESG Management Platform that enables organizations to **measure**, **ma
 
 ## What this repo demonstrates
 
-The **Executive Command Center** (`/ecosphere`) is a working frontend prototype aligned with the hackathon brief:
+The **Executive Command Center** (`/`) is a working frontend prototype aligned with the hackathon brief:
 
 - **KPI row** — overall ESG score, carbon footprint, AI confidence, compliance issues, CSR participation, active challenges
 - **Tamil Nadu ESG heatmap** — facility-level environmental exposure across TN districts (Chennai, Coimbatore, Madurai, Salem, and more)
@@ -193,6 +193,14 @@ npm run dev
 ```
 
 Open **http://localhost:8090/** for the Executive Command Center (login at `/login`).
+
+### Demo logins
+
+| Role | Email | Password |
+|------|-------|----------|
+| Super Admin | `superadmin@ecosphere.in` | `admin123` |
+| ESG Manager | `alex.morgan@ecosphere.in` | `manager` |
+| Department Manager | `john.carter@ecosphere.in` | `dept123` |
 
 ### Build for production
 
